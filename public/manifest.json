@@ -1,0 +1,27 @@
+{
+  "name": "Speech on the Slope",
+  "short_name": "Speech on the Slope",
+  "description": "Expert speech therapy services for children in Brooklyn",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#171e5d",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "medical", "education"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
