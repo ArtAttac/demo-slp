@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use | Speech on the Slope',
+  title: 'Terms of Use',
   description: 'Terms of use for the Speech on the Slope website.',
 };
 
