@@ -62,7 +62,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="relative py-20 sm:py-28 overflow-hidden bg-gradient-to-br from-brand-cream/30 via-white to-brand-bluePurple/10">
+    <section id="services" className="relative min-h-screen flex items-center py-20 sm:py-28 overflow-hidden bg-gradient-to-br from-brand-cream/30 via-white to-brand-bluePurple/10">
       {/* Playful floating shapes */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
@@ -123,7 +123,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((service, index) => {
             const isFlipped = flippedCards.has(index);
 

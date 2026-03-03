@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import heroImage from '@/app/assets/stockimageparkslow.png';
+import heroImage from '@/app/assets/brownstones.jpg';
 
 export default function HeroSection() {
   return (
-    <section className="relative py-28 md:py-40 overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       <Image
         src={heroImage}
         alt="Speech therapist reading with a child"
@@ -24,10 +24,10 @@ export default function HeroSection() {
           className="text-center max-w-3xl mx-auto -mt-12 md:-mt-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-            Every Voice Deserves to be <span className="text-brand-yellow">Heard</span>
+            Speech Therapy & Literacy Support for <span className="text-brand-yellow">Brooklyn Kids</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8 drop-shadow-md">
-            Empowering communication through compassionate, evidence-based speech therapy
+            Helping parents build reading, writing, and speech skills with confidence and connection.
           </p>
           <a
             href="#about"
