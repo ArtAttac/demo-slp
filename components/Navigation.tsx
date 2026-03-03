@@ -9,9 +9,7 @@ const navLinks = [
   { href: '#about', label: 'About', color: 'hover:text-brand-bluePurple' },
   { href: '#services', label: 'Services', color: 'hover:text-brand-pink' },
   { href: '#team', label: 'Team', color: 'hover:text-brand-yellow' },
-  { href: '#testimonials', label: 'Testimonials', color: 'hover:text-brand-bluePurple' },
   { href: '#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
-  { href: '/blog', label: 'Blog', color: 'hover:text-brand-pink' },
 ];
 
 interface NavBarProps {
@@ -29,11 +27,11 @@ function NavBar({ isSticky = false }: NavBarProps) {
           <div className="flex-shrink-0">
             <Link href="/" className="block">
               <Image
-                src="/logo.png"
+                src="/mainlogo.png"
                 alt="Speech on the Slope"
-                width={isSticky ? 320 : 400}
-                height={isSticky ? 120 : 150}
-                className={`${isSticky ? 'h-32' : 'h-40'} w-auto object-contain transition-all duration-300`}
+                width={90}
+                height={90}
+                className="h-[90px] w-[90px] object-contain"
                 priority
               />
             </Link>

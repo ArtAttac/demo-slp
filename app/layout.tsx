@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     description: 'Compassionate, play-based speech therapy services for children in Brooklyn. Specializing in early intervention, preschool services, and parent coaching.',
     images: [
       {
-        url: '/logo.png',
+        url: '/mainmainlogo.png',
         width: 1200,
         height: 630,
         alt: 'Speech on the Slope Logo',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Speech on the Slope | Expert Speech Therapy for Kids',
     description: 'Compassionate, play-based speech therapy services for children in Brooklyn.',
-    images: ['/logo.png'],
+    images: ['/mainmainlogo.png'],
     creator: '@speechontheslope', // Replace with actual Twitter handle if available
   },
 
@@ -132,8 +132,8 @@ export default function RootLayout({
     name: 'Speech on the Slope',
     description: 'Expert speech therapy services for children, specializing in early intervention, preschool services, and parent coaching.',
     url: 'https://speechontheslope.com',
-    logo: 'https://speechontheslope.com/logo.png',
-    image: 'https://speechontheslope.com/logo.png',
+    logo: 'https://speechontheslope.com/mainlogo.png',
+    image: 'https://speechontheslope.com/mainlogo.png',
     telephone: '+1-XXX-XXX-XXXX', // Add your phone number
     email: 'info@speechontheslope.com', // Add your email
 

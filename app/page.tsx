@@ -4,18 +4,22 @@ import { motion } from 'framer-motion';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
+import MissionSection from '@/components/MissionSection';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
+import GetStartedSection from '@/components/GetStartedSection';
 import ParallaxSection from '@/components/ParallaxSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
+
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 const sections = [
+  { key: 'mission', Component: MissionSection },
   { key: 'about', Component: AboutSection },
   { key: 'services', Component: ServicesSection },
   { key: 'parallax', Component: ParallaxSection },
-  { key: 'testimonials', Component: TestimonialsSection },
+  { key: 'get-started', Component: GetStartedSection },
+
   { key: 'contact', Component: ContactSection },
   { key: 'footer', Component: Footer },
 ];

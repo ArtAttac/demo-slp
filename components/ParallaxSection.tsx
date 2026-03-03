@@ -14,7 +14,7 @@ export default function ParallaxSection() {
   const translateY = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
 
   return (
-    <section ref={sectionRef} className="relative h-96 md:h-[500px] overflow-hidden">
+    <section ref={sectionRef} className="relative h-96 md:h-[500px] flex items-center overflow-hidden">
       <motion.div
         className="absolute inset-0 will-change-transform"
         style={{ y: translateY }}
@@ -27,7 +27,7 @@ export default function ParallaxSection() {
         />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-br from-brand-darkBlue via-brand-bluePurple/80 to-brand-pink/80 opacity-80" />
-      <div className="relative h-full flex items-center justify-center">
+      <div className="relative w-full flex items-center justify-center">
         <div className="text-center text-white px-4">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">Transform Communication</h2>
           <p className="text-xl md:text-2xl drop-shadow-md">One session at a time</p>
