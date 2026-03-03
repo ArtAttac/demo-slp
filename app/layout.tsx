@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Josefin_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -234,7 +235,10 @@ export default function RootLayout({
         {/* Theme color for mobile browsers */}
         <meta name="theme-color" content="#171e5d" />
       </head>
-      <body className={`${inter.variable} ${josefinSans.variable} font-body`}>{children}</body>
+      <body className={`${inter.variable} ${josefinSans.variable} font-body`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
