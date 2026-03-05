@@ -6,9 +6,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { href: '#about', label: 'About', color: 'hover:text-brand-bluePurple' },
+  { href: '#mission', label: 'Mission', color: 'hover:text-brand-bluePurple' },
+  { href: '#about', label: 'Team', color: 'hover:text-brand-yellow' },
   { href: '#services', label: 'Services', color: 'hover:text-brand-pink' },
-  { href: '#team', label: 'Team', color: 'hover:text-brand-yellow' },
+  { href: '#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
   { href: '#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
 ];
 

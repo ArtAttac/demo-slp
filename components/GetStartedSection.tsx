@@ -25,7 +25,7 @@ const steps = [
 
 export default function GetStartedSection() {
   return (
-    <section className="relative min-h-screen flex items-center py-20 sm:py-28 overflow-hidden bg-gradient-to-br from-brand-cream via-white to-brand-yellow/10">
+    <section id="get-started" className="relative min-h-screen flex items-center py-20 sm:py-28 overflow-hidden bg-brand-pink">
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -49,7 +49,7 @@ export default function GetStartedSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900"
           >
             Ready to{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-bluePurple via-brand-pink to-brand-yellow">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-darkBlue via-brand-bluePurple to-brand-yellow">
               Get Started?
             </span>
           </motion.h2>

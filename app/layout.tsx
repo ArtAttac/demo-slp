@@ -103,6 +103,12 @@ export const metadata: Metadata = {
     // bing: 'your-bing-verification-code',
   },
 
+  // Favicon and app icons
+  icons: {
+    icon: '/mainlogo.png',
+    apple: '/mainlogo.png',
+  },
+
   // Category for app stores
   category: 'health',
 
@@ -227,9 +233,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Favicon and app icons */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/mainlogo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/mainlogo.png" />
         <link rel="manifest" href="/manifest.json" />
 
         {/* Theme color for mobile browsers */}
