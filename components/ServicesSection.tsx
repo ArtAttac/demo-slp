@@ -122,7 +122,7 @@ export default function ServicesSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
           >
             How We Can{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-darkBlue via-brand-yellow to-brand-cream">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-brand-cream">
               Help
             </span>
           </motion.h2>

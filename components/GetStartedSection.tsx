@@ -49,7 +49,7 @@ export default function GetStartedSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900"
           >
             Ready to{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-darkBlue via-brand-bluePurple to-brand-yellow">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-darkBlue to-brand-bluePurple">
               Get Started?
             </span>
           </motion.h2>

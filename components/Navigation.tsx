@@ -49,7 +49,7 @@ function NavBar({ isSticky = false }: NavBarProps) {
               >
                 <Link
                   href={link.href}
-                  className={`relative px-4 py-2 text-gray-700 ${link.color} transition-all duration-300 font-medium text-base group`}
+                  className={`relative px-4 py-2 text-gray-700 ${link.color} transition-all duration-300 ease-in font-medium text-base group hover:scale-150 origin-center inline-block`}
                 >
                   <span className="relative z-10">{link.label}</span>
                   <span className="absolute inset-0 bg-gradient-to-r from-brand-bluePurple/10 via-brand-pink/10 to-brand-yellow/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300 ease-out"></span>

@@ -159,13 +159,13 @@ export default function AboutPage() {
                   <div className="relative h-56 w-56 rounded-full overflow-hidden border-4 border-white shadow-lg">
                     <Image
                       src={sabrinaImage}
-                      alt="Sabrina, MS CCC-SLP"
+                      alt="Sabrina Itzhaki, MS CCC-SLP"
                       fill
                       className="object-cover"
                     />
                   </div>
                 </motion.div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Sabrina</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Sabrina Itzhaki</h2>
                 <p className="text-base font-semibold text-brand-bluePurple uppercase tracking-wide">MS, CCC-SLP</p>
                 <p className="text-sm text-gray-600 italic">Co-Founder &amp; Speech-Language Pathologist</p>
               </div>

@@ -39,7 +39,7 @@ const practitioners = [
     accentBg: 'bg-brand-pink/10',
   },
   {
-    name: 'Sabrina',
+    name: 'Sabrina Itzhaki',
     credentials: 'MS, CCC-SLP',
     role: 'Co-Founder & Speech-Language Pathologist',
     shortBio: 'Sabrina is a licensed speech-language pathologist, play enthusiast, and proud Brooklyn local. After five years supporting pre-K and elementary-aged students across NYC public schools, she co-founded Speech on the Slope to deliver individualized, child-led therapy rooted in play and built around what kids love\u2014because that\u2019s when real progress happens.',

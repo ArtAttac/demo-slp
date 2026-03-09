@@ -18,8 +18,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['var(--font-inter)', 'sans-serif'],
-        body: ['var(--font-josefin)', 'sans-serif'],
+        heading: ['var(--font-josefin)', 'sans-serif'],
+        body: ['var(--font-outfit)', 'sans-serif'],
       },
     },
   },

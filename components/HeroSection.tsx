@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import heroImage from '@/app/assets/brownstones.jpg';
+import heroImage from '@/app/assets/landinghero.jpg';
 
 export default function HeroSection() {
   return (
