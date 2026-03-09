@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import heroImage from '@/app/assets/landinghero.jpg';
+import heroImage from '@/app/assets/landing.jpg';
 
 export default function HeroSection() {
   return (

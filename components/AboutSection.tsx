@@ -263,7 +263,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative min-h-screen py-20 sm:py-28 overflow-hidden bg-brand-cream"
+      className="relative py-20 sm:py-28 overflow-hidden bg-brand-cream"
     >
       {/* Playful floating shapes */}
       <div className="pointer-events-none absolute inset-0">

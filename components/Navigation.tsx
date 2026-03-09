@@ -21,18 +21,18 @@ function NavBar({ isSticky = false }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`${isSticky ? 'bg-white/98 backdrop-blur-md' : 'bg-white/80 backdrop-blur-sm'}`}>
+    <div className={`${isSticky ? 'bg-white/50 backdrop-blur-md' : 'bg-white/50 backdrop-blur-md'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center h-20 ${isSticky ? 'justify-between' : 'justify-between'}`}>
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="block">
               <Image
-                src="/mainlogo.png"
+                src="/logofortopleftcorner.png"
                 alt="Speech on the Slope"
-                width={90}
-                height={90}
-                className="h-[90px] w-[90px] object-contain"
+                width={170}
+                height={170}
+                className="h-[170px] w-[170px] object-contain"
                 priority
               />
             </Link>
@@ -49,7 +49,7 @@ function NavBar({ isSticky = false }: NavBarProps) {
               >
                 <Link
                   href={link.href}
-                  className={`relative px-4 py-2 text-gray-700 ${link.color} transition-all duration-300 ease-in font-medium text-base group hover:scale-150 origin-center inline-block`}
+                  className={`relative px-4 py-2 text-gray-700 ${link.color} transition-all duration-300 ease-in font-medium text-base group hover:scale-125 origin-center inline-block`}
                 >
                   <span className="relative z-10">{link.label}</span>
                   <span className="absolute inset-0 bg-gradient-to-r from-brand-bluePurple/10 via-brand-pink/10 to-brand-yellow/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300 ease-out"></span>

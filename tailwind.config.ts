@@ -18,7 +18,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['var(--font-josefin)', 'sans-serif'],
+        heading: ['var(--font-rawles)', 'sans-serif'],
         body: ['var(--font-outfit)', 'sans-serif'],
       },
     },

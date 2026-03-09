@@ -25,7 +25,7 @@ const steps = [
 
 export default function GetStartedSection() {
   return (
-    <section id="get-started" className="relative min-h-screen flex items-center py-20 sm:py-28 overflow-hidden bg-brand-pink">
+    <section id="get-started" className="relative py-20 sm:py-28 overflow-hidden bg-brand-pink">
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -49,7 +49,7 @@ export default function GetStartedSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900"
           >
             Ready to{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-darkBlue to-brand-bluePurple">
+            <span className="text-brand-darkBlue">
               Get Started?
             </span>
           </motion.h2>
@@ -57,37 +57,6 @@ export default function GetStartedSection() {
 
         {/* Steps */}
         <div className="relative">
-          {/* Connecting path line (desktop) */}
-          <div className="hidden md:block absolute top-24 left-[16.6%] right-[16.6%] h-0.5">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="h-full bg-gradient-to-r from-brand-bluePurple/40 via-brand-pink/40 to-brand-yellow/40 origin-left"
-            />
-            {/* Dotted overlay */}
-            <div
-              className="absolute inset-0 h-full"
-              style={{
-                backgroundImage: 'radial-gradient(circle, rgb(131 144 250 / 0.6) 1.5px, transparent 1.5px)',
-                backgroundSize: '12px 12px',
-                backgroundPosition: 'center',
-              }}
-            />
-          </div>
-
-          {/* Connecting path line (mobile) */}
-          <div className="md:hidden absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2">
-            <motion.div
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="h-full bg-gradient-to-b from-brand-bluePurple/30 via-brand-pink/30 to-brand-yellow/30 origin-top"
-            />
-          </div>
-
           <div className="grid md:grid-cols-3 gap-12 md:gap-8">
             {steps.map((step, index) => {
               const colors = [
@@ -146,14 +115,6 @@ export default function GetStartedSection() {
                     </p>
                   </motion.div>
 
-                  {/* Arrow connector (mobile only) */}
-                  {index < steps.length - 1 && (
-                    <div className="md:hidden mt-6 mb-2">
-                      <svg className="w-6 h-6 text-brand-pink/50 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
-                    </div>
-                  )}
                 </motion.div>
               );
             })}

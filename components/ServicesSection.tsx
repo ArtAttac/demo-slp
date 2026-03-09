@@ -78,7 +78,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="relative min-h-screen flex items-center py-20 sm:py-28 overflow-hidden bg-brand-bluePurple">
+    <section id="services" className="relative py-20 sm:py-28 overflow-hidden bg-brand-bluePurple">
       {/* Playful floating shapes */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
@@ -122,7 +122,7 @@ export default function ServicesSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
           >
             How We Can{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-brand-cream">
+            <span className="text-white">
               Help
             </span>
           </motion.h2>
@@ -209,20 +209,26 @@ export default function ServicesSection() {
                         </svg>
                       </motion.div>
 
-                      <div className="relative flex-1 flex flex-col">
+                      <div className="relative flex-1 flex flex-col overflow-hidden">
                         <h3 className={`text-xl sm:text-2xl font-bold ${service.textColor} mb-4 pr-12`}>
                           {service.title}
                         </h3>
 
-                        <p className={`text-sm sm:text-base ${service.textColor} leading-relaxed flex-1`}>
-                          {service.backContent}
-                        </p>
+                        <div className="flex-1 service-card-scroll pr-1">
+                          <p className={`text-sm sm:text-base ${service.textColor} leading-relaxed`}>
+                            {service.backContent}
+                          </p>
+                        </div>
 
-                        {/* Back button indicator */}
+                        {/* Sticky Learn More button */}
                         <div className={`mt-4 pt-4 border-t ${service.borderColor}`}>
-                          <button className={`w-full px-4 py-2 bg-white/40 hover:bg-white/60 rounded-full text-sm font-semibold ${service.textColor} transition-all duration-200`}>
-                            Click to flip back
-                          </button>
+                          <a
+                            href="/services"
+                            onClick={(e) => e.stopPropagation()}
+                            className={`block w-full px-4 py-2 bg-white/40 hover:bg-white/60 rounded-full text-sm font-semibold ${service.textColor} transition-all duration-200 text-center`}
+                          >
+                            Learn More
+                          </a>
                         </div>
                       </div>
                     </div>

@@ -42,7 +42,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="min-h-screen flex items-center py-20 bg-brand-pink">
+    <section id="testimonials" className="py-20 bg-brand-pink">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

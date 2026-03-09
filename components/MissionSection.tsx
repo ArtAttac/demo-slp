@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function MissionSection() {
   return (
-    <section id="mission" className="relative min-h-screen flex items-center py-20 sm:py-28 overflow-hidden bg-brand-darkBlue">
+    <section id="mission" className="relative py-20 sm:py-28 overflow-hidden bg-brand-darkBlue">
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Icon with yellow rays — sits above the bubble */}
         <div className="flex justify-center mb-8 relative z-10">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Josefin_Sans, Outfit } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -10,11 +11,10 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const josefinSans = Josefin_Sans({
-  subsets: ["latin"],
+const rawles = localFont({
+  src: './fonts/Rawles.ttf',
   display: 'swap',
-  preload: true,
-  variable: '--font-josefin',
+  variable: '--font-rawles',
 });
 
 const outfit = Outfit({
@@ -247,7 +247,7 @@ export default function RootLayout({
         {/* Theme color for mobile browsers */}
         <meta name="theme-color" content="#171e5d" />
       </head>
-      <body className={`${inter.variable} ${josefinSans.variable} ${outfit.variable} font-body`}>
+      <body className={`${inter.variable} ${rawles.variable} ${outfit.variable} font-body`}>
         {children}
         <Analytics />
       </body>
