@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import ginaImage from '@/app/assets/ginaaboutme.png';
+import ginaImage from '@/app/assets/ginapicprofileedited.png';
 import sabrinaImage from '@/app/assets/sababoutme.png';
 
 type ViewMode = 'cards' | 'expandable' | 'compact';
@@ -32,7 +32,7 @@ const practitioners = [
     experience: '8 years of clinical experience',
     trainings: ['Lively Letters\u2122', 'Story Grammar Marker\u00ae', 'The Hochman Method\u00a9 (The Writing Revolution)', 'Orton Gillingham'],
     image: ginaImage,
-    imagePosition: 'object-[20%_center]',
+    imagePosition: 'object-[40%_center]',
     gradientFrom: 'from-brand-pink/20',
     gradientTo: 'to-brand-bluePurple/10',
     borderColor: 'border-brand-pink/20',
