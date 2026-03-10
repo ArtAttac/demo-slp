@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import ginaImage from '@/app/assets/ginaaboutme.png';
+import ginaImage from '@/app/assets/ginapicprofileedited.png';
 import sabrinaImage from '@/app/assets/sababoutme.png';
 
 export default function AboutPage() {
