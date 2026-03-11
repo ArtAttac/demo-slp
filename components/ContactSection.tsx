@@ -21,13 +21,22 @@ export default function ContactSection() {
     setStatus('sending');
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: '9daad176-7340-40fa-81fe-3a95b2cf3d32',
+          subject: `New Inquiry from ${formData.firstName}`,
+          from_name: 'Speech on the Slope Website',
+          name: formData.firstName,
+          email: formData.email,
+          phone: formData.phone || 'Not provided',
+          'Preferred Contact Time': formData.contactTime || 'Not specified',
+        }),
       });
 
-      if (res.ok) {
+      const data = await res.json();
+      if (data.success) {
         setStatus('success');
         setFormData({ firstName: '', email: '', phone: '', contactTime: '' });
       } else {
