@@ -192,31 +192,56 @@ function BlogContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="block group"
-                >
-                  <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl hover:border-brand-bluePurple/20 transition-all duration-300">
-                    <div className="flex items-center gap-3 mb-4">
-                      <time className="text-sm text-brand-bluePurple font-medium">
-                        {new Date(post.createdAt).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })}
-                      </time>
+                <div className="relative">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="block group"
+                  >
+                    <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-xl hover:border-brand-bluePurple/20 transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-4">
+                        <time className="text-sm text-brand-bluePurple font-medium">
+                          {new Date(post.createdAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                        </time>
+                      </div>
+                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-brand-bluePurple transition-colors">
+                        {post.title}
+                      </h2>
+                      <p className="text-gray-600 leading-relaxed line-clamp-3">
+                        {post.body.split('\n')[0]}
+                      </p>
+                      <span className="inline-block mt-4 text-brand-bluePurple font-semibold text-sm group-hover:underline">
+                        Read more &rarr;
+                      </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-brand-bluePurple transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-gray-600 leading-relaxed line-clamp-3">
-                      {post.body.split('\n')[0]}
-                    </p>
-                    <span className="inline-block mt-4 text-brand-bluePurple font-semibold text-sm group-hover:underline">
-                      Read more &rarr;
-                    </span>
-                  </div>
-                </Link>
+                  </Link>
+                  {isEditMode && (
+                    <button
+                      onClick={async () => {
+                        if (!confirm(`Delete "${post.title}"?`)) return;
+                        const res = await fetch('/api/blog', {
+                          method: 'DELETE',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ slug: post.slug, editKey }),
+                        });
+                        if (res.ok) {
+                          setPosts((prev) => prev.filter((p) => p.slug !== post.slug));
+                        } else {
+                          alert('Failed to delete. Check your edit key.');
+                        }
+                      }}
+                      className="absolute top-4 right-4 w-10 h-10 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-colors"
+                      title="Delete post"
+                    >
+                      <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
               </motion.article>
             ))}
           </div>

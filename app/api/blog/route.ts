@@ -45,3 +45,20 @@ export async function POST(request: Request) {
 
   return NextResponse.json(post, { status: 201 });
 }
+
+export async function DELETE(request: Request) {
+  const { slug, editKey } = await request.json();
+
+  if (editKey !== process.env.BLOG_EDIT_KEY) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  if (!slug) {
+    return NextResponse.json({ error: 'Slug is required.' }, { status: 400 });
+  }
+
+  await redis.del(`blog:post:${slug}`);
+  await redis.lrem('blog:slugs', 0, slug);
+
+  return NextResponse.json({ success: true });
+}
