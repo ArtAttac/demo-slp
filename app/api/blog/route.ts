@@ -20,6 +20,11 @@ export async function GET() {
 export async function POST(request: Request) {
   const { title, body, editKey } = await request.json();
 
+  if (!process.env.BLOG_EDIT_KEY) {
+    console.error('BLOG_EDIT_KEY environment variable is not set');
+    return NextResponse.json({ error: 'Blog edit key not configured on server.' }, { status: 500 });
+  }
+
   if (editKey !== process.env.BLOG_EDIT_KEY) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -44,6 +49,39 @@ export async function POST(request: Request) {
   await redis.lpush('blog:slugs', slug);
 
   return NextResponse.json(post, { status: 201 });
+}
+
+export async function PUT(request: Request) {
+  const { slug, title, body, editKey } = await request.json();
+
+  if (!process.env.BLOG_EDIT_KEY) {
+    console.error('BLOG_EDIT_KEY environment variable is not set');
+    return NextResponse.json({ error: 'Blog edit key not configured on server.' }, { status: 500 });
+  }
+
+  if (editKey !== process.env.BLOG_EDIT_KEY) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  if (!slug || !title || !body) {
+    return NextResponse.json({ error: 'Slug, title, and body are required.' }, { status: 400 });
+  }
+
+  const existing = await redis.get<BlogPost>(`blog:post:${slug}`);
+  if (!existing) {
+    return NextResponse.json({ error: 'Post not found.' }, { status: 404 });
+  }
+
+  const updatedPost: BlogPost = {
+    slug,
+    title,
+    body,
+    createdAt: existing.createdAt,
+  };
+
+  await redis.set(`blog:post:${slug}`, updatedPost);
+
+  return NextResponse.json(updatedPost);
 }
 
 export async function DELETE(request: Request) {

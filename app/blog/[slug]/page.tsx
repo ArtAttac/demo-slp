@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 interface BlogPost {
   slug: string;
@@ -102,12 +103,8 @@ export default function BlogPostPage() {
 
           <div className="w-16 h-1 bg-gradient-to-r from-brand-bluePurple to-brand-pink rounded-full mb-10" />
 
-          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-            {post.body.split('\n\n').map((paragraph, i) => (
-              <p key={i} className="mb-6">
-                {paragraph}
-              </p>
-            ))}
+          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900">
+            <ReactMarkdown>{post.body}</ReactMarkdown>
           </div>
         </motion.div>
 
