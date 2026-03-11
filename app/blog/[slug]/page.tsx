@@ -113,7 +113,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           <div className="w-16 h-1 bg-gradient-to-r from-brand-bluePurple to-brand-pink rounded-full mb-10" />
 
-          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900">
+          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900 prose-a:text-brand-bluePurple prose-a:underline hover:prose-a:text-brand-darkBlue">
             <ReactMarkdown remarkPlugins={[remarkBreaks]}>{post.body}</ReactMarkdown>
           </div>
         </div>

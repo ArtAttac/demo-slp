@@ -44,6 +44,25 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
     });
   }, [body]);
 
+  const insertLink = useCallback(() => {
+    const textarea = bodyRef.current;
+    if (!textarea) return;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = body.slice(start, end);
+    const url = prompt('Enter URL:');
+    if (!url) return;
+    const linkText = selected || 'link text';
+    const markdown = `[${linkText}](${url})`;
+    const newText = body.slice(0, start) + markdown + body.slice(end);
+    setBody(newText);
+    requestAnimationFrame(() => {
+      textarea.focus();
+      const cursorPos = start + markdown.length;
+      textarea.setSelectionRange(cursorPos, cursorPos);
+    });
+  }, [body]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus('sending');
@@ -218,6 +237,16 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
                   1.
                 </button>
                 <div className="w-px h-6 bg-gray-300 mx-1" />
+                <button
+                  type="button"
+                  onClick={insertLink}
+                  className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                  title="Insert link"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                  </svg>
+                </button>
                 <button
                   type="button"
                   onClick={() => insertFormatting('\n', '')}
