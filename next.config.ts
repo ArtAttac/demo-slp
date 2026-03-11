@@ -52,7 +52,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com data:",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://vercel.live https://*.vercel.app",
+              "connect-src 'self' https://vercel.live https://*.vercel.app https://api.web3forms.com https://*.upstash.io",
               "frame-src 'self'",
               "media-src 'self'",
               "object-src 'none'",
