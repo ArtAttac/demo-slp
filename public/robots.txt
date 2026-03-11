@@ -2,9 +2,8 @@
 User-agent: *
 Allow: /
 
-# Disallow crawling of specific paths (if any)
-# Disallow: /admin/
-# Disallow: /api/
+# Disallow crawling of API routes
+Disallow: /api/
 
 # Sitemap location
 Sitemap: https://speechontheslope.com/sitemap.xml

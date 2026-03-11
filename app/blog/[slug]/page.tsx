@@ -1,69 +1,83 @@
-'use client';
-
-import { useState, useEffect } from 'react';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
+import { redis, BlogPost } from '@/lib/redis';
+import type { Metadata } from 'next';
 
-interface BlogPost {
-  slug: string;
-  title: string;
-  body: string;
-  createdAt: string;
+function stripMarkdown(text: string): string {
+  return text.replace(/[#*_~`>]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
 }
 
-export default function BlogPostPage() {
-  const params = useParams();
-  const slug = params.slug as string;
+async function getPost(slug: string): Promise<BlogPost | null> {
+  return redis.get<BlogPost>(`blog:post:${slug}`);
+}
 
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+  if (!post) return { title: 'Post Not Found' };
 
-  useEffect(() => {
-    fetch('/api/blog')
-      .then((res) => res.json())
-      .then((posts: BlogPost[]) => {
-        const found = posts.find((p) => p.slug === slug);
-        if (found) {
-          setPost(found);
-        } else {
-          setNotFound(true);
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        setNotFound(true);
-        setLoading(false);
-      });
-  }, [slug]);
+  const description = stripMarkdown(post.body).slice(0, 160);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="inline-block w-8 h-8 border-4 border-brand-bluePurple/30 border-t-brand-bluePurple rounded-full animate-spin" />
-      </div>
-    );
+  return {
+    title: post.title,
+    description,
+    openGraph: {
+      title: post.title,
+      description,
+      type: 'article',
+      publishedTime: post.createdAt,
+      url: `https://speechontheslope.com/blog/${slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+    },
+    alternates: {
+      canonical: `https://speechontheslope.com/blog/${slug}`,
+    },
+  };
+}
+
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    notFound();
   }
 
-  if (notFound || !post) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-        <p className="text-gray-600 mb-8">The blog post you&apos;re looking for doesn&apos;t exist.</p>
-        <Link
-          href="/blog"
-          className="px-6 py-3 bg-brand-bluePurple text-white font-semibold rounded-full hover:bg-brand-darkBlue transition-colors"
-        >
-          Back to Blog
-        </Link>
-      </div>
-    );
-  }
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    datePublished: post.createdAt,
+    ...(post.updatedAt && { dateModified: post.updatedAt }),
+    author: {
+      '@type': 'Organization',
+      name: 'Speech on the Slope',
+      url: 'https://speechontheslope.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Speech on the Slope',
+      url: 'https://speechontheslope.com',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://speechontheslope.com/blog/${slug}`,
+    },
+  };
 
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -84,11 +98,7 @@ export default function BlogPostPage() {
 
       {/* Article */}
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div>
           <time className="text-sm text-brand-bluePurple font-medium">
             {new Date(post.createdAt).toLocaleDateString('en-US', {
               year: 'numeric',
@@ -104,18 +114,12 @@ export default function BlogPostPage() {
           <div className="w-16 h-1 bg-gradient-to-r from-brand-bluePurple to-brand-pink rounded-full mb-10" />
 
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900">
-            <ReactMarkdown>{post.body}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkBreaks]}>{post.body}</ReactMarkdown>
           </div>
-        </motion.div>
+        </div>
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 pt-10 border-t border-gray-200 text-center"
-        >
+        <div className="mt-16 pt-10 border-t border-gray-200 text-center">
           <p className="text-lg text-gray-600 mb-6">
             Have questions about your child&apos;s speech or language development?
           </p>
@@ -125,7 +129,7 @@ export default function BlogPostPage() {
           >
             Get in Touch
           </Link>
-        </motion.div>
+        </div>
       </article>
     </div>
   );

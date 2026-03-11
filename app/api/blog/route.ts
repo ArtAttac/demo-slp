@@ -77,6 +77,7 @@ export async function PUT(request: Request) {
     title,
     body,
     createdAt: existing.createdAt,
+    updatedAt: new Date().toISOString(),
   };
 
   await redis.set(`blog:post:${slug}`, updatedPost);
