@@ -7,7 +7,7 @@ const steps = [
     number: '1',
     title: 'Reach Out',
     description:
-      "Reach out by phone or email. We'll gather some basic information and plan a time when we can meet you and your child before walking you through next steps!",
+      "Reach out to us by filling out our contact form, giving us a call, or sending an email. We\u2019ll gather a few details about your child and schedule a time to meet them, then guide you through the next steps together!",
   },
   {
     number: '2',
@@ -19,7 +19,7 @@ const steps = [
     number: '3',
     title: 'Start Therapy',
     description:
-      'Therapy sessions can take place at your home or your child\u2019s school (with permission). Sessions focus on building connection and confidence while taking steps toward your child\u2019s goals. We value family involvement and will share ways for you to continue supporting these goals at home!',
+      'Therapy sessions can take place at your home or your child\u2019s school (with permission). Sessions focus on building connection and confidence while taking steps toward your child\u2019s goals.',
   },
 ];
 

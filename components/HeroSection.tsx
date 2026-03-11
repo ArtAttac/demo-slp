@@ -24,10 +24,10 @@ export default function HeroSection() {
           className="text-center max-w-3xl mx-auto -mt-12 md:-mt-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-            Speech Therapy & Literacy Support for <span className="text-brand-yellow">Brooklyn Kids</span>
+            Speech Therapy & Literacy Support for <span className="text-brand-yellow">Brooklyn & Manhattan Kids</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8 drop-shadow-md">
-            Helping parents build reading, writing, and speech skills with confidence and connection.
+            Helping children build clear speech, strong literacy skills, and lasting confidence.
           </p>
           <a
             href="#about"

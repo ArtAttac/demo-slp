@@ -10,6 +10,7 @@ const navLinks = [
   { href: '#about', label: 'Team', color: 'hover:text-brand-yellow' },
   { href: '#services', label: 'Services', color: 'hover:text-brand-pink' },
   { href: '#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
+  { href: '/blog', label: 'Blog', color: 'hover:text-brand-bluePurple' },
   { href: '#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
 ];
 

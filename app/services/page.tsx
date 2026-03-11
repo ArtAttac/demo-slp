@@ -5,108 +5,58 @@ import { motion } from 'framer-motion';
 
 const services = [
   {
-    title: 'Free Consultations',
+    title: 'Evaluations',
     description:
-      "Schedule a complimentary 30-minute session to discuss your child's needs, answer questions, and explore how we can support your family's communication goals.",
+      "Understanding your child\u2019s communication is the first step in helping them thrive. Our speech and language evaluations give a full picture of how your child speaks, understands, and interacts in everyday situations.",
     details: [
-      'No-obligation introductory meeting',
-      'Discuss your child\'s communication strengths and challenges',
-      'Learn about our approach and therapy options',
-      'Get answers to all your questions',
+      "During the evaluation, we\u2019ll review your child\u2019s developmental history, talk with you about your goals and concerns, observe them in play, and use age-appropriate activities to see how they communicate. Standardized testing may also be included if it will help us understand their skills more clearly.",
+      "Afterward, you\u2019ll receive a written report summarizing your child\u2019s strengths, areas to work on, and recommendations for next steps. If therapy is recommended, we\u2019ll create a personalized plan with clear goals tailored to your child\u2019s unique needs, so you feel confident about the path forward.",
     ],
     bgColor: 'bg-brand-pink',
     textColor: 'text-gray-800',
   },
   {
-    title: 'Preschool Services',
+    title: 'Speech & Language Therapy',
     description:
-      'Engaging, play-based therapy sessions designed for ages 3-5. We work on speech sounds, language development, and social skills in a fun, supportive environment.',
+      "Speech therapy is all about helping children communicate clearly and confidently. Each session is designed around your child\u2019s strengths, interests, and learning style, so practicing speech and language skills feels engaging and fun.",
     details: [
-      'Designed for children ages 3-5',
-      'Play-based speech sound therapy',
-      'Language development and social skills',
-      'Fun, child-led sessions tailored to interests',
+      "Speech sessions may include learning how sounds are made, practicing them in words and sentences, listening for differences in sounds, and playing games that reinforce new skills. Families receive practical strategies to continue practicing at home, so progress carries over into everyday life.",
+      "Language therapy helps children understand and use words and sentences effectively. Sessions may focus on building vocabulary, improving sentence structure, asking and answering questions, storytelling, and supporting social communication. Everything we do is interactive, playful, and designed to help children use their skills with confidence at home, in school, and beyond.",
     ],
     bgColor: 'bg-brand-yellow',
     textColor: 'text-gray-800',
   },
   {
-    title: 'Academic Support',
+    title: 'Reading & Writing Support',
     description:
-      'Targeted intervention for reading comprehension, written expression, and verbal reasoning. We help students build the language foundation needed for academic achievement.',
+      "Strong speech and language skills are the foundation for reading and writing success. Our literacy support helps children strengthen the skills they need to become confident readers and writers.",
     details: [
-      'Reading comprehension strategies',
-      'Written expression and composition',
-      'Verbal reasoning and critical thinking',
-      'Phonological and phonemic awareness',
+      "Sessions may focus on phonological and phonemic awareness (hearing and working with sounds in words), connecting sounds to letters, decoding and early reading skills, spelling patterns, reading comprehension, and organizing ideas for writing.",
+      "All activities are playful, hands-on, and tailored to your child\u2019s interests, so learning feels engaging. By connecting what children know about speech and language to reading and writing, we help them build the confidence and skills they need to shine academically and creatively.",
     ],
     bgColor: 'bg-brand-cream',
     textColor: 'text-gray-800',
   },
   {
-    title: 'IEP Consultation',
+    title: 'Myofunctional Therapy',
     description:
-      'Expert guidance through the IEP process. We help you understand evaluations, write effective goals, and advocate for appropriate services in school settings.',
+      "Sometimes, speech challenges are linked to how the mouth and tongue move or habits like mouth breathing or tongue thrust. Myofunctional therapy helps children build the oral muscle coordination they need to support clear speech, healthy swallowing, and proper oral development.",
     details: [
-      'Navigate the IEP process with confidence',
-      'Understand evaluation reports and recommendations',
-      'Develop effective, measurable goals',
-      'Advocate for appropriate school-based services',
+      "Sessions include fun, age-appropriate exercises designed to strengthen the tongue, lips, and jaw, while teaching proper tongue posture, nasal breathing, and swallowing patterns. These skills often work hand-in-hand with speech therapy, helping children produce sounds more accurately and confidently while supporting overall oral health.",
     ],
     bgColor: 'bg-brand-darkBlue',
     textColor: 'text-white',
   },
   {
-    title: 'OT Evaluations',
+    title: 'Community Events + Workshops',
     description:
-      'Thorough assessments of fine motor skills, sensory processing, and daily living skills. Results include detailed recommendations and personalized intervention plans.',
+      "We love connecting with families in our community! Our workshops and group classes take place at local play spaces and centers, giving children opportunities to practice speech, language, and early literacy skills in a playful, social setting.",
     details: [
-      'Comprehensive fine motor assessment',
-      'Sensory processing evaluation',
-      'Daily living skills screening',
-      'Detailed report with personalized recommendations',
+      "Each class focuses on specific skills like speech sound awareness, language development, storytelling, or early reading and writing. Activities are hands-on, interactive, and designed to keep children engaged while learning.",
+      "We also host parent workshops to answer questions in-person (no constant Googling) and provide simple strategies and tools to support your child\u2019s communication at home. By giving parents practical guidance and children fun, meaningful practice, our community events help everyone feel empowered and supported in their journey toward clear, confident communication.",
     ],
     bgColor: 'bg-brand-pink',
     textColor: 'text-gray-800',
-  },
-  {
-    title: 'Early Intervention',
-    description:
-      'Specialized services for infants and toddlers (0-3 years). We coach parents on strategies to enhance communication during daily routines and play.',
-    details: [
-      'For infants and toddlers ages 0-3',
-      'Parent coaching and strategy development',
-      'Communication support during daily routines',
-      'Play-based interaction techniques',
-    ],
-    bgColor: 'bg-brand-yellow',
-    textColor: 'text-gray-800',
-  },
-  {
-    title: 'Parent Coaching',
-    description:
-      "Learn hands-on techniques to support your child's communication at home. We provide customized strategies that fit your family's lifestyle and routines.",
-    details: [
-      'Personalized strategies for your family',
-      'Hands-on coaching during sessions',
-      'Techniques that integrate into daily routines',
-      'Ongoing support and progress updates',
-    ],
-    bgColor: 'bg-brand-cream',
-    textColor: 'text-gray-800',
-  },
-  {
-    title: 'Feeding Therapy',
-    description:
-      'Address picky eating, oral motor difficulties, and mealtime behaviors. We use a responsive, family-centered approach to expand food variety and improve feeding skills.',
-    details: [
-      'Address picky eating and food refusal',
-      'Oral motor skill development',
-      'Mealtime behavior support',
-      'Family-centered, responsive approach',
-    ],
-    bgColor: 'bg-brand-darkBlue',
-    textColor: 'text-white',
   },
 ];
 
@@ -165,16 +115,13 @@ export default function ServicesPage() {
               <p className={`text-base sm:text-lg ${service.textColor} leading-relaxed mb-6`}>
                 {service.description}
               </p>
-              <ul className="space-y-3">
-                {service.details.map((detail) => (
-                  <li key={detail} className={`flex items-start gap-3 ${service.textColor}`}>
-                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-sm sm:text-base">{detail}</span>
-                  </li>
+              <div className="space-y-4">
+                {service.details.map((detail, i) => (
+                  <p key={i} className={`text-sm sm:text-base ${service.textColor} leading-relaxed`}>
+                    {detail}
+                  </p>
                 ))}
-              </ul>
+              </div>
             </motion.div>
           ))}
         </div>

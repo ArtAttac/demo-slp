@@ -76,7 +76,7 @@ export default function AboutPage() {
                       src={ginaImage}
                       alt="Gina Trobiani, M.Ed., CCC-SLP"
                       fill
-                      className="object-cover"
+                      className="object-cover object-[40%_center]"
                     />
                   </div>
                 </motion.div>
@@ -88,42 +88,35 @@ export default function AboutPage() {
               {/* Full bio */}
               <div className="max-w-3xl mx-auto space-y-5 text-gray-700 leading-relaxed">
                 <p>
-                  Hi, I&apos;m Gina! A licensed speech-language pathologist (SLP) who absolutely loves helping little learners find their voices and build strong foundations for reading and writing at the same time!
+                  Hi, I&apos;m Gina! I&apos;m a licensed speech-language pathologist (SLP) who loves helping little learners find their voices while building strong foundations for reading and writing.
                 </p>
                 <p>
-                  I earned my Master&apos;s in Communication Sciences &amp; Disorders from The University of Virginia in 2017 and am a certified member of the American Speech-Language-Hearing Association (ASHA).
+                  I earned my Master&apos;s in Communication Sciences &amp; Disorders from the University of Virginia in 2017 and am a certified member of the American Speech-Language-Hearing Association (ASHA).
                 </p>
                 <p>
-                  I specialize in working with students from Pre-K through 2nd grade who need support with speech sound production, early reading skills, and writing development. Whether a child is working on clear speech, building phonological and phonemic awareness, or learning how to get their ideas onto paper, I&apos;m here to make the whole process feel supportive, engaging, and fun!
+                  I specialize in working with children from Pre-K through 2nd grade who need support with speech sound production, early reading skills, and writing development. Whether a child is working on producing sounds clearly, building phonological and phonemic awareness, or learning how to get their ideas onto paper, my goal is to make the process supportive, engaging, and fun.
                 </p>
                 <p>
-                  I believe learning happens when children feel confident, understood, and successful. My sessions are playful and tailored to each child&apos;s unique strengths and interests&mdash;creating meaningful activities and goals that support growth and translate to academic success.
+                  I believe children learn best when they feel confident, understood, and successful. My sessions are playful and thoughtfully tailored to each child&apos;s strengths and interests, creating meaningful activities that build skills and translate to success in the classroom.
                 </p>
                 <p>
-                  My goal is to help children express themselves clearly, read confidently, and write their ideas proudly&mdash;so they can shine both in school and beyond.
+                  My goal is to help children express themselves clearly, read with confidence, and feel proud sharing their ideas&mdash;both in school and beyond.
                 </p>
                 <p className="italic text-gray-600">
-                  Outside of work, I love traveling with my husband, taking Pilates classes, singing while cleaning, and cuddling with my cat, Finn.
+                  Outside of work, I love traveling with my husband, solving escape rooms, and cuddling with my cat, Finn.
                 </p>
               </div>
 
-              {/* At a Glance */}
+              {/* Certifications & Trainings */}
               <div className="mt-10 max-w-3xl mx-auto">
-                <h3 className="text-xl font-bold text-brand-darkBlue mb-5 text-center">At a Glance</h3>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-brand-pink/20">
-                    <p className="font-semibold text-gray-900 mb-3">Experience</p>
-                    <p className="text-gray-700">8 years of clinical experience</p>
-                  </div>
-                  <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-brand-pink/20">
-                    <p className="font-semibold text-gray-900 mb-3">Advanced Trainings</p>
-                    <ul className="text-gray-700 space-y-1.5 text-sm">
-                      <li>Lively Letters&trade;</li>
-                      <li>Story Grammar Marker&reg;</li>
-                      <li>The Hochman Method&copy; (The Writing Revolution)</li>
-                      <li>Orton Gillingham</li>
-                    </ul>
-                  </div>
+                <h3 className="text-xl font-bold text-brand-darkBlue mb-5 text-center">Certifications &amp; Trainings</h3>
+                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-brand-pink/20">
+                  <ul className="text-gray-700 space-y-1.5 text-sm">
+                    <li>Lively Letters&trade;</li>
+                    <li>Story Grammar Marker&reg;</li>
+                    <li>The Hochman Method&copy; (The Writing Revolution)</li>
+                    <li>Orton Gillingham</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -173,39 +166,36 @@ export default function AboutPage() {
               {/* Full bio */}
               <div className="max-w-3xl mx-auto space-y-5 text-gray-700 leading-relaxed">
                 <p>
-                  Hi! I&apos;m Sabrina, a licensed speech-language pathologist, play enthusiast, and proud Brooklyn local. I earned my Master of Science in Communication Disorders from CUNY Hunter College in 2020 and am a certified member of the American Speech-Language-Hearing Association (ASHA), as well as a recipient of the Award for Continuing Education (ACE).
+                  Hi, I&apos;m Sabrina! I&apos;m a licensed speech-language pathologist, play enthusiast, and proud Brooklyn local who loves helping children build confidence through clear communication.
                 </p>
                 <p>
-                  After five years supporting pre-K and elementary-aged students across NYC public schools, I set out to create a practice rooted in individualized, playful, and family-centered speech therapy&mdash;an approach that truly works because it&apos;s built around what kids love.
+                  I earned my Master of Science in Communication Disorders from CUNY Hunter College in 2020 and am a certified member of the American Speech-Language-Hearing Association (ASHA). I&apos;m also a recipient of ASHA&apos;s Award for Continuing Education (ACE).
                 </p>
                 <p>
-                  My goal is to help children build confidence, connection, and communication that lasts. I meet children exactly where they are&mdash;at home, in their world, and on their terms&mdash;because kids learn best when they&apos;re having fun. That&apos;s why my sessions are always child-led, play-based, and tailored to your child&apos;s passions.
+                  After five years supporting Pre-K and elementary-aged students across NYC public schools, I co-founded Speech on the Slope to create a practice centered on individualized, play-based, and family-focused therapy.
+                </p>
+                <p>
+                  I specialize in speech sound disorders and have additional training in myofunctional therapy. My sessions are child-led, engaging, and built around what kids love, helping children develop clearer speech while strengthening the foundations needed for reading and spelling success.
+                </p>
+                <p>
+                  My goal is to help children build confidence, connection, and communication skills that last, so they can express themselves clearly at home, in school, and in their communities.
                 </p>
                 <p className="italic text-gray-600">
-                  When I&apos;m not celebrating speech breakthroughs, you&apos;ll probably find me wandering around Brooklyn with a croissant in hand, on the hunt for the city&apos;s best bakeries and farmers markets. I love spending time with my husband and our labradoodle, Melo (we&apos;re regulars at the dog park!), and I&apos;m on a mission to visit every U.S. National Park&mdash;24 down so far!
+                  Outside of work, you&apos;ll often find me exploring Brooklyn with a croissant in hand in search of the city&apos;s best bakeries and farmers markets. I love spending time with my husband and our labradoodle, Melo (we&apos;re regulars at the dog park!) and I&apos;m on a mission to visit every U.S. National Park (24 down so far!).
                 </p>
               </div>
 
-              {/* At a Glance */}
+              {/* Certifications & Trainings */}
               <div className="mt-10 max-w-3xl mx-auto">
-                <h3 className="text-xl font-bold text-brand-darkBlue mb-5 text-center">At a Glance</h3>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-brand-yellow/20">
-                    <p className="font-semibold text-gray-900 mb-3">Education</p>
-                    <ul className="text-gray-700 space-y-1.5 text-sm">
-                      <li>MS in Communication Disorders &ndash; Hunter College</li>
-                      <li>BA in Psychology &ndash; Binghamton University</li>
-                    </ul>
-                  </div>
-                  <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-brand-yellow/20">
-                    <p className="font-semibold text-gray-900 mb-3">Certifications &amp; Trainings</p>
-                    <ul className="text-gray-700 space-y-1.5 text-sm">
-                      <li>ASHA Award for Continuing Education (ACE)</li>
-                      <li>ASHA Certificate of Clinical Competence (CCC)</li>
-                      <li>Teacher of Students with Speech &amp; Language Disabilities (TSSLD)</li>
-                      <li>PROMPT, DTTC, Sounds in Motion, Myofunctional Therapy</li>
-                    </ul>
-                  </div>
+                <h3 className="text-xl font-bold text-brand-darkBlue mb-5 text-center">Certifications &amp; Trainings</h3>
+                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-brand-yellow/20">
+                  <ul className="text-gray-700 space-y-1.5 text-sm">
+                    <li>Teacher of Students with Speech &amp; Language Disabilities (TSSLD)</li>
+                    <li>PROMPT (Prompts for Restructuring Oral Muscular Phonetic Targets)</li>
+                    <li>DTTC (Dynamic Temporal and Tactile Cueing)</li>
+                    <li>Sounds in Motion</li>
+                    <li>Myofunctional Therapy</li>
+                  </ul>
                 </div>
               </div>
             </div>

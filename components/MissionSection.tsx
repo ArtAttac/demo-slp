@@ -71,7 +71,7 @@ export default function MissionSection() {
             {/* Mission text */}
             <div className="text-center space-y-6">
               <p className="text-lg md:text-xl text-gray-800 leading-relaxed">
-                At Speech on the Slope, we help children find their voice through playful, engaging therapy grounded in meaningful relationships and care that&apos;s truly individualized. We work hand-in-hand with families to build confidence, strengthen communication, and share strategies that carry over well beyond our sessions&mdash;so children can thrive at home, in school, and out in their communities.
+                At Speech on the Slope, we help children find their voice through playful, engaging therapy grounded in meaningful relationships and care that&apos;s truly individualized. We work hand-in-hand with families to strengthen communication, build confidence, and share strategies that carry over well beyond our sessions&mdash;so children can thrive at home, in school, and out in their communities.
               </p>
               <p className="text-lg md:text-xl text-gray-800 leading-relaxed">
                 Whether we&apos;re supporting clearer speech, nurturing language development, or laying the groundwork for reading and spelling, every session is shaped around your child&apos;s interests, strengths, and unique learning style. Because when therapy feels like play, real progress happens.
