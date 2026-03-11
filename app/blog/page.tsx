@@ -221,11 +221,12 @@ function BlogContent() {
                   {isEditMode && (
                     <button
                       onClick={async () => {
-                        if (!confirm(`Delete "${post.title}"?`)) return;
+                        const key = prompt(`Enter edit key to delete "${post.title}":`);
+                        if (!key) return;
                         const res = await fetch('/api/blog', {
                           method: 'DELETE',
                           headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ slug: post.slug, editKey }),
+                          body: JSON.stringify({ slug: post.slug, editKey: key }),
                         });
                         if (res.ok) {
                           setPosts((prev) => prev.filter((p) => p.slug !== post.slug));
