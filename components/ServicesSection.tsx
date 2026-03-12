@@ -81,18 +81,6 @@ export default function ServicesSection() {
       <div className="relative max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-block"
-          >
-            <span className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-brand-yellow/20 to-brand-pink/20 text-sm font-bold uppercase tracking-widest text-white mb-4">
-              What We Offer
-            </span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

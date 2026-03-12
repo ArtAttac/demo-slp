@@ -6,11 +6,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { href: '#mission', label: 'Mission', color: 'hover:text-brand-bluePurple' },
-  { href: '#about', label: 'Team', color: 'hover:text-brand-yellow' },
-  { href: '#services', label: 'Services', color: 'hover:text-brand-pink' },
+  { href: '#mission', label: 'Mission', color: 'hover:text-brand-darkBlue' },
+  { href: '#about', label: 'Team', color: 'hover:text-brand-darkBlue' },
+  { href: '#services', label: 'Services', color: 'hover:text-brand-darkBlue' },
   { href: '#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
-  { href: '/blog', label: 'Blog', color: 'hover:text-brand-bluePurple' },
+  { href: '/blog', label: 'Blog', color: 'hover:text-brand-darkBlue' },
+  { href: '#faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
   { href: '#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
 ];
 
@@ -22,7 +23,7 @@ function NavBar({ isSticky = false }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`${isSticky ? 'bg-white/50 backdrop-blur-md' : 'bg-white/50 backdrop-blur-md'}`}>
+    <div className={`${isSticky ? 'bg-white/60 backdrop-blur-md' : 'bg-white/60 backdrop-blur-md'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center h-20 ${isSticky ? 'justify-between' : 'justify-between'}`}>
           {/* Logo */}
@@ -31,9 +32,9 @@ function NavBar({ isSticky = false }: NavBarProps) {
               <Image
                 src="/logofortopleftcorner.png"
                 alt="Speech on the Slope"
-                width={170}
-                height={170}
-                className="h-[170px] w-[170px] object-contain"
+                width={210}
+                height={210}
+                className="h-[210px] w-[210px] object-contain"
                 priority
               />
             </Link>

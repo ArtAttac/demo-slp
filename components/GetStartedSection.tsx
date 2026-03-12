@@ -29,18 +29,6 @@ export default function GetStartedSection() {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-block"
-          >
-            <span className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-brand-bluePurple/15 to-brand-pink/15 text-sm font-bold uppercase tracking-widest text-brand-darkBlue mb-4">
-              How It Works
-            </span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +37,7 @@ export default function GetStartedSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900"
           >
             Ready to{' '}
-            <span className="text-brand-darkBlue">
+            <span className="text-black">
               Get Started?
             </span>
           </motion.h2>
@@ -67,10 +55,10 @@ export default function GetStartedSection() {
                   glow: 'bg-brand-bluePurple/10',
                 },
                 {
-                  ring: 'ring-brand-pink/30',
-                  bg: 'bg-brand-pink',
-                  cardBorder: 'border-brand-pink/20',
-                  glow: 'bg-brand-pink/10',
+                  ring: 'ring-brand-darkBlue/30',
+                  bg: 'bg-brand-darkBlue',
+                  cardBorder: 'border-brand-darkBlue/20',
+                  glow: 'bg-brand-darkBlue/10',
                 },
                 {
                   ring: 'ring-brand-yellow/30',
