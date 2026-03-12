@@ -106,7 +106,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 lg:gap-8">
           {services.map((service, index) => {
             const isFlipped = flippedCards.has(index);
 
@@ -117,7 +117,7 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative"
+                className="relative w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]"
                 style={{ perspective: '1000px' }}
               >
                 <motion.div
