@@ -9,8 +9,8 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-start overflow-hidden">
       {/* Hero image with zoom-to-center animation, cropped to hide bottom-right watermark */}
       <motion.div
-        initial={{ scale: 1.3 }}
-        animate={{ scale: 1.05 }}
+        initial={{ scale: 1.5 }}
+        animate={{ scale: 1.2 }}
         transition={{ duration: 2, ease: 'easeOut' }}
         className="absolute inset-0"
       >
@@ -18,11 +18,11 @@ export default function HeroSection() {
           src={heroImage}
           alt="Speech on the Slope - Brooklyn speech therapy"
           fill
-          className="object-cover object-center"
+          className="object-cover object-[center_30%]"
           priority
         />
         {/* Cover watermark in bottom-right */}
-        <div className="absolute bottom-0 right-0 w-48 h-16 bg-gradient-to-tl from-brand-darkBlue/80 via-brand-darkBlue/40 to-transparent" />
+        <div className="absolute bottom-0 right-0 w-96 h-32 bg-gradient-to-tl from-brand-darkBlue via-brand-darkBlue/70 to-transparent" />
       </motion.div>
       <div className="absolute inset-0 bg-brand-darkBlue/40" />
 
