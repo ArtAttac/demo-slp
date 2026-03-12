@@ -28,7 +28,7 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} Speech on the Slope. All rights reserved.
         </p>
         <p className="text-gray-400 text-sm">
-          Business phone coming soon | hello@speechontheslope.com
+          (917) 200-0339 | hello@speechontheslope.com
         </p>
       </div>
     </footer>
