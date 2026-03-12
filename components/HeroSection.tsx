@@ -2,26 +2,36 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import heroImage from '@/app/assets/landing.jpg';
+import heroImage from '@/app/assets/herolandingv1.png';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      <Image
-        src={heroImage}
-        alt="Speech therapist reading with a child"
-        fill
-        className="object-cover scale-125 object-[40%_35%]"
-        priority
-      />
+    <section className="relative min-h-screen flex items-start overflow-hidden">
+      {/* Hero image with zoom-to-center animation, cropped to hide bottom-right watermark */}
+      <motion.div
+        initial={{ scale: 1.3 }}
+        animate={{ scale: 1.05 }}
+        transition={{ duration: 2, ease: 'easeOut' }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={heroImage}
+          alt="Speech on the Slope - Brooklyn speech therapy"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        {/* Cover watermark in bottom-right */}
+        <div className="absolute bottom-0 right-0 w-48 h-16 bg-gradient-to-tl from-brand-darkBlue/80 via-brand-darkBlue/40 to-transparent" />
+      </motion.div>
       <div className="absolute inset-0 bg-brand-darkBlue/40" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl mx-auto -mt-12 md:-mt-16"
+          className="text-center max-w-3xl mx-auto"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
             Speech Therapy & Literacy Support for <span className="text-brand-yellow">Brooklyn & Manhattan Kids</span>
