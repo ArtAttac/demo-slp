@@ -7,17 +7,17 @@ const faqs = [
   {
     question: 'How do I know if my child needs speech therapy?',
     answer:
-      "If your child is having difficulty being understood, following directions, putting words together, or using language socially, a speech-language evaluation can help determine if therapy would be beneficial. You don't need a diagnosis to reach out — we're happy to help you figure out the next steps.",
+      "This is a question many families ask! We provide guidance through an initial call and free screening. This allows us to begin building a relationship with your child and your family, hear your observations and make our own, and determine if our practice is the best fit!",
   },
   {
     question: 'Do you support every area of speech and language therapy?',
     answer:
-      'We specialize in articulation and phonological disorders, receptive and expressive language delays, pragmatic/social language skills, early intervention for late talkers, language-based literacy support, and fluency. If your child\'s needs fall outside our scope, we\'ll help connect you with the right provider.',
+      'Speech on the Slope specializes in speech sound production, myofunctional therapy, literacy (reading and writing), and fluency. If your child\'s needs fall outside our scope, we\'ll help connect you with the right provider.',
   },
   {
     question: 'Where is therapy provided?',
     answer:
-      "We offer in-home therapy throughout Brooklyn, NY so your child can learn in a space where they're most comfortable. We also provide therapy in schools when appropriate and approved.",
+      "We offer in-home therapy throughout Brooklyn and Manhattan, so your child can learn in a space where they're most comfortable. We also provide therapy in schools when appropriate and approved.",
   },
   {
     question: 'Do you require an evaluation to begin therapy?',

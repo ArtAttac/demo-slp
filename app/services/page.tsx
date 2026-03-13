@@ -1,9 +1,24 @@
 'use client';
 
 import Link from 'next/link';
+import Image, { StaticImageData } from 'next/image';
 import { motion } from 'framer-motion';
 
-const services = [
+import evalPic from '@/app/assets/evalpicture.png';
+import speechPic from '@/app/assets/speechtherapypic.png';
+import readingPic from '@/app/assets/readingsupportpic.png';
+import myoPic from '@/app/assets/mycotherapy.png';
+import communityPic from '@/app/assets/communitysupportpic.png';
+
+const services: {
+  title: string;
+  description: string;
+  details: string[];
+  bgColor: string;
+  textColor: string;
+  image: StaticImageData;
+  imageClass?: string;
+}[] = [
   {
     title: 'Evaluations',
     description:
@@ -14,6 +29,8 @@ const services = [
     ],
     bgColor: 'bg-brand-pink',
     textColor: 'text-gray-800',
+    image: evalPic,
+    imageClass: 'object-cover object-[20%_center] md:object-[20%_center] scale-150 md:scale-100',
   },
   {
     title: 'Speech & Language Therapy',
@@ -25,6 +42,8 @@ const services = [
     ],
     bgColor: 'bg-brand-yellow',
     textColor: 'text-gray-800',
+    image: speechPic,
+    imageClass: 'object-cover object-[center_20%] md:object-center',
   },
   {
     title: 'Reading & Writing Support',
@@ -36,6 +55,7 @@ const services = [
     ],
     bgColor: 'bg-brand-cream',
     textColor: 'text-gray-800',
+    image: readingPic,
   },
   {
     title: 'Myofunctional Therapy',
@@ -46,6 +66,7 @@ const services = [
     ],
     bgColor: 'bg-brand-darkBlue',
     textColor: 'text-white',
+    image: myoPic,
   },
   {
     title: 'Community Events + Workshops',
@@ -57,6 +78,7 @@ const services = [
     ],
     bgColor: 'bg-brand-pink',
     textColor: 'text-gray-800',
+    image: communityPic,
   },
 ];
 
@@ -99,31 +121,50 @@ export default function ServicesPage() {
       </motion.div>
 
       {/* Services List */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="space-y-12">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className={`rounded-3xl ${service.bgColor} p-8 sm:p-10 shadow-lg`}
-            >
-              <h2 className={`text-2xl sm:text-3xl font-bold ${service.textColor} mb-4`}>
-                {service.title}
-              </h2>
-              <p className={`text-base sm:text-lg ${service.textColor} leading-relaxed mb-6`}>
-                {service.description}
-              </p>
-              <div className="space-y-4">
-                {service.details.map((detail, i) => (
-                  <p key={i} className={`text-sm sm:text-base ${service.textColor} leading-relaxed`}>
-                    {detail}
-                  </p>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+          {services.map((service, index) => {
+            const imageOnRight = index % 2 === 0;
+
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className={`rounded-3xl ${service.bgColor} shadow-lg overflow-hidden`}
+              >
+                <div className={`flex flex-col ${imageOnRight ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  {/* Text content */}
+                  <div className="flex-1 p-8 sm:p-10">
+                    <h2 className={`text-2xl sm:text-3xl font-bold ${service.textColor} mb-4`}>
+                      {service.title}
+                    </h2>
+                    <p className={`text-base sm:text-lg ${service.textColor} leading-relaxed mb-6`}>
+                      {service.description}
+                    </p>
+                    <div className="space-y-4">
+                      {service.details.map((detail, i) => (
+                        <p key={i} className={`text-sm sm:text-base ${service.textColor} leading-relaxed`}>
+                          {detail}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Image */}
+                  <div className="relative w-full md:w-72 lg:w-80 h-64 md:h-auto flex-shrink-0 overflow-hidden">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className={service.imageClass || 'object-cover'}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* CTA */}
