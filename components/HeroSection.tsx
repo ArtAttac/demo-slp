@@ -22,7 +22,7 @@ export default function HeroSection() {
           priority
         />
         {/* Cover watermark in bottom-right */}
-        <div className="absolute bottom-0 right-0 w-96 h-32 bg-gradient-to-tl from-brand-darkBlue via-brand-darkBlue/70 to-transparent" />
+        <div className="absolute bottom-0 right-0 w-96 h-32 bg-gradient-to-tl to-transparent" />
       </motion.div>
       <div className="absolute inset-0 bg-brand-darkBlue/40" />
 

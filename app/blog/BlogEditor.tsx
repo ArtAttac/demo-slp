@@ -15,6 +15,16 @@ interface BlogPost {
   createdAt: string;
 }
 
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&apos;/g, "'")
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
+
 function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -366,7 +376,7 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
                       </time>
                     </div>
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-brand-bluePurple transition-colors">
-                      {post.title}
+                      {decodeHtmlEntities(post.title)}
                     </h2>
                     <p className="text-gray-600 leading-relaxed line-clamp-3">
                       {post.body.split('\n')[0].replace(/[#*_~`>]/g, '').trim()}

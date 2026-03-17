@@ -9,6 +9,16 @@ function stripMarkdown(text: string): string {
   return text.replace(/[#*_~`>]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
 }
 
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&apos;/g, "'")
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
+
 async function getPost(slug: string): Promise<BlogPost | null> {
   return redis.get<BlogPost>(`blog:post:${slug}`);
 }
@@ -108,7 +118,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </time>
 
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-8 leading-tight">
-            {post.title}
+            {decodeHtmlEntities(post.title)}
           </h1>
 
           <div className="w-16 h-1 bg-gradient-to-r from-brand-bluePurple to-brand-pink rounded-full mb-10" />
