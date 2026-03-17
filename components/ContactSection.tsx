@@ -214,7 +214,7 @@ export default function ContactSection() {
 
           {/* Instagram */}
           <a
-            href="https://instagram.com/speechontheslopnyc"
+            href="https://instagram.com/speechontheslopenyc"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 text-gray-800 hover:text-brand-darkBlue transition-colors group"
@@ -227,7 +227,7 @@ export default function ContactSection() {
                 <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
               </svg>
             </div>
-            <span className="text-xs font-medium">@speechontheslopnyc</span>
+            <span className="text-xs font-medium">@speechontheslopenyc</span>
           </a>
         </motion.div>
       </div>
