@@ -19,6 +19,13 @@ function decodeHtmlEntities(str: string): string {
     .replace(/&gt;/g, '>');
 }
 
+export const revalidate = 3600; // revalidate every hour
+
+export async function generateStaticParams() {
+  const slugs = await redis.lrange('blog:slugs', 0, -1);
+  return (slugs ?? []).map((slug) => ({ slug }));
+}
+
 async function getPost(slug: string): Promise<BlogPost | null> {
   return redis.get<BlogPost>(`blog:post:${slug}`);
 }

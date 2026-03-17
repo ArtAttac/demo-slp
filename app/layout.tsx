@@ -103,13 +103,6 @@ export const metadata: Metadata = {
     },
   },
 
-  // Verification for search engines
-  verification: {
-    google: 'your-google-verification-code', // Add your Google Search Console verification code
-    // yandex: 'your-yandex-verification-code',
-    // bing: 'your-bing-verification-code',
-  },
-
   // Favicon and app icons
   icons: {
     icon: '/mainlogo.png',
@@ -148,15 +141,15 @@ export default function RootLayout({
     url: 'https://speechontheslope.com',
     logo: 'https://speechontheslope.com/mainlogo.png',
     image: 'https://speechontheslope.com/mainlogo.png',
-    telephone: '+1-XXX-XXX-XXXX', // Add your phone number
+    telephone: '+1-917-200-0339', // Add your phone number
     email: 'info@speechontheslope.com', // Add your email
 
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Your Street Address',
+      streetAddress: '267 9th Street',
       addressLocality: 'Brooklyn',
       addressRegion: 'NY',
-      postalCode: 'XXXXX',
+      postalCode: '11215',
       addressCountry: 'US'
     },
 

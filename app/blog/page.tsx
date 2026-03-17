@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // revalidate every hour
 
 async function getPosts(): Promise<BlogPost[]> {
   const slugs = await redis.lrange('blog:slugs', 0, -1);
