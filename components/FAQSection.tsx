@@ -10,14 +10,14 @@ const faqs = [
       "This is a question many families ask! We provide guidance through an initial call and free screening. This allows us to begin building a relationship with your child and your family, hear your observations and make our own, and determine if our practice is the best fit!",
   },
   {
-    question: 'Do you support every area of speech and language therapy?',
+    question: 'What areas do you treat?',
     answer:
-      'Speech on the Slope specializes in speech sound production, myofunctional therapy, literacy (reading and writing), and fluency. If your child\'s needs fall outside our scope, we\'ll help connect you with the right provider.',
+      'Speech on the Slope specializes in speech sound production, myofunctional therapy and literacy (reading and writing). We provide free screenings to determine if your child\'s needs align with our areas of specialization. If not, we are more than happy to provide the names of other practices in the area!',
   },
   {
     question: 'Where is therapy provided?',
     answer:
-      "We offer in-home therapy throughout Brooklyn and Manhattan, so your child can learn in a space where they're most comfortable. We also provide therapy in schools when appropriate and approved.",
+      "We offer in-home therapy throughout South and Northwestern Brooklyn, including Park Slope, Carroll Gardens, Cobble Hill, Boerum Hill, Brooklyn Heights, Gowanus, Prospect Heights, Windsor Terrace, Downtown Brooklyn, Fort Greene, and Clinton Hill as well as Lower Manhattan. We also provide therapy in schools when appropriate and approved.",
   },
   {
     question: 'Do you require an evaluation to begin therapy?',

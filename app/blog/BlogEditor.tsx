@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Suspense } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 
 interface BlogPost {
   slug: string;
@@ -26,6 +28,7 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
   const [editKey, setEditKey] = useState('');
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [editingSlug, setEditingSlug] = useState<string | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -173,99 +176,142 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
               />
             </div>
             <div>
-              <label htmlFor="postBody" className="block text-sm font-semibold text-gray-800 mb-2">
-                Body *
-              </label>
-              {/* Formatting Toolbar */}
-              <div className="flex items-center gap-1 mb-2 p-2 bg-gray-50 rounded-xl border border-gray-200">
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('**', '**')}
-                  className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Bold"
-                >
-                  B
-                </button>
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('*', '*')}
-                  className="px-3 py-1.5 text-sm italic text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Italic"
-                >
-                  I
-                </button>
-                <div className="w-px h-6 bg-gray-300 mx-1" />
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('# ', '')}
-                  className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Large heading"
-                >
-                  H1
-                </button>
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('## ', '')}
-                  className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Medium heading"
-                >
-                  H2
-                </button>
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('### ', '')}
-                  className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Small heading"
-                >
-                  H3
-                </button>
-                <div className="w-px h-6 bg-gray-300 mx-1" />
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('- ', '')}
-                  className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Bullet list"
-                >
-                  &bull;
-                </button>
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('1. ', '')}
-                  className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Numbered list"
-                >
-                  1.
-                </button>
-                <div className="w-px h-6 bg-gray-300 mx-1" />
-                <button
-                  type="button"
-                  onClick={insertLink}
-                  className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Insert link"
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => insertFormatting('\n', '')}
-                  className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
-                  title="Line break"
-                >
-                  &#8629;
-                </button>
+              <div className="flex items-center justify-between mb-2">
+                <label htmlFor="postBody" className="block text-sm font-semibold text-gray-800">
+                  Body *
+                </label>
+                <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setShowPreview(false)}
+                    className={`px-4 py-1.5 text-sm font-medium transition-colors ${
+                      !showPreview
+                        ? 'bg-brand-bluePurple text-white'
+                        : 'bg-white text-gray-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowPreview(true)}
+                    className={`px-4 py-1.5 text-sm font-medium transition-colors ${
+                      showPreview
+                        ? 'bg-brand-bluePurple text-white'
+                        : 'bg-white text-gray-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    Preview
+                  </button>
+                </div>
               </div>
-              <textarea
-                ref={bodyRef}
-                id="postBody"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                required
-                rows={12}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-bluePurple/50 focus:border-brand-bluePurple transition-colors text-gray-800 resize-y font-mono text-sm"
-                placeholder="Write your blog post here. Use **bold**, *italic*, and # headings for formatting."
-              />
+              {showPreview ? (
+                <div className="w-full min-h-[288px] px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800">
+                  {body ? (
+                    <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900 prose-a:text-brand-bluePurple prose-a:underline hover:prose-a:text-brand-darkBlue">
+                      {title && (
+                        <h1 className="text-3xl font-bold text-gray-900 mb-6">{title}</h1>
+                      )}
+                      <ReactMarkdown remarkPlugins={[remarkBreaks]}>{body}</ReactMarkdown>
+                    </div>
+                  ) : (
+                    <p className="text-gray-400 italic">Nothing to preview yet. Write something in the editor first.</p>
+                  )}
+                </div>
+              ) : (
+                <>
+                  {/* Formatting Toolbar */}
+                  <div className="flex items-center gap-1 mb-2 p-2 bg-gray-50 rounded-xl border border-gray-200">
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('**', '**')}
+                      className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Bold"
+                    >
+                      B
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('*', '*')}
+                      className="px-3 py-1.5 text-sm italic text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Italic"
+                    >
+                      I
+                    </button>
+                    <div className="w-px h-6 bg-gray-300 mx-1" />
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('# ', '')}
+                      className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Large heading"
+                    >
+                      H1
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('## ', '')}
+                      className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Medium heading"
+                    >
+                      H2
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('### ', '')}
+                      className="px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Small heading"
+                    >
+                      H3
+                    </button>
+                    <div className="w-px h-6 bg-gray-300 mx-1" />
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('- ', '')}
+                      className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Bullet list"
+                    >
+                      &bull;
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('1. ', '')}
+                      className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Numbered list"
+                    >
+                      1.
+                    </button>
+                    <div className="w-px h-6 bg-gray-300 mx-1" />
+                    <button
+                      type="button"
+                      onClick={insertLink}
+                      className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Insert link"
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => insertFormatting('\n', '')}
+                      className="px-3 py-1.5 text-sm text-gray-700 hover:bg-white hover:text-brand-bluePurple rounded-lg transition-colors"
+                      title="Line break"
+                    >
+                      &#8629;
+                    </button>
+                  </div>
+                  <textarea
+                    ref={bodyRef}
+                    id="postBody"
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                    required
+                    rows={12}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-bluePurple/50 focus:border-brand-bluePurple transition-colors text-gray-800 resize-y font-mono text-sm"
+                    placeholder="Write your blog post here. Use **bold**, *italic*, and # headings for formatting."
+                  />
+                </>
+              )}
             </div>
 
             {submitStatus === 'success' && (
