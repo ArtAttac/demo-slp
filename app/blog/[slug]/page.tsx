@@ -11,12 +11,13 @@ function stripMarkdown(text: string): string {
 
 function decodeHtmlEntities(str: string): string {
   return str
-    .replace(/&apos;/g, "'")
-    .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
     .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&')
+    .replace(/&apos;/g, "'")
     .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>');
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
 }
 
 export const revalidate = 3600; // revalidate every hour
@@ -35,13 +36,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = await getPost(slug);
   if (!post) return { title: 'Post Not Found' };
 
+  const title = decodeHtmlEntities(post.title);
   const description = stripMarkdown(post.body).slice(0, 160);
 
   return {
-    title: post.title,
+    title,
     description,
     openGraph: {
-      title: post.title,
+      title,
       description,
       type: 'article',
       publishedTime: post.createdAt,
@@ -49,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
+      title,
       description,
     },
     alternates: {
@@ -69,7 +71,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title,
+    headline: decodeHtmlEntities(post.title),
     datePublished: post.createdAt,
     ...(post.updatedAt && { dateModified: post.updatedAt }),
     author: {
@@ -124,7 +126,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             })}
           </time>
 
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-8 leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-body font-bold text-gray-900 mt-3 mb-8 leading-tight">
             {decodeHtmlEntities(post.title)}
           </h1>
 

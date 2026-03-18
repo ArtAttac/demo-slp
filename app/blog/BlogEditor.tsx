@@ -17,12 +17,13 @@ interface BlogPost {
 
 function decodeHtmlEntities(str: string): string {
   return str
-    .replace(/&apos;/g, "'")
-    .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
     .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&')
+    .replace(/&apos;/g, "'")
     .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>');
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
 }
 
 function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
@@ -375,7 +376,7 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
                         })}
                       </time>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-brand-bluePurple transition-colors">
+                    <h2 className="text-2xl md:text-3xl font-body font-bold text-gray-900 mb-3 group-hover:text-brand-bluePurple transition-colors">
                       {decodeHtmlEntities(post.title)}
                     </h2>
                     <p className="text-gray-600 leading-relaxed line-clamp-3">
