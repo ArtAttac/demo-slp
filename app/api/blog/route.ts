@@ -1,3 +1,4 @@
+import { del } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 import { redis, BlogPost } from '@/lib/redis';
 
@@ -18,7 +19,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { title, body, editKey } = await request.json();
+  const { title, body, imageUrl, editKey } = await request.json();
 
   if (!process.env.BLOG_EDIT_KEY) {
     console.error('BLOG_EDIT_KEY environment variable is not set');
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
     slug,
     title,
     body,
+    ...(imageUrl && { imageUrl }), // Only include if provided
     createdAt: new Date().toISOString(),
   };
 
@@ -52,7 +54,7 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const { slug, title, body, editKey } = await request.json();
+  const { slug, title, body, imageUrl, editKey } = await request.json();
 
   if (!process.env.BLOG_EDIT_KEY) {
     console.error('BLOG_EDIT_KEY environment variable is not set');
@@ -76,6 +78,7 @@ export async function PUT(request: Request) {
     slug,
     title,
     body,
+    ...(imageUrl ? { imageUrl } : {}), // Clear imageUrl if not provided
     createdAt: existing.createdAt,
     updatedAt: new Date().toISOString(),
   };
@@ -94,6 +97,14 @@ export async function DELETE(request: Request) {
 
   if (!slug) {
     return NextResponse.json({ error: 'Slug is required.' }, { status: 400 });
+  }
+
+  // Delete the featured image from Vercel Blob before removing the post record
+  const post = await redis.get<BlogPost>(`blog:post:${slug}`);
+  if (post?.imageUrl) {
+    await del(post.imageUrl).catch((err) =>
+      console.warn(`Could not delete blob for post "${slug}":`, err)
+    );
   }
 
   await redis.del(`blog:post:${slug}`);

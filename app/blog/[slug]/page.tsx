@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 import { redis, BlogPost } from '@/lib/redis';
@@ -132,7 +133,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           <div className="w-16 h-1 bg-gradient-to-r from-brand-bluePurple to-brand-pink rounded-full mb-10" />
 
-          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900 prose-a:text-brand-bluePurple prose-a:underline hover:prose-a:text-brand-darkBlue">
+          {/* Featured image — shown when the post has one */}
+          {post.imageUrl && (
+            <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-10">
+              <Image
+                src={post.imageUrl}
+                alt={`Featured image for ${decodeHtmlEntities(post.title)}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority
+              />
+            </div>
+          )}
+
+          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900 prose-a:text-brand-bluePurple prose-a:underline hover:prose-a:text-brand-darkBlue prose-img:rounded-xl prose-img:shadow-md prose-img:mx-auto prose-img:w-full">
             <ReactMarkdown remarkPlugins={[remarkBreaks]}>{post.body}</ReactMarkdown>
           </div>
         </div>

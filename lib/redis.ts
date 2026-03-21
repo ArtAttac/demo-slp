@@ -9,6 +9,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   body: string;
+  imageUrl?: string; // Optional featured image — hosted on Vercel Blob
   createdAt: string;
   updatedAt?: string;
 }
