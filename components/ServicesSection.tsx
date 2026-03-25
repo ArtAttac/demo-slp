@@ -117,23 +117,23 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]"
+                className="relative w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)] transition-transform duration-300 hover:-translate-y-2"
                 style={{ perspective: '1000px' }}
               >
                 <motion.div
-                  onClick={() => toggleFlip(index)}
                   animate={{ rotateY: isFlipped ? 180 : 0 }}
                   transition={{ duration: 0.6, type: 'spring', stiffness: 120 }}
                   style={{ transformStyle: 'preserve-3d' }}
-                  whileHover={{ y: -8 }}
-                  className="relative cursor-pointer h-full min-h-[280px]"
+                  className="relative h-full min-h-[280px]"
                 >
                   {/* Front of card */}
                   <div
-                    className="absolute inset-0 w-full h-full"
+                    onClick={() => toggleFlip(index)}
+                    className="absolute inset-0 w-full h-full cursor-pointer"
                     style={{
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
+                      pointerEvents: isFlipped ? 'none' : 'auto',
                     }}
                   >
                     <div className={`h-full relative overflow-hidden rounded-3xl ${service.bgColor} p-8 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center`}>
@@ -164,9 +164,10 @@ export default function ServicesSection() {
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       transform: 'rotateY(180deg)',
+                      pointerEvents: isFlipped ? 'auto' : 'none',
                     }}
                   >
-                    <div className={`h-full relative overflow-hidden rounded-3xl ${service.bgColor} p-6 sm:p-8 shadow-lg flex flex-col`}>
+                    <div onClick={() => toggleFlip(index)} className={`h-full relative overflow-hidden rounded-3xl ${service.bgColor} p-6 sm:p-8 shadow-lg flex flex-col cursor-pointer`}>
                       {/* Close icon indicator */}
                       <motion.div
                         className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/60 flex items-center justify-center shadow-md"
@@ -188,10 +189,9 @@ export default function ServicesSection() {
                         </div>
 
                         {/* Sticky Learn More button */}
-                        <div className={`mt-4 pt-4 border-t ${service.borderColor}`}>
+                        <div className={`mt-4 pt-4 border-t ${service.borderColor}`} onClick={(e) => e.stopPropagation()}>
                           <a
                             href="/services"
-                            onClick={(e) => e.stopPropagation()}
                             className={`block w-full px-4 py-2 bg-white/40 hover:bg-white/60 rounded-full text-sm font-semibold ${service.textColor} transition-all duration-200 text-center`}
                           >
                             Learn More
