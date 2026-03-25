@@ -1,42 +1,84 @@
 import Link from 'next/link';
-import { redis, BlogPost } from '@/lib/redis';
 import BlogEditor from './BlogEditor';
 import type { Metadata } from 'next';
+import { getAbsoluteUrl, getAllBlogPosts, decodeHtmlEntities, createExcerpt, getPostLastModified } from '@/lib/blog';
+import type { BlogPost } from '@/lib/redis';
+
+const BLOG_URL = getAbsoluteUrl('/blog');
+const BLOG_TITLE = 'Blog | Speech on the Slope';
+const BLOG_DESCRIPTION = 'Tips, insights, and resources for supporting your child\'s speech, language, literacy, and sound development from the Speech on the Slope team.';
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Tips, insights, and resources for supporting your child\'s speech, language, and literacy development from the Speech on the Slope team.',
+  description: BLOG_DESCRIPTION,
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'Blog | Speech on the Slope',
-    description: 'Tips, insights, and resources for supporting your child\'s speech, language, and literacy development.',
-    url: 'https://speechontheslope.com/blog',
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
+    url: BLOG_URL,
+    type: 'website',
+    images: [
+      {
+        url: getAbsoluteUrl('/mainmainlogo.png'),
+        alt: 'Speech on the Slope Blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
+    images: [getAbsoluteUrl('/mainmainlogo.png')],
   },
   alternates: {
-    canonical: 'https://speechontheslope.com/blog',
+    canonical: BLOG_URL,
+    types: {
+      'application/rss+xml': getAbsoluteUrl('/blog/rss.xml'),
+    },
   },
 };
 
 export const revalidate = 3600; // revalidate every hour
 
-async function getPosts(): Promise<BlogPost[]> {
-  const slugs = await redis.lrange('blog:slugs', 0, -1);
-  if (!slugs || slugs.length === 0) return [];
-
-  const posts: BlogPost[] = [];
-  for (const slug of slugs) {
-    const post = await redis.get<BlogPost>(`blog:post:${slug}`);
-    if (post) posts.push(post);
-  }
-
-  posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  return posts;
-}
-
 export default async function BlogPage() {
-  const posts = await getPosts();
+  const posts: BlogPost[] = await getAllBlogPosts();
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Speech on the Slope Blog',
+    description: BLOG_DESCRIPTION,
+    url: BLOG_URL,
+    inLanguage: 'en-US',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Speech on the Slope',
+      url: getAbsoluteUrl(),
+      logo: {
+        '@type': 'ImageObject',
+        url: getAbsoluteUrl('/mainlogo.png'),
+      },
+    },
+    blogPost: posts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: decodeHtmlEntities(post.title),
+      url: getAbsoluteUrl(`/blog/${post.slug}`),
+      datePublished: post.createdAt,
+      dateModified: getPostLastModified(post),
+      description: createExcerpt(post.body, 220),
+      ...(post.imageUrl ? { image: [post.imageUrl] } : {}),
+    })),
+  };
 
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">

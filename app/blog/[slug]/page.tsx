@@ -3,91 +3,116 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
-import { redis, BlogPost } from '@/lib/redis';
 import type { Metadata } from 'next';
+import { getAbsoluteUrl, getBlogPost, getBlogSlugs, getPostLastModified, decodeHtmlEntities, createExcerpt } from '@/lib/blog';
 
-function stripMarkdown(text: string): string {
-  return text.replace(/[#*_~`>]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
-}
-
-function decodeHtmlEntities(str: string): string {
-  return str
-    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
-    .replace(/&#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
-}
+const FALLBACK_IMAGE = getAbsoluteUrl('/mainmainlogo.png');
+const ARTICLE_KEYWORDS = [
+  'Brooklyn speech therapy blog',
+  'Park Slope speech therapy blog',
+  'pediatric speech therapy',
+  'speech therapy tips for parents',
+  'speech and language development',
+];
 
 export const revalidate = 3600; // revalidate every hour
 
 export async function generateStaticParams() {
-  const slugs = await redis.lrange('blog:slugs', 0, -1);
-  return (slugs ?? []).map((slug) => ({ slug }));
-}
-
-async function getPost(slug: string): Promise<BlogPost | null> {
-  return redis.get<BlogPost>(`blog:post:${slug}`);
+  const slugs = await getBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) return { title: 'Post Not Found' };
 
   const title = decodeHtmlEntities(post.title);
-  const description = stripMarkdown(post.body).slice(0, 160);
+  const description = createExcerpt(post.body);
+  const url = getAbsoluteUrl(`/blog/${slug}`);
+  const image = post.imageUrl ?? FALLBACK_IMAGE;
+  const publishedTime = post.createdAt;
+  const modifiedTime = getPostLastModified(post);
 
   return {
     title,
     description,
+    authors: [{ name: 'Speech on the Slope' }],
+    keywords: [title, ...ARTICLE_KEYWORDS],
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       title,
       description,
       type: 'article',
-      publishedTime: post.createdAt,
-      url: `https://speechontheslope.com/blog/${slug}`,
+      url,
+      siteName: 'Speech on the Slope',
+      publishedTime,
+      modifiedTime,
+      authors: ['Speech on the Slope'],
+      images: [
+        {
+          url: image,
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: [image],
     },
     alternates: {
-      canonical: `https://speechontheslope.com/blog/${slug}`,
+      canonical: url,
     },
   };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
 
+  const title = decodeHtmlEntities(post.title);
+  const description = createExcerpt(post.body, 220);
+  const url = getAbsoluteUrl(`/blog/${slug}`);
+  const image = post.imageUrl ?? FALLBACK_IMAGE;
+  const dateModified = getPostLastModified(post);
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: decodeHtmlEntities(post.title),
+    headline: title,
+    description,
+    url,
     datePublished: post.createdAt,
-    ...(post.updatedAt && { dateModified: post.updatedAt }),
+    dateModified,
+    image: [image],
+    isAccessibleForFree: true,
+    inLanguage: 'en-US',
     author: {
       '@type': 'Organization',
       name: 'Speech on the Slope',
-      url: 'https://speechontheslope.com',
+      url: getAbsoluteUrl(),
     },
     publisher: {
       '@type': 'Organization',
       name: 'Speech on the Slope',
-      url: 'https://speechontheslope.com',
+      url: getAbsoluteUrl(),
+      logo: {
+        '@type': 'ImageObject',
+        url: getAbsoluteUrl('/mainlogo.png'),
+      },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://speechontheslope.com/blog/${slug}`,
+      '@id': url,
     },
   };
 
@@ -128,7 +153,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </time>
 
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-body font-bold text-gray-900 mt-3 mb-8 leading-tight">
-            {decodeHtmlEntities(post.title)}
+            {title}
           </h1>
 
           <div className="w-16 h-1 bg-gradient-to-r from-brand-bluePurple to-brand-pink rounded-full mb-10" />
@@ -138,7 +163,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-10">
               <Image
                 src={post.imageUrl}
-                alt={`Featured image for ${decodeHtmlEntities(post.title)}`}
+                alt={`Featured image for ${title}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 768px"

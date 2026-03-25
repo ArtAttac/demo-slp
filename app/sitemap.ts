@@ -1,83 +1,73 @@
 import { MetadataRoute } from 'next';
-import { redis, BlogPost } from '@/lib/redis';
+import { getAbsoluteUrl, getAllBlogPosts, getPostLastModified } from '@/lib/blog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://speechontheslope.com';
+  const posts = await getAllBlogPosts();
+  const latestBlogUpdate = posts[0] ? new Date(getPostLastModified(posts[0])) : new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: getAbsoluteUrl(),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
+      url: getAbsoluteUrl('/about'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services`,
+      url: getAbsoluteUrl('/services'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      url: getAbsoluteUrl('/blog'),
+      lastModified: latestBlogUpdate,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.9,
     },
     {
-      url: `${baseUrl}/privacy-practices`,
+      url: getAbsoluteUrl('/privacy-practices'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/patient-rights-good-faith-estimate`,
+      url: getAbsoluteUrl('/patient-rights-good-faith-estimate'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/disclaimer`,
+      url: getAbsoluteUrl('/disclaimer'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/privacy-policy`,
+      url: getAbsoluteUrl('/privacy-policy'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/terms-of-use`,
+      url: getAbsoluteUrl('/terms-of-use'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
   ];
 
-  // Dynamically add blog post URLs
-  const slugs = await redis.lrange('blog:slugs', 0, -1);
-  const blogPages: MetadataRoute.Sitemap = [];
-
-  if (slugs && slugs.length > 0) {
-    for (const slug of slugs) {
-      const post = await redis.get<BlogPost>(`blog:post:${slug}`);
-      if (post) {
-        blogPages.push({
-          url: `${baseUrl}/blog/${slug}`,
-          lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.createdAt),
-          changeFrequency: 'monthly',
-          priority: 0.7,
-        });
-      }
-    }
-  }
+  const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: getAbsoluteUrl(`/blog/${post.slug}`),
+    lastModified: new Date(getPostLastModified(post)),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
 
   return [...staticPages, ...blogPages];
 }
