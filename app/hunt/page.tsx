@@ -4,6 +4,14 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+declare global {
+  interface Window {
+    EBWidgets?: {
+      createWidget: (config: any) => void;
+    };
+  }
+}
+
 export default function HuntPage() {
   useEffect(() => {
     // Load Eventbrite widget script
