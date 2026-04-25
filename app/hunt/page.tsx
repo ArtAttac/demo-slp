@@ -248,10 +248,10 @@ export default function HuntPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col"
             >
               {/* Header */}
-              <div className="sticky top-0 bg-gradient-to-r from-brand-bluePurple/10 via-brand-pink/10 to-brand-yellow/10 px-6 sm:px-8 py-6 flex items-center justify-between border-b border-gray-100">
+              <div className="bg-gradient-to-r from-brand-bluePurple/10 via-brand-pink/10 to-brand-yellow/10 px-6 sm:px-8 py-6 flex items-center justify-between border-b border-gray-100 flex-shrink-0">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Event Details</h2>
                 <button
                   onClick={() => setIsModalOpen(false)}
@@ -263,8 +263,8 @@ export default function HuntPage() {
                 </button>
               </div>
 
-              {/* Content */}
-              <div className="px-6 sm:px-8 py-8 space-y-6">
+              {/* Content - Scrollable */}
+              <div className="px-6 sm:px-8 py-8 space-y-6 overflow-y-auto flex-1">
                 {/* Event Title & Location */}
                 <div>
                   <h3 className="text-xl font-bold text-brand-darkBlue mb-2">Park Slope Little Explorers Scavenger Hunt</h3>
@@ -335,17 +335,17 @@ export default function HuntPage() {
                     We cannot wait to <strong>explore, connect, and grow together</strong> in language and in community 💛
                   </p>
                 </div>
+              </div>
 
-                {/* Eventbrite Button */}
-                <div className="pt-4">
-                  <button
-                    id="eventbrite-widget-modal-trigger-1987359718416"
-                    type="button"
-                    className="w-full px-8 py-4 bg-gradient-to-r from-brand-bluePurple to-brand-pink text-white font-bold text-lg rounded-full shadow-lg hover:shadow-2xl transition-all duration-300"
-                  >
-                    🎫 Register Now
-                  </button>
-                </div>
+              {/* Eventbrite Button - Sticky Footer */}
+              <div className="border-t border-gray-100 px-6 sm:px-8 py-6 bg-white flex-shrink-0">
+                <button
+                  id="eventbrite-widget-modal-trigger-1987359718416"
+                  type="button"
+                  className="w-full px-8 py-4 bg-gradient-to-r from-brand-bluePurple to-brand-pink text-white font-bold text-lg rounded-full shadow-lg hover:shadow-2xl transition-all duration-300"
+                >
+                  🎫 Register Now
+                </button>
               </div>
             </motion.div>
           </motion.div>
