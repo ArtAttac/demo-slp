@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 declare global {
   interface Window {
@@ -13,6 +13,8 @@ declare global {
 }
 
 export default function HuntPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     // Load Eventbrite widget script
     const script = document.createElement('script');
@@ -34,14 +36,16 @@ export default function HuntPage() {
           modal: true,
           modalTriggerElementId: 'eventbrite-widget-modal-trigger-1987359718416',
           onOrderComplete: () => {
-            console.log('Order complete!');
+            setIsModalOpen(false);
           },
         });
       }
     };
 
     return () => {
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 
@@ -60,7 +64,7 @@ export default function HuntPage() {
             Back to Home
           </Link>
           <button
-            id="eventbrite-widget-modal-trigger-1987359718416"
+            onClick={() => setIsModalOpen(true)}
             type="button"
             className="px-6 py-2 bg-gradient-to-r from-brand-bluePurple to-brand-pink text-white text-sm font-semibold rounded-full hover:shadow-lg transition-all duration-300"
           >
@@ -99,7 +103,7 @@ export default function HuntPage() {
               transition={{ duration: 0.2 }}
             >
               <button
-                id="eventbrite-widget-modal-trigger-1987359718416"
+                onClick={() => setIsModalOpen(true)}
                 type="button"
                 className="px-10 py-4 bg-gradient-to-r from-brand-bluePurple to-brand-pink text-white font-bold text-lg rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 inline-block"
               >
@@ -124,8 +128,8 @@ export default function HuntPage() {
             >
               <div className="text-4xl mb-3">📅</div>
               <h3 className="text-lg font-bold text-brand-darkBlue mb-2">Date & Time</h3>
-              <p className="text-gray-700 font-medium">Coming Soon</p>
-              <p className="text-sm text-gray-600 mt-1">Check back for exact details</p>
+              <p className="text-gray-700 font-medium">Saturday, May 9</p>
+              <p className="text-sm text-gray-600 mt-1">2:30 PM - 5:30 PM</p>
             </motion.div>
 
             {/* Location Card */}
@@ -138,8 +142,8 @@ export default function HuntPage() {
             >
               <div className="text-4xl mb-3">📍</div>
               <h3 className="text-lg font-bold text-brand-darkBlue mb-2">Location</h3>
-              <p className="text-gray-700 font-medium">Park Slope, Brooklyn</p>
-              <p className="text-sm text-gray-600 mt-1">Local businesses throughout the neighborhood</p>
+              <p className="text-gray-700 font-medium">Old Stone House of Brooklyn</p>
+              <p className="text-sm text-gray-600 mt-1">Brooklyn, NY</p>
             </motion.div>
 
             {/* Ages Card */}
@@ -152,8 +156,8 @@ export default function HuntPage() {
             >
               <div className="text-4xl mb-3">🎯</div>
               <h3 className="text-lg font-bold text-brand-darkBlue mb-2">For Ages</h3>
-              <p className="text-gray-700 font-medium">Preschool & Kindergarten</p>
-              <p className="text-sm text-gray-600 mt-1">Perfect for little explorers</p>
+              <p className="text-gray-700 font-medium">Ages 2-8</p>
+              <p className="text-sm text-gray-600 mt-1">FREE community event</p>
             </motion.div>
           </div>
 
@@ -228,6 +232,125 @@ export default function HuntPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Event Details Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-gradient-to-r from-brand-bluePurple/10 via-brand-pink/10 to-brand-yellow/10 px-6 sm:px-8 py-6 flex items-center justify-between border-b border-gray-100">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Event Details</h2>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="px-6 sm:px-8 py-8 space-y-6">
+                {/* Event Title & Location */}
+                <div>
+                  <h3 className="text-xl font-bold text-brand-darkBlue mb-2">Park Slope Little Explorers Scavenger Hunt</h3>
+                  <p className="text-lg text-gray-700">Old Stone House of Brooklyn, Brooklyn, NY</p>
+                  <p className="text-lg font-semibold text-gray-900 mt-2">Saturday, May 9 • 2:30 PM - 5:30 PM</p>
+                </div>
+
+                {/* Overview */}
+                <div className="bg-gradient-to-br from-brand-pink/10 to-transparent rounded-2xl p-6 border border-brand-pink/20">
+                  <h4 className="text-lg font-bold text-brand-darkBlue mb-4">Overview</h4>
+                  <div className="space-y-4 text-gray-700">
+                    <p>
+                      <strong>Calling all explorers ages 2-8!</strong>
+                    </p>
+                    <p>
+                      Join Speech on the Slope on Saturday 5/9 for a <strong>FREE neighborhood scavenger hunt</strong> designed to support early language development while your family explores our local community together.
+                    </p>
+                    <p>
+                      This event is all about building vocabulary, sparking conversation, and strengthening observation skills through real-life experiences like noticing details, asking questions, solving clues, and describing what you see.
+                    </p>
+                  </div>
+                </div>
+
+                {/* How It Works */}
+                <div>
+                  <h4 className="text-lg font-bold text-brand-darkBlue mb-4">How It Works</h4>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-xl mr-3">✨</span>
+                      <span>Register using the link below and choose one of two café celebration time slots</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-xl mr-3">✨</span>
+                      <span>Print or pick up your scavenger hunt board</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-xl mr-3">✨</span>
+                      <span>Visit participating local businesses to collect stickers</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-xl mr-3">✨</span>
+                      <span>Complete your board by spotting items (younger children) or solving clues (older children)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-xl mr-3">✨</span>
+                      <span>Meet us at the Old Stone House Café tables for prizes, crafts, and games</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Important Info */}
+                <div className="bg-gradient-to-br from-brand-yellow/10 to-transparent rounded-2xl p-6 border border-brand-yellow/20">
+                  <p className="text-gray-700 mb-3">
+                    <strong>Families may begin visiting businesses anytime during the afternoon.</strong> The time slot you select during registration is the designated time your family will join us at the café tables for the celebration.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    Please reserve a ticket for every person attending, including all children, and select the total number of tickets equal to your full party.
+                  </p>
+                  <p className="text-gray-700 flex items-start">
+                    <span className="text-xl mr-3">⚠️</span>
+                    <span><strong>Space is limited to 30 people per time slot due to park regulations.</strong> Advance registration is required.</span>
+                  </p>
+                </div>
+
+                {/* Closing */}
+                <div className="bg-gradient-to-br from-brand-bluePurple/10 to-transparent rounded-2xl p-6 border border-brand-bluePurple/20">
+                  <p className="text-gray-700 text-lg">
+                    We cannot wait to <strong>explore, connect, and grow together</strong> in language and in community 💛
+                  </p>
+                </div>
+
+                {/* Eventbrite Button */}
+                <div className="pt-4">
+                  <button
+                    id="eventbrite-widget-modal-trigger-1987359718416"
+                    type="button"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-brand-bluePurple to-brand-pink text-white font-bold text-lg rounded-full shadow-lg hover:shadow-2xl transition-all duration-300"
+                  >
+                    🎫 Register Now
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
