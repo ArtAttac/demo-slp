@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 declare global {
@@ -14,16 +14,18 @@ declare global {
 
 export default function HuntPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const eventbriteTriggerRef = useRef<HTMLButtonElement>(null);
+  const eventbriteTriggerId = 'eventbrite-widget-modal-trigger-1987359718416';
+
+  const openEventbriteCheckout = () => {
+    setIsModalOpen(false);
+    window.requestAnimationFrame(() => {
+      eventbriteTriggerRef.current?.click();
+    });
+  };
 
   useEffect(() => {
-    // Load Eventbrite widget script
-    const script = document.createElement('script');
-    script.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    // Initialize Eventbrite widget after script loads
-    script.onload = () => {
+    const initializeEventbriteWidget = () => {
       if (window.EBWidgets) {
         window.EBWidgets.createWidget({
           widgetType: 'checkout',
@@ -34,7 +36,7 @@ export default function HuntPage() {
             background: '#FFFFFF',
           },
           modal: true,
-          modalTriggerElementId: 'eventbrite-widget-modal-trigger-1987359718416',
+          modalTriggerElementId: eventbriteTriggerId,
           onOrderComplete: () => {
             setIsModalOpen(false);
           },
@@ -42,7 +44,30 @@ export default function HuntPage() {
       }
     };
 
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      'script[src="https://www.eventbrite.com/static/widgets/eb_widgets.js"]'
+    );
+
+    if (existingScript) {
+      if (window.EBWidgets) {
+        initializeEventbriteWidget();
+      } else {
+        existingScript.addEventListener('load', initializeEventbriteWidget, { once: true });
+      }
+
+      return () => {
+        existingScript.removeEventListener('load', initializeEventbriteWidget);
+      };
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
+    script.async = true;
+    script.addEventListener('load', initializeEventbriteWidget, { once: true });
+    document.body.appendChild(script);
+
     return () => {
+      script.removeEventListener('load', initializeEventbriteWidget);
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
@@ -51,6 +76,26 @@ export default function HuntPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <noscript>
+        <a
+          href="https://www.eventbrite.com/e/park-slope-little-explorers-scavenger-hunt-tickets-1987359718416"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Buy Tickets on Eventbrite
+        </a>
+      </noscript>
+      <button
+        ref={eventbriteTriggerRef}
+        id={eventbriteTriggerId}
+        type="button"
+        className="sr-only"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        Buy Tickets
+      </button>
+
       {/* Navigation back */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -340,7 +385,7 @@ export default function HuntPage() {
               {/* Eventbrite Button - Sticky Footer */}
               <div className="border-t border-gray-100 px-6 sm:px-8 py-6 bg-white flex-shrink-0">
                 <button
-                  id="eventbrite-widget-modal-trigger-1987359718416"
+                  onClick={openEventbriteCheckout}
                   type="button"
                   className="w-full px-8 py-4 bg-gradient-to-r from-brand-bluePurple to-brand-pink text-white font-bold text-lg rounded-full shadow-lg hover:shadow-2xl transition-all duration-300"
                 >
