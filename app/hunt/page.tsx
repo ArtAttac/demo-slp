@@ -134,7 +134,10 @@ export default function HuntPage() {
               🔍 Community Event
             </span>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Park Slope Little{' '}
+              Park Slope{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink via-brand-yellow to-brand-bluePurple">
+                Little
+              </span>{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink via-brand-yellow to-brand-bluePurple">
                 Explorers Scavenger Hunt
               </span>
@@ -202,7 +205,6 @@ export default function HuntPage() {
               <div className="text-4xl mb-3">🎯</div>
               <h3 className="text-lg font-bold text-brand-darkBlue mb-2">For Ages</h3>
               <p className="text-gray-700 font-medium">Ages 2-8</p>
-              <p className="text-sm text-gray-600 mt-1">FREE community event</p>
             </motion.div>
           </div>
 
@@ -223,16 +225,16 @@ export default function HuntPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-pink/15 to-transparent p-8 border border-brand-pink/20">
                 <div className="text-5xl mb-4">💬</div>
-                <h3 className="text-2xl font-bold text-brand-darkBlue mb-3">Communication Fun</h3>
+                <h3 className="text-2xl font-bold text-brand-darkBlue mb-3">communication fun</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Kids practice social skills, asking questions, and conversations while exploring neighborhood businesses.
+                  Kids practice asking questions and expanding language while exploring neighborhood businesses.
                 </p>
               </div>
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-yellow/15 to-transparent p-8 border border-brand-yellow/20">
                 <div className="text-5xl mb-4">🏆</div>
-                <h3 className="text-2xl font-bold text-brand-darkBlue mb-3">Prizes & Rewards</h3>
+                <h3 className="text-2xl font-bold text-brand-darkBlue mb-3">Celebration & Prizes</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Complete challenges at each stop and earn stickers, completion certificates, and special recognition!
+                  Join us at the Old Stone House to be entered into our raffle for chances to win gift cards from local businesses — plus enjoy games, crafts, and light snacks!
                 </p>
               </div>
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-bluePurple/15 to-transparent p-8 border border-brand-bluePurple/20">
