@@ -116,6 +116,7 @@ export default function AboutPage() {
                     <li>Story Grammar Marker&reg;</li>
                     <li>The Hochman Method&copy; (The Writing Revolution)</li>
                     <li>Orton Gillingham</li>
+                    <li>Talk Yoga&trade;</li>
                   </ul>
                 </div>
               </div>

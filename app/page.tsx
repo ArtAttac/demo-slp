@@ -11,7 +11,6 @@ import GetStartedSection from '@/components/GetStartedSection';
 import ParallaxSection from '@/components/ParallaxSection';
 
 import ContactSection from '@/components/ContactSection';
-import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 
 const sections = [
@@ -22,7 +21,6 @@ const sections = [
   { key: 'get-started', Component: GetStartedSection },
 
   { key: 'contact', Component: ContactSection },
-  { key: 'faq', Component: FAQSection },
   { key: 'footer', Component: Footer },
 ];
 

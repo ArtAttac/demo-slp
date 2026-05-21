@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const faqs = [
+const faqs: { question: string; answer: ReactNode }[] = [
   {
     question: 'How do I know if my child needs speech therapy?',
     answer:
@@ -31,8 +31,36 @@ const faqs = [
   },
   {
     question: 'Do you accept insurance?',
-    answer:
-      "We are currently an out-of-network provider. We can provide you with a superbill (a detailed receipt) that you can submit to your insurance company for potential reimbursement. We're happy to walk you through the process!",
+    answer: (
+      <div className="space-y-4">
+        <p>
+          Speech on the Slope Speech-Language Therapy, PLLC is a private pay practice and an out-of-network provider. Payment for evaluations and/or sessions is required in full at the end of each week. Out of network coverage varies from plan to plan. We will provide a Superbill and other documentation if needed to submit to your insurance company. Speech on the Slope does not guarantee reimbursement and we encourage you to call your insurance company prior to services to ensure you understand your plan&apos;s benefits. Knowing your out-of-network insurance benefits is your responsibility.
+        </p>
+        <div>
+          <p className="font-semibold text-gray-900 mb-2">
+            Helpful questions to ask your insurance company:
+          </p>
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Does my plan have &quot;out-of-network&quot; coverage for speech &amp; language therapy &amp; evaluations?</li>
+            <li>Is there an annual deductible for out-of-network speech therapy? If so, how much?</li>
+            <li>Is there a limit on the number of sessions my plan will cover per year? If yes, how many?</li>
+            <li>
+              What CPT/service codes does my plan cover for speech therapy?
+              <ul className="list-disc space-y-1 pl-5 mt-2">
+                <li>92523 - Speech &amp; language evaluation</li>
+                <li>92522 - Evaluation of speech production (articulation only)</li>
+                <li>92507 - Speech therapy, individual</li>
+                <li>92508 - Speech therapy, group</li>
+              </ul>
+            </li>
+            <li>Does my plan require pre-authorization and/or referral for speech therapy? If so, what is required?</li>
+            <li>Can I submit a Superbill? If so, what is the process for submitting a Superbill?</li>
+            <li>How long does it take to process a claim?</li>
+            <li>How do I appeal if a claim is denied?</li>
+          </ul>
+        </div>
+      </div>
+    ),
   },
 ];
 

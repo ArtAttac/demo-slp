@@ -6,13 +6,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { href: '#mission', label: 'Mission', color: 'hover:text-brand-darkBlue' },
-  { href: '#about', label: 'Team', color: 'hover:text-brand-darkBlue' },
-  { href: '#services', label: 'Services', color: 'hover:text-brand-darkBlue' },
-  { href: '#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
+  { href: '/#mission', label: 'Mission', color: 'hover:text-brand-darkBlue' },
+  { href: '/#about', label: 'Team', color: 'hover:text-brand-darkBlue' },
+  { href: '/#services', label: 'Services', color: 'hover:text-brand-darkBlue' },
+  { href: '/#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
   { href: '/blog', label: 'Blog', color: 'hover:text-brand-darkBlue' },
-  { href: '#faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
-  { href: '#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
+  { href: '/faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
+  { href: '/#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
 ];
 
 interface NavBarProps {
