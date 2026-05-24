@@ -127,9 +127,11 @@ export default function ServicesSection() {
                   className="relative h-full min-h-[280px]"
                 >
                   {/* Front of card */}
-                  <div
+                  <button
                     onClick={() => toggleFlip(index)}
-                    className="absolute inset-0 w-full h-full cursor-pointer"
+                    aria-label={`Learn about ${service.title}`}
+                    aria-pressed={isFlipped}
+                    className="absolute inset-0 w-full h-full cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-3xl"
                     style={{
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
@@ -143,7 +145,7 @@ export default function ServicesSection() {
                         transition={{ duration: 0.3 }}
                         className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/60 flex items-center justify-center shadow-md"
                       >
-                        <svg className={`h-6 w-6 ${service.textColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className={`h-6 w-6 ${service.textColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
                         </svg>
                       </motion.div>
@@ -155,7 +157,7 @@ export default function ServicesSection() {
                         </h3>
                       </div>
                     </div>
-                  </div>
+                  </button>
 
                   {/* Back of card */}
                   <div
@@ -167,32 +169,34 @@ export default function ServicesSection() {
                       pointerEvents: isFlipped ? 'auto' : 'none',
                     }}
                   >
-                    <div onClick={() => toggleFlip(index)} className={`h-full relative overflow-hidden rounded-3xl ${service.bgColor} p-6 sm:p-8 shadow-lg flex flex-col cursor-pointer`}>
-                      {/* Close icon indicator */}
-                      <motion.div
-                        className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/60 flex items-center justify-center shadow-md"
+                    <div className={`h-full relative overflow-hidden rounded-3xl ${service.bgColor} p-6 sm:p-8 shadow-lg flex flex-col`}>
+                      {/* Close button */}
+                      <button
+                        onClick={() => toggleFlip(index)}
+                        aria-label={`Close ${service.title} details`}
+                        className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/60 flex items-center justify-center shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                       >
-                        <svg className={`h-6 w-6 ${service.textColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className={`h-6 w-6 ${service.textColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                      </motion.div>
+                      </button>
 
                       <div className="relative flex-1 flex flex-col overflow-hidden">
                         <h3 className={`text-xl sm:text-2xl font-bold ${service.textColor} mb-4 pr-12`}>
                           {service.title}
                         </h3>
 
-                        <div className="flex-1 service-card-scroll pr-1">
+                        <div className="flex-1 service-card-scroll pr-1" tabIndex={0}>
                           <p className={`text-sm sm:text-base ${service.textColor} leading-relaxed`}>
                             {service.backContent}
                           </p>
                         </div>
 
                         {/* Sticky Learn More button */}
-                        <div className={`mt-4 pt-4 border-t ${service.borderColor}`} onClick={(e) => e.stopPropagation()}>
+                        <div className={`mt-4 pt-4 border-t ${service.borderColor}`}>
                           <a
                             href="/services"
-                            className={`block w-full px-4 py-2 bg-white/40 hover:bg-white/60 rounded-full text-sm font-semibold ${service.textColor} transition-all duration-200 text-center`}
+                            className={`block w-full px-4 py-2 bg-white/40 hover:bg-white/60 rounded-full text-sm font-semibold ${service.textColor} transition-all duration-200 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white`}
                           >
                             Learn More
                           </a>

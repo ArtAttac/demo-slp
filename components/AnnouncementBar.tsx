@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function AnnouncementBar() {
   return (
-    <div className="bg-brand-darkBlue flex flex-wrap items-center justify-center gap-3 py-2 px-4">
+    <div role="region" aria-label="Announcement" className="bg-brand-darkBlue flex flex-wrap items-center justify-center gap-3 py-2 px-4">
       <p className="text-sm md:text-base font-semibold text-white">
         NOW ACCEPTING NEW CLIENTS
       </p>
