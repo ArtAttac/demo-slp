@@ -303,7 +303,7 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div className="max-w-4xl lg:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
       {/* ── Edit Mode: New / Edit Post Form ─────────────────────────────────── */}
       {isEditMode && (
@@ -509,13 +509,45 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
           <p className="text-xl text-gray-500">No blog posts yet. Stay tuned!</p>
         </div>
       ) : (
-        <div className="space-y-8">
-          {posts.map((post, index) => (
+        <div className="lg:flex lg:gap-10 lg:items-start">
+          {/* Sticky sidebar quick-nav (desktop only) */}
+          <aside className="hidden lg:block lg:w-64 lg:flex-shrink-0 sticky top-24 self-start">
+            <nav aria-label="Blog posts quick navigation" className="bg-gradient-to-br from-brand-cream to-white rounded-2xl border border-gray-100 shadow-sm p-5 max-h-[calc(100vh-8rem)] overflow-y-auto">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-brand-bluePurple mb-3">
+                All Posts
+              </h3>
+              <ul className="space-y-1.5">
+                {posts.map((post) => (
+                  <li key={post.slug}>
+                    <a
+                      href={`#post-${post.slug}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById(`post-${post.slug}`)?.scrollIntoView({
+                          behavior: 'smooth',
+                          block: 'start',
+                        });
+                      }}
+                      className="block text-sm text-gray-700 hover:text-brand-bluePurple hover:bg-white/70 rounded-md px-2 py-1.5 leading-snug transition-colors line-clamp-2"
+                      title={decodeHtmlEntities(post.title)}
+                    >
+                      {decodeHtmlEntities(post.title)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
+
+          <div className="flex-1 min-w-0 space-y-6 scroll-mt-24">
+            {posts.map((post, index) => (
             <motion.article
               key={post.slug}
+              id={`post-${post.slug}`}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="scroll-mt-24"
             >
               <div className="relative">
                 <Link href={`/blog/${post.slug}`} className="block group">
@@ -523,7 +555,7 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
 
                     {/* Featured image — only rendered when the post has one */}
                     {post.imageUrl && (
-                      <div className="relative h-52 w-full">
+                      <div className="relative h-72 md:h-80 w-full">
                         <Image
                           src={post.imageUrl}
                           alt={`Featured image for ${decodeHtmlEntities(post.title)}`}
@@ -534,21 +566,21 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
                       </div>
                     )}
 
-                    <div className="p-8">
-                      <time className="text-sm text-brand-bluePurple font-medium">
+                    <div className="p-6">
+                      <time className="text-xs text-brand-bluePurple font-medium">
                         {new Date(post.createdAt).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric',
                         })}
                       </time>
-                      <h2 className="text-2xl md:text-3xl font-body font-bold text-gray-900 mt-2 mb-3 group-hover:text-brand-bluePurple transition-colors">
+                      <h2 className="text-xl md:text-2xl font-body font-bold text-gray-900 mt-1.5 mb-2 group-hover:text-brand-bluePurple transition-colors">
                         {decodeHtmlEntities(post.title)}
                       </h2>
-                      <p className="text-gray-600 leading-relaxed line-clamp-3">
+                      <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
                         {post.body.split('\n')[0].replace(/[#*_~`>]/g, '').trim()}
                       </p>
-                      <span className="inline-block mt-4 text-brand-bluePurple font-semibold text-sm group-hover:underline">
+                      <span className="inline-block mt-3 text-brand-bluePurple font-semibold text-sm group-hover:underline">
                         Read more &rarr;
                       </span>
                     </div>
@@ -594,7 +626,8 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
                 )}
               </div>
             </motion.article>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>

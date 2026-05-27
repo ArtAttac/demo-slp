@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import AnnouncementBar from '@/components/AnnouncementBar';
+import BlogToast from '@/components/BlogToast';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import MissionSection from '@/components/MissionSection';
@@ -48,6 +49,7 @@ export default function Home() {
           </motion.div>
         ))}
       </motion.main>
+      <BlogToast />
     </>
   );
 }
