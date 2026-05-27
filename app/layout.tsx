@@ -154,6 +154,11 @@ export const metadata: Metadata = {
   // Alternate languages (add if you support multiple languages)
   alternates: {
     canonical: 'https://speechontheslope.com',
+    types: {
+      'application/rss+xml': [
+        { url: '/blog/rss.xml', title: 'Speech on the Slope Blog' },
+      ],
+    },
   },
 
   // Additional metadata

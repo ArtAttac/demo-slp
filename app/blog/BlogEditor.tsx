@@ -512,7 +512,7 @@ function BlogEditorContent({ initialPosts }: { initialPosts: BlogPost[] }) {
         <div className="lg:flex lg:gap-10 lg:items-start">
           {/* Sticky sidebar quick-nav (desktop only) */}
           <aside className="hidden lg:block lg:w-64 lg:flex-shrink-0 sticky top-24 self-start">
-            <nav aria-label="Blog posts quick navigation" className="bg-gradient-to-br from-brand-cream to-white rounded-2xl border border-gray-100 shadow-sm p-5 max-h-[calc(100vh-8rem)] overflow-y-auto">
+            <nav aria-label="Blog posts quick navigation" className="bg-white rounded-2xl border border-brand-darkBlue/10 shadow-sm p-5 max-h-[calc(100vh-8rem)] overflow-y-auto">
               <h3 className="text-xs font-bold uppercase tracking-wider text-brand-bluePurple mb-3">
                 All Posts
               </h3>

@@ -1,6 +1,18 @@
 import { del } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 import { redis, BlogPost } from '@/lib/redis';
+import { getAbsoluteUrl } from '@/lib/blog';
+import { pingIndexNow } from '@/lib/indexnow';
+
+// URLs to notify on any blog mutation: the post itself + the index + the
+// sitemap (so search engines re-pull the list of all posts).
+function urlsToPing(slug: string): string[] {
+  return [
+    getAbsoluteUrl(`/blog/${slug}`),
+    getAbsoluteUrl('/blog'),
+    getAbsoluteUrl('/sitemap.xml'),
+  ];
+}
 
 export async function GET() {
   const slugs = await redis.lrange('blog:slugs', 0, -1);
@@ -50,6 +62,8 @@ export async function POST(request: Request) {
   await redis.set(`blog:post:${slug}`, post);
   await redis.lpush('blog:slugs', slug);
 
+  await pingIndexNow(urlsToPing(slug));
+
   return NextResponse.json(post, { status: 201 });
 }
 
@@ -85,6 +99,8 @@ export async function PUT(request: Request) {
 
   await redis.set(`blog:post:${slug}`, updatedPost);
 
+  await pingIndexNow(urlsToPing(slug));
+
   return NextResponse.json(updatedPost);
 }
 
@@ -109,6 +125,8 @@ export async function DELETE(request: Request) {
 
   await redis.del(`blog:post:${slug}`);
   await redis.lrem('blog:slugs', 0, slug);
+
+  await pingIndexNow(urlsToPing(slug));
 
   return NextResponse.json({ success: true });
 }
