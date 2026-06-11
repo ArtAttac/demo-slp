@@ -13,6 +13,7 @@ const navLinks = [
   { href: '/blog', label: 'Blog', color: 'hover:text-brand-darkBlue' },
   { href: '/faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
   { href: '/#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
+  { href: '/workshops', label: 'Workshops', color: 'hover:text-brand-darkBlue' },
 ];
 
 interface NavBarProps {
