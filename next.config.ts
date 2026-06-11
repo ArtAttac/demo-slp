@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: process.cwd(),
+
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
@@ -58,7 +60,7 @@ const nextConfig: NextConfig = {
               "font-src 'self' https://fonts.gstatic.com data:",
               "img-src 'self' data: https: blob:",
               "connect-src 'self' https://vercel.live https://*.vercel.app https://api.web3forms.com https://*.upstash.io https://www.eventbrite.com",
-              "frame-src 'self' https://www.eventbrite.com https://calendar.google.com",
+              "frame-src 'self' https://www.eventbrite.com https://calendar.google.com https://docs.google.com",
               "media-src 'self'",
               "object-src 'none'",
               "base-uri 'self'",
