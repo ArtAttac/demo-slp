@@ -22,8 +22,6 @@ export const metadata: Metadata = {
 
 const registrationUrl =
   'https://docs.google.com/forms/d/e/1FAIpQLScipkdI51SO2m5is3yJcamVEUo8oKAOvqZct3yO83NmkGFUEA/viewform?usp=header';
-const embeddedFormUrl =
-  'https://docs.google.com/forms/d/e/1FAIpQLScipkdI51SO2m5is3yJcamVEUo8oKAOvqZct3yO83NmkGFUEA/viewform?embedded=true';
 
 export default function WorkshopsPage() {
   return (
@@ -49,20 +47,20 @@ export default function WorkshopsPage() {
       </nav>
 
       <main>
-        <section className="pb-8 pt-16 sm:pb-10 sm:pt-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <section className="pb-6 pt-8 sm:pb-8 sm:pt-10">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <div className="overflow-hidden rounded-[2rem] border border-brand-darkBlue/10 bg-white shadow-xl">
-              <div className="border-b border-brand-darkBlue/10 px-6 py-5 sm:px-8">
+              <div className="border-b border-brand-darkBlue/10 px-6 py-4 sm:px-8">
                 <p className="mb-2 text-sm font-bold uppercase tracking-[0.25em] text-brand-bluePurple">
                   Workshop
                 </p>
               </div>
 
-              <div className="p-4 sm:p-6">
+              <div className="p-3 sm:p-4">
                 <Image
                   src={readingYogisFlyer}
                   alt="Reading Yogis workshop flyer"
-                  className="h-auto w-full rounded-2xl"
+                  className="mx-auto h-auto max-h-[calc(100vh-11rem)] w-auto max-w-full rounded-2xl object-contain"
                   priority
                 />
               </div>
@@ -91,7 +89,7 @@ export default function WorkshopsPage() {
               </p>
 
               <div className="mt-8 grid gap-4 md:grid-cols-2">
-                <div className="rounded-3xl bg-brand-cream p-6 shadow-sm">
+                <div className="rounded-3xl bg-brand-yellow/20 p-6 shadow-sm">
                   <h2 className="text-xl font-bold text-brand-darkBlue">Schedule</h2>
                   <p className="mt-3 text-base leading-relaxed text-gray-700">
                     Wednesdays July 1st-August 12th, 2026
@@ -102,7 +100,7 @@ export default function WorkshopsPage() {
                   </p>
                 </div>
 
-                <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-brand-bluePurple/15">
+                <div className="rounded-3xl bg-brand-yellow/20 p-6 shadow-sm">
                   <h2 className="text-xl font-bold text-brand-darkBlue">Location</h2>
                   <p className="mt-3 text-base leading-relaxed text-gray-700">
                     Llamaste Yoga Studio
@@ -113,7 +111,7 @@ export default function WorkshopsPage() {
                   </p>
                 </div>
 
-                <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-brand-pink/20">
+                <div className="rounded-3xl bg-brand-yellow/20 p-6 shadow-sm">
                   <h2 className="text-xl font-bold text-brand-darkBlue">Activities</h2>
                   <p className="mt-3 text-base leading-relaxed text-gray-700">
                     Activities include mat-based movement, music, and seated work
@@ -140,44 +138,8 @@ export default function WorkshopsPage() {
                   >
                     here
                   </a>
-                  {' '}or{' '}
-                  <a
-                    href="#registration-form"
-                    className="font-semibold text-brand-yellow underline decoration-2 underline-offset-4"
-                  >
-                    here at the bottom of this page
-                  </a>
                   .
                 </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="registration-form" className="pb-16 sm:pb-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-[2rem] border border-brand-darkBlue/10 bg-white shadow-xl">
-              <div className="border-b border-brand-darkBlue/10 px-6 py-5 sm:px-8">
-                <p className="mb-2 text-sm font-bold uppercase tracking-[0.25em] text-brand-bluePurple">
-                  Registration Form
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  Complete the form below to reserve a spot for the Reading Yogis
-                  workshop.
-                </p>
-              </div>
-
-              <div className="p-3 sm:p-4">
-                <iframe
-                  src={embeddedFormUrl}
-                  title="Reading Yogis registration form"
-                  className="min-h-[1516px] w-full rounded-2xl"
-                  style={{ border: 0 }}
-                  marginHeight={0}
-                  marginWidth={0}
-                >
-                  Loading…
-                </iframe>
               </div>
             </div>
           </div>
