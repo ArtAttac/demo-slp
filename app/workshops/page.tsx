@@ -7,6 +7,20 @@ import readingYogisFlyer from '@/app/assets/Reading Yogis Claude Flyer.png';
 export const metadata: Metadata = {
   title: 'Workshops',
   description: 'Reading Yogis summer workshop registration and details.',
+  alternates: {
+    canonical: '/workshops',
+  },
+  openGraph: {
+    title: 'Reading Yogis Workshop',
+    description: 'A 7-week summer workshop for ages 3-5 using Talk Yoga™ to build language and early literacy skills through movement, yoga, and phonics fun.',
+    url: '/workshops',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reading Yogis Workshop',
+    description: 'A 7-week summer workshop for ages 3-5 focused on movement, yoga, and early literacy.',
+  },
   robots: {
     index: false,
     follow: false,

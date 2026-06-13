@@ -111,7 +111,7 @@ export const metadata: Metadata = {
     description: 'Play-based speech therapy for children in Brooklyn and Park Slope, including speech sound disorders, myofunctional therapy, literacy support, and parent coaching.',
     images: [
       {
-        url: '/mainmainlogo.png',
+        url: '/mainlogo.png',
         width: 1200,
         height: 630,
         alt: 'Speech on the Slope Logo',
@@ -124,7 +124,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Speech on the Slope | Brooklyn & Manhattan Speech Therapy Kids',
     description: 'Play-based speech therapy in Brooklyn and Park Slope for speech sound disorders, myofunctional therapy, and literacy support.',
-    images: ['/mainmainlogo.png'],
+    images: ['/mainlogo.png'],
     creator: '@speechontheslope', // Replace with actual Twitter handle if available
   },
 
