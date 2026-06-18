@@ -43,7 +43,7 @@ export default function Footer() {
             rel="noreferrer"
             className="hover:text-white hover:underline transition-colors"
           >
-            @speechontheslopnyc
+            @speechontheslopenyc
           </a>
         </div>
       </div>

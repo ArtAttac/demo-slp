@@ -59,7 +59,7 @@ test('1. Learn More button meets minimum contrast ratio on hover (brand-darkBlue
 test('2. AnnouncementBar copy is contained within a landmark element', async ({ page }) => {
   await page.goto('/');
 
-  const announcementText = page.locator('text=Now accepting new clients');
+  const announcementText = page.locator('text=NOW ACCEPTING NEW CLIENTS');
   await expect(announcementText).toBeVisible();
 
   // Walk up the DOM to find a landmark ancestor
@@ -82,7 +82,7 @@ test('2. AnnouncementBar copy is contained within a landmark element', async ({ 
 
   expect(
     inLandmark.found,
-    `"Now accepting new clients" is NOT inside any landmark element. Found: ${inLandmark.element}`
+    `"NOW ACCEPTING NEW CLIENTS" is NOT inside any landmark element. Found: ${inLandmark.element}`
   ).toBe(true);
 });
 
