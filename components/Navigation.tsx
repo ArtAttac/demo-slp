@@ -6,14 +6,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
+  { href: '/#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
   { href: '/#mission', label: 'Mission', color: 'hover:text-brand-darkBlue' },
   { href: '/#about', label: 'Team', color: 'hover:text-brand-darkBlue' },
   { href: '/#services', label: 'Services', color: 'hover:text-brand-darkBlue' },
-  { href: '/#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
   { href: '/blog', label: 'Blog', color: 'hover:text-brand-darkBlue' },
   { href: '/faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
-  { href: '/#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
   { href: '/workshops', label: 'Workshops', color: 'hover:text-brand-darkBlue' },
+  { href: '/#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
 ];
 
 interface NavBarProps {
@@ -42,7 +42,7 @@ function NavBar({ isSticky = false }: NavBarProps) {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className={`hidden lg:flex items-center ${isSticky ? 'flex-1 justify-evenly mx-12' : 'space-x-1 xl:space-x-2'}`}>
+          <nav className={`hidden xl:flex items-center ${isSticky ? 'flex-1 justify-evenly mx-12' : 'space-x-1 xl:space-x-2'}`}>
             {navLinks.map((link, index) => (
               <motion.div
                 key={link.href}
@@ -62,7 +62,7 @@ function NavBar({ isSticky = false }: NavBarProps) {
           </nav>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="xl:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
@@ -90,7 +90,7 @@ function NavBar({ isSticky = false }: NavBarProps) {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
               id="mobile-menu"
-              className="lg:hidden overflow-hidden"
+              className="xl:hidden overflow-hidden"
             >
               <div className="px-2 pt-2 pb-4 space-y-1 bg-gradient-to-b from-brand-bluePurple/5 to-brand-pink/5 rounded-lg mb-4">
                 {navLinks.map((link, index) => (

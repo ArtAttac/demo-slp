@@ -27,9 +27,25 @@ export default function Footer() {
         <p className="text-gray-300 mb-4">
           &copy; {new Date().getFullYear()} Speech on the Slope. All rights reserved.
         </p>
-        <p className="text-gray-400 text-sm">
-          (917) 200-0339 | hello@speechontheslope.com
-        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-gray-400">
+          <span>(917) 200-0339</span>
+          <span aria-hidden="true">|</span>
+          <a
+            href="mailto:hello@speechontheslope.com"
+            className="hover:text-white hover:underline transition-colors"
+          >
+            hello@speechontheslope.com
+          </a>
+          <span aria-hidden="true">|</span>
+          <a
+            href="https://www.instagram.com/speechontheslopenyc/"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white hover:underline transition-colors"
+          >
+            @speechontheslopnyc
+          </a>
+        </div>
       </div>
     </footer>
   );

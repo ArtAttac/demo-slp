@@ -11,7 +11,6 @@ const practitioners = [
     name: 'Meet Gina',
     credentials: 'M.Ed., CCC-SLP',
     role: 'Co-Founder & Speech-Language Pathologist',
-    shortBio: 'Gina is a licensed speech-language pathologist who loves helping little learners find their voices and build strong foundations for reading and writing. She specializes in working with students from Pre-K through 2nd grade and brings eight years of experience supporting speech sound production, early literacy, and writing development. Her sessions are playful, engaging, and designed to help children build skills and confidence at the same time.',
     image: ginaImage,
     imagePosition: 'object-[40%_center]',
     gradientFrom: 'from-brand-pink/20',
@@ -22,7 +21,6 @@ const practitioners = [
     name: 'Meet Sabrina',
     credentials: 'MS, CCC-SLP',
     role: 'Co-Founder & Speech-Language Pathologist',
-    shortBio: 'Sabrina is a licensed speech-language pathologist, play enthusiast, and proud Brooklyn local. After five years supporting Pre-K and elementary-aged students across NYC public schools, she co-founded Speech on the Slope to provide individualized, child-led therapy rooted in play. She specializes in speech sound disorders and has additional training in myofunctional therapy, helping children develop clearer speech and greater confidence in their communication.',
     image: sabrinaImage,
     imagePosition: 'object-center',
     gradientFrom: 'from-brand-yellow/20',
@@ -107,16 +105,13 @@ export default function AboutSection() {
                   <p className="text-sm text-gray-600 italic">{person.role}</p>
                 </div>
 
-                {/* Bio */}
-                <p className="text-gray-700 leading-relaxed text-center mb-6">{person.shortBio}</p>
-
                 {/* Link */}
                 <div className="text-center">
                   <Link
                     href="/about"
                     className={`inline-block px-6 py-2 rounded-full bg-white/80 backdrop-blur-sm text-sm font-semibold text-brand-darkBlue shadow-sm border ${person.borderColor} hover:shadow-md hover:scale-105 transition-all duration-200`}
                   >
-                    Read Full Bio &rarr;
+                    Read More
                   </Link>
                 </div>
               </div>

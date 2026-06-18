@@ -6,6 +6,7 @@ import AnnouncementBar from '@/components/AnnouncementBar';
 import BlogToast from '@/components/BlogToast';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
+import ServiceAreaBar from '@/components/ServiceAreaBar';
 import MissionSection from '@/components/MissionSection';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
@@ -41,6 +42,7 @@ export default function HomeClient({ latestPostsSlot }: { latestPostsSlot: React
         <section id="hero-section">
           <HeroSection />
         </section>
+        <ServiceAreaBar />
         {sections.map(({ key, Component }, index) => (
           <motion.div
             key={key}

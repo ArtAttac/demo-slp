@@ -6,20 +6,20 @@ import readingYogisFlyer from '@/app/assets/Reading Yogis Claude Flyer.png';
 
 export const metadata: Metadata = {
   title: 'Workshops',
-  description: 'Reading Yogis summer workshop registration and details.',
+  description: 'Reading Yogis by Speech on the Slope.',
   alternates: {
     canonical: '/workshops',
   },
   openGraph: {
-    title: 'Reading Yogis Workshop',
-    description: 'A 7-week summer workshop for ages 3-5 using Talk Yoga™ to build language and early literacy skills through movement, yoga, and phonics fun.',
+    title: 'Reading Yogis',
+    description: 'A playful literacy and movement experience for little learners from Speech on the Slope.',
     url: '/workshops',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Reading Yogis Workshop',
-    description: 'A 7-week summer workshop for ages 3-5 focused on movement, yoga, and early literacy.',
+    title: 'Reading Yogis',
+    description: 'Stretch, sound out, and shine with Speech on the Slope.',
   },
   robots: {
     index: false,
@@ -95,7 +95,7 @@ export default function WorkshopsPage() {
                 Reading Yogis
               </h1>
               <p className="mt-5 max-w-3xl text-lg leading-relaxed text-gray-700">
-                A 7-week summer workshop using the Talk Yoga™ program as a
+                A 7-week summer workshop using the Talk Yoga&trade; program as a
                 foundation to help pre-readers build language and early literacy
                 skills through movement, yoga, and hands-on phonics fun led by a
                 certified speech-language pathologist. Designed for children ages

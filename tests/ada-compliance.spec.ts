@@ -25,7 +25,7 @@ function parseRgb(color: string): [number, number, number] {
 test('1. Learn More button meets minimum contrast ratio on hover (brand-darkBlue bg)', async ({ page }) => {
   await page.goto('/');
 
-  const learnMoreBtn = page.locator('a[href="#about"]', { hasText: 'Learn More' }).first();
+  const learnMoreBtn = page.locator('a[href="#get-started"]', { hasText: 'Learn More' }).first();
   await expect(learnMoreBtn).toBeVisible();
 
   // Simulate hover state by evaluating computed styles after hover
@@ -56,10 +56,10 @@ test('1. Learn More button meets minimum contrast ratio on hover (brand-darkBlue
 });
 
 // ─── Test 2: Landmark — "NOW ACCEPTING NEW CLIENTS" is inside a landmark ─────
-test('2. AnnouncementBar "NOW ACCEPTING NEW CLIENTS" is contained within a landmark element', async ({ page }) => {
+test('2. AnnouncementBar copy is contained within a landmark element', async ({ page }) => {
   await page.goto('/');
 
-  const announcementText = page.locator('text=NOW ACCEPTING NEW CLIENTS');
+  const announcementText = page.locator('text=Now accepting new clients');
   await expect(announcementText).toBeVisible();
 
   // Walk up the DOM to find a landmark ancestor
@@ -82,7 +82,7 @@ test('2. AnnouncementBar "NOW ACCEPTING NEW CLIENTS" is contained within a landm
 
   expect(
     inLandmark.found,
-    `"NOW ACCEPTING NEW CLIENTS" is NOT inside any landmark element. Found: ${inLandmark.element}`
+    `"Now accepting new clients" is NOT inside any landmark element. Found: ${inLandmark.element}`
   ).toBe(true);
 });
 

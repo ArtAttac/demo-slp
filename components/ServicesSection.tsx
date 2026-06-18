@@ -196,7 +196,7 @@ export default function ServicesSection() {
                         {/* Sticky Learn More button */}
                         <div className={`mt-4 pt-4 border-t ${service.borderColor}`}>
                           <Link
-                            href="/services"
+                            href="/#get-started"
                             className={`block w-full px-4 py-2 bg-white/40 hover:bg-white/60 rounded-full text-sm font-semibold ${service.textColor} transition-all duration-200 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white`}
                           >
                             Learn More

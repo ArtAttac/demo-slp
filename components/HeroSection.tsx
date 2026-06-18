@@ -34,13 +34,13 @@ export default function HeroSection() {
           className="text-center max-w-3xl mx-auto"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-            Speech Therapy & Literacy Support for <span className="text-brand-yellow">Brooklyn & Manhattan Kids</span>
+            In home Speech Therapy and Literacy Support for <span className="text-brand-yellow">Brooklyn Kids</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8 drop-shadow-md">
             Helping children build clear speech, strong literacy skills, and lasting confidence.
           </p>
           <a
-            href="#about"
+            href="#get-started"
             className="inline-block bg-brand-bluePurple hover:bg-brand-darkBlue text-white font-semibold px-8 py-4 rounded-full shadow-lg transition-all hover:scale-105"
           >
             Learn More
