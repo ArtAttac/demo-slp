@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import BlogEditor from './BlogEditor';
 import type { Metadata } from 'next';
+import Navigation from '@/components/Navigation';
 import { getAbsoluteUrl, getAllBlogPosts, decodeHtmlEntities, createExcerpt, getPostLastModified } from '@/lib/blog';
 import type { BlogPost } from '@/lib/redis';
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: getAbsoluteUrl('/mainmainlogo.png'),
+        url: getAbsoluteUrl('/mainlogo.png'),
         alt: 'Speech on the Slope Blog',
       },
     ],
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: BLOG_TITLE,
     description: BLOG_DESCRIPTION,
-    images: [getAbsoluteUrl('/mainmainlogo.png')],
+    images: [getAbsoluteUrl('/mainlogo.png')],
   },
   alternates: {
     canonical: BLOG_URL,
@@ -74,28 +74,11 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-brand-cream">
+      <Navigation />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-brand-cream/90 backdrop-blur-md border-b border-brand-darkBlue/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center text-brand-darkBlue hover:text-brand-bluePurple font-medium transition-colors"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Home
-          </Link>
-          <Link href="/#contact" className="px-5 py-2 bg-brand-bluePurple text-white text-sm font-semibold rounded-full hover:bg-brand-darkBlue transition-colors">
-            Contact Us
-          </Link>
-        </div>
-      </nav>
 
       {/* Header */}
       <section className="relative py-16 sm:py-20 bg-gradient-to-br from-brand-darkBlue via-brand-bluePurple/90 to-brand-pink/80">

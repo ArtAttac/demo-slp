@@ -4,9 +4,10 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 import type { Metadata } from 'next';
+import Navigation from '@/components/Navigation';
 import { getAbsoluteUrl, getBlogPost, getBlogSlugs, getPostLastModified, decodeHtmlEntities, createExcerpt } from '@/lib/blog';
 
-const FALLBACK_IMAGE = getAbsoluteUrl('/mainmainlogo.png');
+const FALLBACK_IMAGE = getAbsoluteUrl('/mainlogo.png');
 const ARTICLE_KEYWORDS = [
   'Brooklyn speech therapy blog',
   'Park Slope speech therapy blog',
@@ -118,28 +119,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="min-h-screen bg-brand-cream">
+      <Navigation />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-brand-cream/90 backdrop-blur-md border-b border-brand-darkBlue/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link
-            href="/blog"
-            className="inline-flex items-center text-brand-darkBlue hover:text-brand-bluePurple font-medium transition-colors"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Blog
-          </Link>
-          <Link href="/#contact" className="px-5 py-2 bg-brand-bluePurple text-white text-sm font-semibold rounded-full hover:bg-brand-darkBlue transition-colors">
-            Contact Us
-          </Link>
-        </div>
-      </nav>
 
       {/* Article */}
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

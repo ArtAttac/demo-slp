@@ -3,29 +3,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Navigation from '@/components/Navigation';
 import ginaImage from '@/app/assets/ginapicprofileedited.png';
 import sabrinaImage from '@/app/assets/sababoutme.png';
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation back */}
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center text-brand-darkBlue hover:text-brand-bluePurple font-medium transition-colors"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Home
-          </Link>
-          <Link href="/#contact" className="px-5 py-2 bg-brand-bluePurple text-white text-sm font-semibold rounded-full hover:bg-brand-darkBlue transition-colors">
-            Contact Us
-          </Link>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Page Header */}
       <section className="relative py-16 sm:py-20 bg-gradient-to-br from-brand-bluePurple/20 via-brand-pink/15 to-brand-yellow/10">
