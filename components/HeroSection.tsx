@@ -2,23 +2,24 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import heroImage from '@/app/assets/herolandingv1.png';
+import heroImage from '@/app/assets/imagehero.png';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-start overflow-hidden">
+    <section className="relative min-h-[calc(100svh-11rem)] md:min-h-[calc(100svh-7.75rem)] flex items-start overflow-hidden">
       {/* Hero image with zoom-to-center animation, cropped to hide bottom-right watermark */}
       <motion.div
         initial={{ scale: 1.5 }}
         animate={{ scale: 1.2 }}
         transition={{ duration: 2, ease: 'easeOut' }}
+        style={{ transformOrigin: '20% center' }}
         className="absolute inset-0"
       >
         <Image
           src={heroImage}
           alt="Speech on the Slope - Brooklyn speech therapy"
           fill
-          className="object-cover object-[center_30%]"
+          className="object-cover object-[55%_30%] md:object-[left_30%]"
           priority
         />
         {/* Cover watermark in bottom-right */}
@@ -26,7 +27,7 @@ export default function HeroSection() {
       </motion.div>
       <div className="absolute inset-0 bg-brand-darkBlue/40" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-48">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
