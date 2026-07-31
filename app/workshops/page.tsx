@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import readingYogisFlyer from '@/app/assets/Reading Yogis Claude Flyer.png';
+import SawyerWorkshopsEmbed from '@/components/SawyerWorkshopsEmbed';
+import { isSawyerWorkshopsEnabled, SAWYER_WORKSHOPS_COOKIE } from '@/lib/workshops';
 
 export const metadata: Metadata = {
   title: 'Workshops',
@@ -37,7 +40,16 @@ export const metadata: Metadata = {
 const registrationUrl =
   'https://docs.google.com/forms/d/e/1FAIpQLScipkdI51SO2m5is3yJcamVEUo8oKAOvqZct3yO83NmkGFUEA/viewform?usp=header';
 
-export default function WorkshopsPage() {
+export default async function WorkshopsPage() {
+  const cookieStore = await cookies();
+  const showSawyerWorkshops = isSawyerWorkshopsEnabled(
+    cookieStore.get(SAWYER_WORKSHOPS_COOKIE)?.value,
+  );
+
+  if (showSawyerWorkshops) {
+    return <SawyerWorkshopsEmbed />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-brand-cream via-white to-brand-pink/10">
       <nav className="sticky top-0 z-50 border-b border-brand-darkBlue/10 bg-white/95 backdrop-blur-md">

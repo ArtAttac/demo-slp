@@ -42,7 +42,7 @@ export default function HeroSection() {
           </p>
           <a
             href="#get-started"
-            className="inline-block bg-brand-bluePurple hover:bg-brand-darkBlue text-white font-semibold px-8 py-4 rounded-full shadow-lg transition-all hover:scale-105"
+            className="inline-block mb-8 md:mb-0 bg-brand-bluePurple hover:bg-brand-darkBlue text-white font-semibold px-8 py-4 rounded-full shadow-lg transition-all hover:scale-105"
           >
             Learn More
           </a>
