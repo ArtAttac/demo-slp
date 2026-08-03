@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { isSawyerWorkshopsEnabled, SAWYER_WORKSHOPS_COOKIE } from '@/lib/workshops';
+import { isSawyerWorkshopsEnabled, SAWYER_WORKSHOPS_QUERY } from '@/lib/workshops';
 
 const createNavLinks = (showSawyerWorkshops: boolean) => [
   { href: '/#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
@@ -14,7 +14,7 @@ const createNavLinks = (showSawyerWorkshops: boolean) => [
   { href: '/blog', label: 'Blog', color: 'hover:text-brand-darkBlue' },
   { href: '/faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
   {
-    href: '/workshops',
+    href: showSawyerWorkshops ? `/workshops?${SAWYER_WORKSHOPS_QUERY}=on` : '/workshops',
     label: showSawyerWorkshops ? 'Classes/Workshops' : 'Workshops',
     color: 'hover:text-brand-darkBlue',
   },
@@ -130,12 +130,9 @@ export default function NavigationClient() {
   const [showSawyerWorkshops, setShowSawyerWorkshops] = useState(false);
 
   useEffect(() => {
-    const cookieValue = document.cookie
-      .split('; ')
-      .find((cookie) => cookie.startsWith(`${SAWYER_WORKSHOPS_COOKIE}=`))
-      ?.split('=').slice(1).join('=');
+    const queryValue = new URLSearchParams(window.location.search).get(SAWYER_WORKSHOPS_QUERY);
 
-    setShowSawyerWorkshops(isSawyerWorkshopsEnabled(cookieValue));
+    setShowSawyerWorkshops(isSawyerWorkshopsEnabled(queryValue ?? undefined));
 
     const handleScroll = () => {
       const heroSection = document.getElementById('hero-section');

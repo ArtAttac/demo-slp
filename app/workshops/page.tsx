@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
-import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import readingYogisFlyer from '@/app/assets/Reading Yogis Claude Flyer.png';
 import SawyerWorkshopsEmbed from '@/components/SawyerWorkshopsEmbed';
-import { isSawyerWorkshopsEnabled, SAWYER_WORKSHOPS_COOKIE } from '@/lib/workshops';
+import { isSawyerWorkshopsEnabled, SAWYER_WORKSHOPS_QUERY } from '@/lib/workshops';
 
 export const metadata: Metadata = {
   title: 'Workshops',
@@ -40,10 +39,14 @@ export const metadata: Metadata = {
 const registrationUrl =
   'https://docs.google.com/forms/d/e/1FAIpQLScipkdI51SO2m5is3yJcamVEUo8oKAOvqZct3yO83NmkGFUEA/viewform?usp=header';
 
-export default async function WorkshopsPage() {
-  const cookieStore = await cookies();
+export default async function WorkshopsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const queryValue = (await searchParams)[SAWYER_WORKSHOPS_QUERY];
   const showSawyerWorkshops = isSawyerWorkshopsEnabled(
-    cookieStore.get(SAWYER_WORKSHOPS_COOKIE)?.value,
+    Array.isArray(queryValue) ? queryValue[0] : queryValue,
   );
 
   if (showSawyerWorkshops) {
