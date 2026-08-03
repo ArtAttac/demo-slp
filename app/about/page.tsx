@@ -3,15 +3,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import Navigation from '@/components/Navigation';
 import ginaImage from '@/app/assets/ginapicprofileedited.png';
 import sabrinaImage from '@/app/assets/sababoutme.png';
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
-
       {/* Page Header */}
       <section className="relative py-16 sm:py-20 bg-gradient-to-br from-brand-bluePurple/20 via-brand-pink/15 to-brand-yellow/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

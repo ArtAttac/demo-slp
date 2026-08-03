@@ -1,6 +1,5 @@
 import BlogEditor from './BlogEditor';
 import type { Metadata } from 'next';
-import Navigation from '@/components/Navigation';
 import { getAbsoluteUrl, getAllBlogPosts, decodeHtmlEntities, createExcerpt, getPostLastModified } from '@/lib/blog';
 import type { BlogPost } from '@/lib/redis';
 
@@ -74,7 +73,6 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-brand-cream">
-      <Navigation />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

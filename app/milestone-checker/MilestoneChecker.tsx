@@ -272,28 +272,6 @@ export default function MilestoneChecker() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-brand-cream via-white to-brand-bluePurple/10">
-      <nav className="border-b border-brand-darkBlue/10 bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="inline-flex items-center font-semibold text-brand-darkBlue transition-colors hover:text-brand-bluePurple"
-          >
-            <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Home
-          </Link>
-          <a
-            href={bookingUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-brand-bluePurple px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-darkBlue"
-          >
-            Free Consultation
-          </a>
-        </div>
-      </nav>
-
       <main className="relative overflow-hidden px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <div className="pointer-events-none absolute -left-20 top-20 h-64 w-64 rounded-full bg-brand-yellow/20 blur-3xl" />
         <div className="pointer-events-none absolute -right-16 top-52 h-72 w-72 rounded-full bg-brand-pink/20 blur-3xl" />

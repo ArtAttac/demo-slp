@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { isSawyerWorkshopsEnabled, SAWYER_WORKSHOPS_QUERY } from '@/lib/workshops';
 
-const createNavLinks = (showSawyerWorkshops: boolean) => [
+const createNavLinks = () => [
   { href: '/#get-started', label: 'Get Started', color: 'hover:text-brand-darkBlue' },
   { href: '/#mission', label: 'Mission', color: 'hover:text-brand-darkBlue' },
   { href: '/#about', label: 'Team', color: 'hover:text-brand-darkBlue' },
@@ -14,8 +14,8 @@ const createNavLinks = (showSawyerWorkshops: boolean) => [
   { href: '/blog', label: 'Blog', color: 'hover:text-brand-darkBlue' },
   { href: '/faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
   {
-    href: showSawyerWorkshops ? `/workshops?${SAWYER_WORKSHOPS_QUERY}=on` : '/workshops',
-    label: showSawyerWorkshops ? 'Classes/Workshops' : 'Workshops',
+    href: '/workshops',
+    label: 'Classes/Workshops',
     color: 'hover:text-brand-darkBlue',
   },
   { href: '/#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
@@ -23,12 +23,11 @@ const createNavLinks = (showSawyerWorkshops: boolean) => [
 
 interface NavBarProps {
   isSticky?: boolean;
-  showSawyerWorkshops: boolean;
 }
 
-function NavBar({ isSticky = false, showSawyerWorkshops }: NavBarProps) {
+function NavBar({ isSticky = false }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const navLinks = createNavLinks(showSawyerWorkshops);
+  const navLinks = createNavLinks();
 
   return (
     <div className={`${isSticky ? 'bg-white/60 backdrop-blur-md' : 'bg-white/60 backdrop-blur-md'}`}>
@@ -127,31 +126,51 @@ function NavBar({ isSticky = false, showSawyerWorkshops }: NavBarProps) {
 
 export default function NavigationClient() {
   const [isSticky, setIsSticky] = useState(false);
-  const [showSawyerWorkshops, setShowSawyerWorkshops] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const queryValue = new URLSearchParams(window.location.search).get(SAWYER_WORKSHOPS_QUERY);
+    if (pathname !== '/') {
+      setIsSticky(false);
+      return;
+    }
 
-    setShowSawyerWorkshops(isSawyerWorkshopsEnabled(queryValue ?? undefined));
+    let frameId: number | null = null;
+
+    const updateStickyState = () => {
+      frameId = null;
+      const heroSection = document.getElementById('hero-section');
+      const nextIsSticky = heroSection
+        ? window.scrollY > heroSection.offsetTop + heroSection.clientHeight - 80
+        : window.scrollY > window.innerHeight - 80;
+
+      setIsSticky((currentIsSticky) =>
+        currentIsSticky === nextIsSticky ? currentIsSticky : nextIsSticky,
+      );
+    };
 
     const handleScroll = () => {
-      const heroSection = document.getElementById('hero-section');
-      if (heroSection) {
-        setIsSticky(window.scrollY > heroSection.offsetTop + heroSection.clientHeight - 80);
-      } else {
-        setIsSticky(window.scrollY > window.innerHeight - 80);
+      if (frameId === null) {
+        frameId = window.requestAnimationFrame(updateStickyState);
       }
     };
 
+    updateStickyState();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
+  }, [pathname]);
 
   return (
     <>
       {/* Main Header */}
-      <header className="relative z-20 shadow-sm">
-        <NavBar showSawyerWorkshops={showSawyerWorkshops} />
+      <header
+        className={`${pathname === '/' ? 'relative' : 'sticky top-0'} z-20 shadow-sm`}
+      >
+        <NavBar />
       </header>
 
       {/* Sticky Navigation */}
@@ -164,7 +183,7 @@ export default function NavigationClient() {
             transition={{ duration: 0.3 }}
             className="fixed top-0 left-0 right-0 z-50 shadow-lg"
           >
-            <NavBar isSticky showSawyerWorkshops={showSawyerWorkshops} />
+            <NavBar isSticky />
           </motion.nav>
         )}
       </AnimatePresence>

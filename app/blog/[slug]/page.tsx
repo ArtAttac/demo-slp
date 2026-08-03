@@ -4,7 +4,6 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 import type { Metadata } from 'next';
-import Navigation from '@/components/Navigation';
 import { getAbsoluteUrl, getBlogPost, getBlogSlugs, getPostLastModified, decodeHtmlEntities, createExcerpt } from '@/lib/blog';
 
 const FALLBACK_IMAGE = getAbsoluteUrl('/mainlogo.png');
@@ -119,7 +118,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="min-h-screen bg-brand-cream">
-      <Navigation />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

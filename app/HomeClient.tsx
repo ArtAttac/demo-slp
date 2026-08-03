@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import BlogToast from '@/components/BlogToast';
-import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ServiceAreaBar from '@/components/ServiceAreaBar';
 import MissionSection from '@/components/MissionSection';
@@ -33,7 +32,6 @@ export default function HomeClient({ latestPostsSlot }: { latestPostsSlot: React
   return (
     <>
       <AnnouncementBar />
-      <Navigation />
       <motion.main
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}

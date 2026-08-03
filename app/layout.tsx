@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
+import Navigation from '@/components/Navigation';
 import "./globals.css";
 
 const inter = Inter({
@@ -275,6 +276,8 @@ export default function RootLayout({
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.hisawyer.com" />
+        <link rel="preconnect" href="https://cdn-fir-p.hisawyer.com" />
 
         {/* Favicon and app icons */}
         <link rel="icon" href="/mainlogo.png" type="image/png" />
@@ -285,6 +288,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#171e5d" />
       </head>
       <body className={`${inter.variable} ${rawles.variable} ${outfit.variable} font-body`}>
+        <Navigation />
         {children}
         <Analytics />
       </body>

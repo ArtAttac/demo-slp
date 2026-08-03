@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,15 +8,6 @@ export const metadata: Metadata = {
 export default function PrivacyPracticesPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Nav */}
-      <nav className="sticky top-0 z-50 bg-white/98 backdrop-blur-md shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="text-brand-darkBlue font-bold hover:text-brand-bluePurple transition-colors">
-            &larr; Back to Home
-          </Link>
-        </div>
-      </nav>
-
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Notice of Privacy Practices</h1>
         <p className="text-sm text-gray-500 mb-4">Effective Date: March 2, 2026</p>

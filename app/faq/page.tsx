@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Navigation from '@/components/Navigation';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 
@@ -14,7 +13,6 @@ export const metadata: Metadata = {
 export default function FAQPage() {
   return (
     <div className="min-h-screen bg-brand-cream">
-      <Navigation />
       <main>
         <FAQSection />
       </main>
