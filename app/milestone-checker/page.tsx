@@ -1,45 +1,37 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
 import MilestoneChecker from './MilestoneChecker';
 
-export const dynamic = 'force-dynamic';
-
 export const metadata: Metadata = {
-  title: 'Speech & Language Milestone Checker',
+  title: 'Speech & Language Milestone Check-In for Ages 1–5',
   description:
-    'Explore age-based speech and language milestones for children from 12 months to 5 years with this free educational milestone checker.',
+    'Use this free educational check-in to reflect on speech, language, and communication milestones for children ages 1 to 5.',
   alternates: {
     canonical: '/milestone-checker',
   },
   openGraph: {
-    title: 'Speech & Language Milestone Checker',
+    title: 'Speech & Language Milestone Check-In for Ages 1–5',
     description:
       'A warm, educational way to reflect on your child’s communication milestones and decide whether a conversation with an SLP could be helpful.',
     url: '/milestone-checker',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Speech & Language Milestone Check-In for Ages 1–5',
+    description:
+      'A free educational check-in for reflecting on communication milestones from 12 months to 5 years.',
+  },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
     },
   },
 };
 
-type MilestoneCheckerPageProps = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-};
-
-export default async function MilestoneCheckerPage({ searchParams }: MilestoneCheckerPageProps) {
-  const params = await searchParams;
-  const testQuiz = params.testquiz;
-
-  if (Array.isArray(testQuiz) || testQuiz !== '1') {
-    notFound();
-  }
-
+export default function MilestoneCheckerPage() {
   return <MilestoneChecker />;
 }

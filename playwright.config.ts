@@ -1,11 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const port = process.env.PLAYWRIGHT_PORT ?? '3000';
+const baseURL = `http://localhost:${port}`;
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
   retries: 0,
   use: {
-    baseURL: 'http://localhost:3001',
+    baseURL,
     trace: 'on-first-retry',
   },
   projects: [
@@ -15,8 +18,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3001',
+    command: `npm run dev -- -p ${port}`,
+    url: baseURL,
     reuseExistingServer: true,
     timeout: 120000,
   },

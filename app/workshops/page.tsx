@@ -3,13 +3,14 @@ import type { Metadata } from 'next';
 import SawyerWorkshopsEmbed from '@/components/SawyerWorkshopsEmbed';
 
 export const metadata: Metadata = {
-  title: 'Workshops',
-  description: 'Browse and register for classes and workshops from Speech on the Slope.',
+  title: 'Children’s Speech, Literacy & Movement Workshops',
+  description:
+    'Browse children’s speech, literacy, and movement classes and workshops from Speech on the Slope in Brooklyn.',
   alternates: {
     canonical: '/workshops',
   },
   openGraph: {
-    title: 'Reading Yogis',
+    title: 'Children’s Speech, Literacy & Movement Workshops',
     description: 'A playful literacy and movement experience for little learners from Speech on the Slope.',
     url: '/workshops',
     type: 'website',
@@ -20,11 +21,11 @@ export const metadata: Metadata = {
     description: 'Stretch, sound out, and shine with Speech on the Slope.',
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       'max-image-preview': 'large',
       'max-snippet': -1,
       'max-video-preview': -1,

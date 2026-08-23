@@ -37,6 +37,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: getAbsoluteUrl('/milestone-checker'),
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: getAbsoluteUrl('/workshops'),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: getAbsoluteUrl('/privacy-practices'),
       lastModified: new Date(),
       changeFrequency: 'yearly',

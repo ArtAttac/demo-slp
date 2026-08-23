@@ -10,7 +10,7 @@ export default function DisclaimerPage() {
     <div className="min-h-screen bg-white">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Medical &amp; Professional Disclaimer</h1>
-        <p className="text-sm text-gray-500 mb-10">Last updated: March 2, 2026</p>
+        <p className="text-sm text-gray-500 mb-10">Last updated: August 23, 2026</p>
 
         <div className="prose prose-gray max-w-none space-y-6 text-gray-700 leading-relaxed">
           <p>
@@ -19,6 +19,11 @@ export default function DisclaimerPage() {
 
           <p>
             Browsing this website, reading our materials, or contacting us does not establish a speech-language pathologist-client relationship between you and any therapist at Speech on the Slope. Every child&apos;s communication and developmental needs are unique. Always seek the direct advice of a qualified healthcare provider, pediatrician, or licensed speech-language pathologist with any questions you may have regarding your child&apos;s speech, language, feeding, or overall development. Never disregard professional medical advice or delay in seeking it because of something you have read on this website.
+          </p>
+
+          <h2 className="text-xl font-bold text-gray-900 mt-10">Milestone Checker and Quiz Tool</h2>
+          <p>
+            The Speech &amp; Language Milestone Checker and quiz are general educational tools, not speech-language evaluations, screenings, or diagnoses. They do not create a therapist-client relationship with Speech on the Slope. The tool-specific limitations and disclosures in Section V above, including the language presented in the checker&apos;s entry notice and About These Results section, are incorporated into this Disclaimer by reference.
           </p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-10">No Guarantees</h2>

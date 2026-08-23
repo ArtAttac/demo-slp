@@ -10,7 +10,7 @@ export default function TermsOfUsePage() {
     <div className="min-h-screen bg-white">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Terms of Use</h1>
-        <p className="text-sm text-gray-500 mb-10">Last updated: March 3, 2026</p>
+        <p className="text-sm text-gray-500 mb-10">Last updated: August 23, 2026</p>
 
         <div className="prose prose-gray max-w-none space-y-6 text-gray-700 leading-relaxed">
           <p>
@@ -25,6 +25,9 @@ export default function TermsOfUsePage() {
           <h2 className="text-xl font-bold text-gray-900 mt-10">No Provider-Patient Relationship</h2>
           <p>
             Using this website, reading website content, or contacting Speech on the Slope through general channels does not establish a speech-language pathologist-client or other healthcare provider-patient relationship.
+          </p>
+          <p>
+            This no-relationship provision applies equally to all interactive features and tools on the website, including quizzes, checkers, calculators, forms, summaries, and the Speech &amp; Language Milestone Checker. Using an interactive tool does not create a clinician-patient, therapist-client, or other healthcare provider relationship.
           </p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-10">Intellectual Property</h2>
@@ -54,7 +57,7 @@ export default function TermsOfUsePage() {
 
           <h2 className="text-xl font-bold text-gray-900 mt-10">Limitation of Liability</h2>
           <p>
-            To the fullest extent permitted by law, Speech on the Slope will not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from or related to website use.
+            To the fullest extent permitted by law, Speech on the Slope will not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from or related to website use, including reliance on or use of any interactive tool, quiz, checker, calculator, form, summary, or result.
           </p>
 
           <h2 className="text-xl font-bold text-gray-900 mt-10">Governing Law</h2>
