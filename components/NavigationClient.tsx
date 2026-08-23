@@ -15,7 +15,7 @@ const createNavLinks = () => [
   { href: '/faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
   {
     href: '/workshops',
-    label: 'Classes/Workshops',
+    label: 'Classes',
     color: 'hover:text-brand-darkBlue',
   },
   {
@@ -57,13 +57,14 @@ function NavBar({ isSticky = false }: NavBarProps) {
             {navLinks.map((link, index) => (
               <motion.div
                 key={link.href}
+                className="shrink-0"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
               >
                 <Link
                   href={link.href}
-                  className={`relative px-4 py-2 text-gray-700 ${link.color} transition-all duration-300 ease-in font-medium text-base group hover:scale-125 origin-center inline-block`}
+                  className={`relative inline-block whitespace-nowrap px-4 py-2 text-base font-medium text-gray-700 ${link.color} group origin-center transition-all duration-300 ease-in hover:scale-125`}
                 >
                   <span className="relative z-10">{link.label}</span>
                   <span className="absolute inset-0 bg-gradient-to-r from-brand-bluePurple/10 via-brand-pink/10 to-brand-yellow/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300 ease-out"></span>

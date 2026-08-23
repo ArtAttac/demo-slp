@@ -44,6 +44,10 @@ test.describe('public milestone check-in flow', () => {
     await page.getByRole('radio', { name: /^Sometimes/ }).click({ force: true });
     await expect(page.getByText('Question 2 of 10 · Sharing words and ideas')).toBeVisible();
     expect(new URL(page.url()).search).toBe('');
+
+    await page.getByRole('button', { name: 'Start over' }).click();
+    await expect(page.getByRole('group', { name: 'How old is your child?' })).toBeVisible();
+    await expect(page.getByLabel('I have read and understand the above.')).not.toBeChecked();
   });
 
   test('shows deterministic results, valid CTA, and restart', async ({ page }) => {

@@ -14,6 +14,7 @@ test('navbar places the milestone checker after workshops', async ({ page }) => 
 
   expect(workshopsIndex).toBeGreaterThanOrEqual(0);
   expect(milestoneIndex).toBe(workshopsIndex + 1);
+  expect(navLinks[workshopsIndex]?.label).toBe('Classes');
   expect(navLinks[milestoneIndex]?.label).toBe('Milestone Checker');
 });
 
