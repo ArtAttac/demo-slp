@@ -18,6 +18,11 @@ const createNavLinks = () => [
     label: 'Classes/Workshops',
     color: 'hover:text-brand-darkBlue',
   },
+  {
+    href: '/milestone-checker',
+    label: 'Milestone Checker',
+    color: 'hover:text-brand-darkBlue',
+  },
   { href: '/#contact', label: 'Contact', color: 'hover:text-brand-darkBlue' },
 ];
 
