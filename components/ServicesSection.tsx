@@ -16,7 +16,7 @@ export default function ServicesSection() {
       backContent: 'We start by getting to know your child\u2014how they speak, understand language, and communicate\u2014so we can create a plan that truly meets their needs.',
     },
     {
-      title: 'Speech & Language Therapy',
+      title: 'Speech Therapy',
       bgColor: 'bg-brand-yellow',
       textColor: 'text-gray-800',
       borderColor: 'border-gray-800/20',

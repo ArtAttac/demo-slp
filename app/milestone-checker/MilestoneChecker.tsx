@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ageGroups, answerOptions, domainLabels } from './milestone-data';
 import { createCheckInResult } from './result-engine';
 import type { AgeGroup, AgeKey, AnswerValue, CheckInState, ProfessionalType } from './milestone-types';
-
-type EmailStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const initialState: CheckInState = {
   version: 2,
@@ -26,10 +24,6 @@ const answerOrder: AnswerValue[] = ['consistently', 'sometimes', 'not_yet', 'uns
 export default function MilestoneChecker() {
   const [checkIn, setCheckIn] = useState<CheckInState>(initialState);
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
-  const [email, setEmail] = useState('');
-  const [emailOptIn, setEmailOptIn] = useState(false);
-  const [emailStatus, setEmailStatus] = useState<EmailStatus>('idle');
-  const [emailMessage, setEmailMessage] = useState('');
   const [showAnswerGuidance, setShowAnswerGuidance] = useState(false);
   const activeHeadingRef = useRef<HTMLHeadingElement>(null);
   const answerGuidanceButtonRef = useRef<HTMLButtonElement>(null);
@@ -108,47 +102,12 @@ export default function MilestoneChecker() {
   const reset = () => {
     setCheckIn(initialState);
     setHasAcceptedTerms(false);
-    setEmail('');
-    setEmailOptIn(false);
-    setEmailStatus('idle');
-    setEmailMessage('');
     setShowAnswerGuidance(false);
   };
 
   const closeAnswerGuidance = () => {
     setShowAnswerGuidance(false);
     window.requestAnimationFrame(() => answerGuidanceButtonRef.current?.focus());
-  };
-
-  const submitEmail = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const normalizedEmail = email.trim();
-    if (!emailOptIn) {
-      setEmailStatus('error');
-      setEmailMessage('Check the box if you would like to join the email list, or skip this optional step.');
-      return;
-    }
-    if (!normalizedEmail) {
-      setEmailStatus('error');
-      setEmailMessage('Enter an email address, or simply skip this optional step.');
-      return;
-    }
-    setEmailStatus('submitting');
-    setEmailMessage('');
-    try {
-      const response = await fetch('/api/milestone-interest', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: normalizedEmail, emailConsent: true }),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'We could not save your email right now.');
-      setEmailStatus('success');
-      setEmailMessage('You’re all set! We’ll send occasional updates about workshops and events.');
-    } catch (error) {
-      setEmailStatus('error');
-      setEmailMessage(error instanceof Error ? error.message : 'We could not save your email right now.');
-    }
   };
 
   const progressMax = ageGroup.questions.length;
@@ -212,16 +171,8 @@ export default function MilestoneChecker() {
                 <ResultsScreen
                   result={result}
                   headingRef={activeHeadingRef}
-                  email={email}
-                  emailOptIn={emailOptIn}
-                  emailStatus={emailStatus}
-                  emailMessage={emailMessage}
                   transition={transition}
                   onReset={reset}
-                  onEmail={setEmail}
-                  onOptIn={setEmailOptIn}
-                  clearEmailStatus={() => { setEmailStatus('idle'); setEmailMessage(''); }}
-                  onSubmit={submitEmail}
                 />
               )}
             </AnimatePresence>
@@ -305,13 +256,11 @@ function QuizNavigation({ onBack, onReset }: { onBack: () => void; onReset: () =
   return <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"><button type="button" onClick={onBack} className="font-semibold text-gray-600 underline underline-offset-4 hover:text-brand-darkBlue focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-bluePurple/25">Back</button><button type="button" onClick={onReset} className="font-semibold text-brand-darkBlue underline underline-offset-4 hover:text-brand-bluePurple focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-bluePurple/25">Start over</button></div>;
 }
 
-function ResultsScreen({ result, headingRef, email, emailOptIn, emailStatus, emailMessage, transition, onReset, onEmail, onOptIn, clearEmailStatus, onSubmit }: {
+function ResultsScreen({ result, headingRef, transition, onReset }: {
   result: ReturnType<typeof createCheckInResult>;
   headingRef: React.RefObject<HTMLHeadingElement>;
-  email: string; emailOptIn: boolean; emailStatus: EmailStatus; emailMessage: string;
   transition: Record<string, unknown>;
-  onReset: () => void; onEmail: (value: string) => void; onOptIn: (value: boolean) => void; clearEmailStatus: () => void;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onReset: () => void;
 }) {
   return <motion.div key="results" {...transition} className="p-6 sm:p-10">
     <div className={`rounded-3xl border p-6 sm:p-8 ${result.overview.panel}`}><span className={`inline-flex rounded-full px-4 py-2 text-sm font-bold uppercase tracking-[0.16em] ${result.overview.accent}`}>{result.overview.eyebrow}</span><h2 ref={headingRef} tabIndex={-1} className="mt-5 text-3xl font-bold leading-tight text-brand-darkBlue outline-none sm:text-4xl">{result.overview.title}</h2><p className="mt-4 text-lg leading-relaxed text-gray-700">{result.overview.body}</p></div>
@@ -319,7 +268,6 @@ function ResultsScreen({ result, headingRef, email, emailOptIn, emailStatus, ema
     <ResultList title="Skills that may still be emerging" items={result.skillsToWatch.length ? result.skillsToWatch : ['You did not mark any of these check-in skills as sometimes, not yet, or unsure.']} dotClass="bg-brand-bluePurple" />
     <section className="mt-8 rounded-3xl bg-brand-cream p-6 sm:p-7"><h3 className="text-2xl font-bold text-brand-darkBlue">Ideas to try during everyday routines</h3><p className="mt-2 leading-relaxed text-gray-600">These are low-pressure ways to create communication opportunities. Your child does not need to repeat or perform on demand.</p><ul className="mt-5 space-y-3">{result.personalizedIdeas.map((idea) => <ResultItem key={idea} text={idea} dotClass="bg-brand-pink" />)}</ul></section>
     <section className="mt-8" aria-labelledby="next-step-heading"><h3 id="next-step-heading" className="text-2xl font-bold text-brand-darkBlue">Your next step</h3>{result.nextSteps.length ? <div className="mt-4 grid gap-4">{result.nextSteps.map((action, index) => <article key={action.id} className={`rounded-2xl border p-5 ${index === 0 && action.priority === 'prompt' ? 'border-2 border-brand-pink bg-brand-pink/10' : 'border-brand-darkBlue/15 bg-white'}`}><p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-bluePurple">{professionalLabels[action.professional]} · {action.priority}</p><h4 className="mt-2 text-xl font-bold text-brand-darkBlue">{action.title}</h4><p className="mt-2 leading-relaxed text-gray-700">{action.reason}</p>{action.ctaHref ? <a href={action.ctaHref} target="_blank" rel="noreferrer" className="mt-4 inline-flex rounded-full bg-brand-darkBlue px-6 py-3 font-bold text-white transition hover:bg-brand-bluePurple focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-bluePurple/30">{action.ctaLabel}</a> : action.ctaLabel ? <p className="mt-4 font-bold text-brand-darkBlue">{action.ctaLabel}</p> : null}</article>)}</div> : <div className="mt-4 rounded-2xl border border-brand-yellow/60 bg-brand-yellow/15 p-5"><h4 className="text-xl font-bold text-brand-darkBlue">Keep noticing and building together</h4><p className="mt-2 leading-relaxed text-gray-700">Use the ideas above during familiar routines, and contact a speech-language pathologist if you would like individualized guidance.</p></div>}</section>
-    <EmailSignup email={email} emailOptIn={emailOptIn} status={emailStatus} message={emailMessage} onEmailChange={(value) => { onEmail(value); clearEmailStatus(); }} onOptInChange={(value) => { onOptIn(value); clearEmailStatus(); }} onSubmit={onSubmit} />
     <section className="mt-8 rounded-3xl border border-brand-darkBlue/10 bg-gray-50 p-6 sm:p-7" aria-labelledby="about-results"><h3 id="about-results" className="text-2xl font-bold text-brand-darkBlue">About this summary</h3><p className="mt-3 leading-relaxed text-gray-700">{result.disclaimer}</p><p className="mt-4 text-sm leading-relaxed text-gray-600">The questions are informed by public ASHA and CDC communication milestones. Their selection, grouping, response choices, and routing have not been clinically validated for sensitivity or specificity.</p><div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold"><a href="https://www.asha.org/public/developmental-milestones/communication-milestones/" target="_blank" rel="noreferrer" className="text-brand-bluePurple underline underline-offset-4 hover:text-brand-darkBlue">ASHA communication milestones</a><a href="https://www.cdc.gov/act-early/milestones/index.html" target="_blank" rel="noreferrer" className="text-brand-bluePurple underline underline-offset-4 hover:text-brand-darkBlue">CDC developmental milestones</a></div></section>
     <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-brand-darkBlue/10 pt-6"><button type="button" onClick={onReset} className="font-semibold text-brand-darkBlue underline underline-offset-4 hover:text-brand-bluePurple">Restart the check-in</button><Link href="/" className="font-semibold text-gray-500 underline underline-offset-4 hover:text-brand-darkBlue">Return home</Link></div>
   </motion.div>;
@@ -333,6 +281,3 @@ function ResultItem({ text, dotClass }: { text: string; dotClass: string }) {
   return <li className="flex gap-3 leading-relaxed text-gray-700"><span className={`mt-2 h-2 w-2 flex-none rounded-full ${dotClass}`} aria-hidden="true" /><span>{text}</span></li>;
 }
 
-function EmailSignup({ email, emailOptIn, status, message, onEmailChange, onOptInChange, onSubmit }: { email: string; emailOptIn: boolean; status: EmailStatus; message: string; onEmailChange: (value: string) => void; onOptInChange: (value: boolean) => void; onSubmit: (event: FormEvent<HTMLFormElement>) => void }) {
-  return <section className="mt-8 rounded-3xl bg-brand-cream p-6 sm:p-7" aria-labelledby="email-signup-heading"><p className="text-sm font-bold uppercase tracking-[0.16em] text-brand-bluePurple">Optional email signup</p><h3 id="email-signup-heading" className="mt-2 text-2xl font-bold text-brand-darkBlue">Want occasional updates about workshops and events?</h3><p className="mt-2 leading-relaxed text-gray-600">Sign up to receive updates from Speech on the Slope about upcoming workshops, classes, events, and speech &amp; language tips!</p>{status === 'success' ? <p className="mt-5 rounded-2xl bg-white px-5 py-4 font-semibold text-brand-darkBlue" role="status">{message}</p> : <form onSubmit={onSubmit} className="mt-5" noValidate><label htmlFor="milestone-email-opt-in" className="flex cursor-pointer items-start gap-3 font-semibold text-brand-darkBlue"><input id="milestone-email-opt-in" type="checkbox" checked={emailOptIn} onChange={(event) => onOptInChange(event.target.checked)} className="mt-1 h-5 w-5 flex-none accent-brand-bluePurple" /><span>Yes, add me to the Speech on the Slope email list.</span></label><label htmlFor="milestone-email" className="mt-4 block text-sm font-bold text-brand-darkBlue">Email address <span className="font-normal text-gray-500">(optional)</span></label><div className="mt-2 flex flex-col gap-3 sm:flex-row"><input id="milestone-email" type="email" inputMode="email" autoComplete="email" value={email} onChange={(event) => onEmailChange(event.target.value)} aria-describedby="milestone-email-note milestone-email-status" className="min-w-0 flex-1 rounded-full border-2 border-brand-darkBlue/15 bg-white px-5 py-3 text-gray-900 outline-none transition focus:border-brand-bluePurple focus:ring-4 focus:ring-brand-bluePurple/15" /><button type="submit" disabled={status === 'submitting'} className="rounded-full bg-brand-bluePurple px-6 py-3 font-bold text-white transition hover:bg-brand-darkBlue disabled:cursor-wait disabled:opacity-60">{status === 'submitting' ? 'Saving…' : 'Join the email list'}</button></div><p id="milestone-email-note" className="mt-3 text-xs leading-relaxed text-gray-500">You can <a href="mailto:hello@speechontheslope.com?subject=Unsubscribe%20from%20Speech%20on%20the%20Slope%20email%20list" className="font-semibold underline underline-offset-2 hover:text-brand-darkBlue">unsubscribe at any time</a>. See our <Link href="/privacy-policy" className="font-semibold underline underline-offset-2 hover:text-brand-darkBlue">Privacy Policy</Link>.</p><p id="milestone-email-status" className={`mt-3 text-sm font-semibold ${status === 'error' ? 'text-red-700' : 'text-brand-darkBlue'}`} role="status">{message}</p></form>}</section>;
-}

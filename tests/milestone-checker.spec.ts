@@ -60,10 +60,11 @@ test.describe('public milestone check-in flow', () => {
     await expect(page.getByRole('heading', { name: 'Ideas to try during everyday routines' })).toBeVisible();
     const consultation = page.getByRole('link', { name: 'Schedule a consultation' });
     await expect(consultation).toHaveAttribute('href', /^https:\/\/calendar\.google\.com\//);
-    const emailBeforeAbout = await page.locator('#email-signup-heading, #about-results').evaluateAll(
+    const aboutResults = await page.locator('#email-signup-heading, #about-results').evaluateAll(
       (elements) => elements.map((element) => element.id),
     );
-    expect(emailBeforeAbout).toEqual(['email-signup-heading', 'about-results']);
+    expect(aboutResults).toEqual(['about-results']);
+    await expect(page.locator('#email-signup-heading')).toHaveCount(0);
     expect(new URL(page.url()).search).toBe('');
     await expect(page.getByRole('button', { name: 'Review my final answer' })).toHaveCount(0);
 

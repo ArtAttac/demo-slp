@@ -28,21 +28,9 @@ export default function MilestoneCheckerPrivacyPage() {
             The checker uses the age group you select and your answers to generate a general educational summary. Those quiz answers are used in your browser only; they are not sent to Speech on the Slope, saved to a patient record, or stored by this checker. They remain available only while the page is open and are cleared when you refresh or leave the page.
           </p>
 
-          <h2>Optional email signup</h2>
-          <p>
-            The email signup is a separate, optional step and is not needed to receive or view results. We collect your email address only if you check the box agreeing to join the Speech on the Slope email list and then submit the form. The signup is used for practice marketing messages about workshops, events, and updates. Your quiz answers and results are not sent with the signup.
-          </p>
-          <p>
-            We keep your email address on the marketing list while you remain subscribed. You can unsubscribe or request deletion at any time by emailing{' '}
-            <a href="mailto:hello@speechontheslope.com" className="text-brand-bluePurple hover:underline">
-              hello@speechontheslope.com
-            </a>
-            . We will remove it from the practice&apos;s list after processing your request, subject to any limited retention required by law or legitimate recordkeeping. Your email address, consent time, and signup source are stored in the practice&apos;s Upstash Redis datastore. Upstash may process this information under its own privacy and retention practices.
-          </p>
-
           <h2>Privacy policies and your rights</h2>
           <p>
-            For information about how website information and optional email signups are handled more generally, please review our{' '}
+            For information about how website information is handled more generally, please review our{' '}
             <Link href="/privacy-policy" className="text-brand-bluePurple hover:underline">
               Privacy Policy
             </Link>{' '}
@@ -50,12 +38,12 @@ export default function MilestoneCheckerPrivacyPage() {
             <Link href="/privacy-practices" className="text-brand-bluePurple hover:underline">
               Notice of Privacy Practices
             </Link>
-            . The checker is not a patient portal. Please do not enter private medical details into this public tool or its optional email form.
+            . The checker is not a patient portal. Please do not enter private medical details into this public tool.
           </p>
 
-          <h2>Questions, deletion, or opting out</h2>
+          <h2>Questions</h2>
           <p>
-            To ask a privacy question, request deletion of an optional email signup, or unsubscribe from the marketing list, email{' '}
+            To ask a privacy question, email{' '}
             <a href="mailto:hello@speechontheslope.com" className="text-brand-bluePurple hover:underline">
               hello@speechontheslope.com
             </a>
