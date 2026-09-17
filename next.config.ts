@@ -55,11 +55,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live https://www.eventbrite.com https://www.hisawyer.com https://va.vercel-scripts.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live https://www.eventbrite.com https://www.hisawyer.com https://va.vercel-scripts.com https://connect.facebook.net",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com data:",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://vercel.live https://*.vercel.app https://api.web3forms.com https://*.upstash.io https://www.eventbrite.com https://www.hisawyer.com",
+              "connect-src 'self' https://vercel.live https://*.vercel.app https://api.web3forms.com https://*.upstash.io https://www.eventbrite.com https://www.hisawyer.com https://connect.facebook.net https://www.facebook.com",
               "frame-src 'self' https://www.eventbrite.com https://calendar.google.com https://docs.google.com https://www.hisawyer.com",
               "media-src 'self'",
               "object-src 'none'",
