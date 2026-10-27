@@ -116,12 +116,20 @@ function ArrowIcon() {
   );
 }
 
-function RegisterButton({ label, size = 'md' }: { label: string; size?: 'md' | 'lg' }) {
+function CtaButton({
+  label,
+  href = EVENT_DETAILS.registerUrl,
+  size = 'md',
+}: {
+  label: string;
+  href?: string;
+  size?: 'md' | 'lg';
+}) {
   const reduceMotion = useReducedMotion();
 
   return (
     <motion.a
-      href={EVENT_DETAILS.registerUrl}
+      href={href}
       target="_blank"
       rel="noreferrer"
       whileHover={{ scale: 1.05 }}
@@ -149,7 +157,7 @@ function RegisterButton({ label, size = 'md' }: { label: string; size?: 'md' | '
 
 /* ---------- Page ---------- */
 
-export default function EventsPage() {
+export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -190,7 +198,7 @@ export default function EventsPage() {
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
               className="inline-block rounded-2xl border-2 border-brand-darkBlue bg-brand-yellow px-5 py-2 font-heading text-2xl tracking-wide text-brand-darkBlue shadow-[4px_4px_0_#171e5d] sm:text-3xl"
             >
-              FREE!
+              {isPast ? 'Thank you!' : 'FREE!'}
             </motion.span>
           </motion.div>
 
@@ -200,7 +208,7 @@ export default function EventsPage() {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-white/90 sm:text-base"
           >
-            Upcoming Event
+            {isPast ? 'Past Event' : 'Upcoming Event'}
           </motion.p>
 
           <motion.h1
@@ -249,7 +257,11 @@ export default function EventsPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-10"
           >
-            <RegisterButton label="Reserve a Spot" />
+            {isPast ? (
+              <CtaButton label="Follow for the next event" href={EVENT_DETAILS.instagramUrl} />
+            ) : (
+              <CtaButton label="Reserve a Spot" />
+            )}
           </motion.div>
         </div>
 
@@ -276,6 +288,11 @@ export default function EventsPage() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl rounded-[2rem] border-[3px] border-brand-darkBlue bg-white px-6 py-8 text-center shadow-[8px_8px_0_#171e5d] sm:px-10 sm:py-10"
         >
+          {isPast && (
+            <p className="mb-5 inline-block rounded-full bg-brand-pink/20 px-4 py-1.5 text-sm font-semibold text-brand-darkBlue">
+              This event took place on November 7. Thank you to everyone who joined us!
+            </p>
+          )}
           <p className="text-lg leading-relaxed text-brand-darkBlue sm:text-xl">
             Join <span className="font-semibold text-brand-bluePurple">Speech on the Slope</span> at{' '}
             <span className="font-semibold">Rikud Studio</span> on <span className="font-semibold">Saturday, November 7</span>,
@@ -452,14 +469,23 @@ export default function EventsPage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-pink opacity-75 motion-reduce:animate-none" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand-pink" />
             </span>
-            Limited spots available
+            {isPast ? 'More events coming soon' : 'Limited spots available'}
           </p>
-          <h2 className="relative mt-5 font-heading text-4xl text-white md:text-5xl">Save your spot!</h2>
+          {/* The heading font has no apostrophe glyph, so keep apostrophes out of these headings. */}
+          <h2 className="relative mt-5 font-heading text-4xl text-white md:text-5xl">
+            {isPast ? 'Stay tuned for the next one!' : 'Save your spot!'}
+          </h2>
           <p className="relative mx-auto mt-4 max-w-xl text-lg text-white/80">
-            Registration is free. Fill out the quick form below and we&rsquo;ll see you at Rikud Studio on November 7.
+            {isPast
+              ? 'Follow us on Instagram to hear about our next Reading Yogis pop-up and family events.'
+              : 'Registration is free. Fill out the quick form below and we’ll see you at Rikud Studio on November 7.'}
           </p>
           <div className="relative mt-9">
-            <RegisterButton label="Register Now" size="lg" />
+            {isPast ? (
+              <CtaButton label="Follow on Instagram" href={EVENT_DETAILS.instagramUrl} size="lg" />
+            ) : (
+              <CtaButton label="Register Now" size="lg" />
+            )}
           </div>
         </motion.div>
       </section>

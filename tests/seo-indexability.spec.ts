@@ -32,6 +32,34 @@ test.describe('public route indexability', () => {
     expect(robots).toContain('Sitemap: https://speechontheslope.com/sitemap.xml');
   });
 
+  test('robots explicitly welcomes AI search crawlers', async ({ request }) => {
+    const robots = await (await request.get('/robots.txt')).text();
+    for (const bot of ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'PerplexityBot']) {
+      expect(robots).toContain(`User-Agent: ${bot}`);
+    }
+  });
+
+  test('llms.txt summarizes the practice for AI assistants', async ({ request }) => {
+    const response = await request.get('/llms.txt');
+    expect(response.ok()).toBeTruthy();
+    expect(response.headers()['content-type']).toContain('text/plain');
+    const body = await response.text();
+    expect(body).toContain('# Speech on the Slope');
+    expect(body).toContain('https://speechontheslope.com/workshops');
+  });
+
+  test('events page shares the event image and Event structured data', async ({ page }) => {
+    await page.goto('/workshops');
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      'content',
+      /\/events\/reading-yogis-share\.png$/,
+    );
+    const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const event = jsonLd.map((text) => JSON.parse(text)).find((data) => data['@type'] === 'Event');
+    expect(event?.location?.name).toBe('Rikud Studio');
+    expect(event?.offers?.price).toBe('0');
+  });
+
   test('RSS remains a valid crawlable feed', async ({ request }) => {
     const response = await request.get('/blog/rss.xml');
     expect(response.ok()).toBeTruthy();

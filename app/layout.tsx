@@ -127,7 +127,6 @@ export const metadata: Metadata = {
     title: 'Speech on the Slope | Brooklyn & Manhattan Speech Therapy Kids',
     description: 'Play-based speech therapy in Brooklyn and Park Slope for speech sound disorders, myofunctional therapy, and literacy support.',
     images: ['/mainlogo.png'],
-    creator: '@speechontheslope', // Replace with actual Twitter handle if available
   },
 
   // Robots and indexing
@@ -187,8 +186,8 @@ export default function RootLayout({
     url: 'https://speechontheslope.com',
     logo: 'https://speechontheslope.com/mainlogo.png',
     image: 'https://speechontheslope.com/mainlogo.png',
-    telephone: '+1-917-200-0339', // Add your phone number
-    email: 'info@speechontheslope.com', // Add your email
+    telephone: '+1-917-200-0339',
+    email: 'hello@speechontheslope.com',
 
     address: {
       '@type': 'PostalAddress',
@@ -201,8 +200,8 @@ export default function RootLayout({
 
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 40.6782, // Replace with your actual coordinates
-      longitude: -73.9442
+      latitude: 40.6717,
+      longitude: -73.9861
     },
 
     openingHoursSpecification: [
@@ -258,10 +257,7 @@ export default function RootLayout({
     },
 
     sameAs: [
-      // Add your social media profiles
-      // 'https://www.facebook.com/speechontheslope',
-      // 'https://www.instagram.com/speechontheslope',
-      // 'https://www.linkedin.com/company/speechontheslope'
+      'https://www.instagram.com/speechontheslopenyc/',
     ]
   };
 

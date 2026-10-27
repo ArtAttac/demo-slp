@@ -1,65 +1,80 @@
 import type { Metadata } from 'next';
 
 import EventsPage from '@/components/EventsPage';
-import { EVENT_DETAILS } from '@/components/events-data';
+import { EVENT_DETAILS, isEventPast } from '@/components/events-data';
 import Footer from '@/components/Footer';
 
 // The previous Sawyer classes page is preserved in components/legacy/LegacyClassesPage.tsx.
 
-const title = 'Free Reading Yogis Pop-Up & Family Celebration';
-const description =
-  'Join Speech on the Slope at Rikud Studio on Saturday, November 7 for a free Reading Yogis early literacy class (ages 3-5) followed by crafts, games, snacks, and family fun for all ages.';
+// Re-render hourly so the page flips to its "past event" state shortly after the event ends.
+export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: `${title} | Events`,
-  description,
-  alternates: {
-    canonical: '/workshops',
-  },
-  openGraph: {
-    title,
-    description,
-    url: '/workshops',
-    type: 'website',
-    images: [
-      {
-        url: '/workshops-share.png',
+const upcomingDescription =
+  'Join Speech on the Slope at Rikud Studio on Saturday, November 7 for a free Reading Yogis early literacy class (ages 3-5) followed by crafts, games, snacks, and family fun for all ages.';
+const pastDescription =
+  'Community events from Speech on the Slope in Brooklyn, including our Reading Yogis early literacy and movement pop-ups. Follow along for upcoming family events.';
+
+export function generateMetadata(): Metadata {
+  const isPast = isEventPast();
+  const title = isPast ? 'Community Events for Brooklyn Families' : EVENT_DETAILS.name;
+  const description = isPast ? pastDescription : upcomingDescription;
+  const image = isPast
+    ? { url: '/workshops-share.png', width: 1200, height: 630, alt: 'Speech on the Slope events for curious, growing kids' }
+    : {
+        url: EVENT_DETAILS.shareImageSrc,
         width: 1200,
         height: 630,
-        alt: 'Speech on the Slope events for curious, growing kids',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title,
+        alt: 'Free Reading Yogis Pop-Up & Family Celebration, Saturday Nov 7 at Rikud Studio, Brooklyn',
+      };
+
+  return {
+    title: `${title} | Events`,
     description,
-    images: ['/workshops-share.png'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    alternates: {
+      canonical: '/workshops',
+    },
+    openGraph: {
+      title,
+      description,
+      url: '/workshops',
+      type: 'website',
+      images: [image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image.url],
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+      },
     },
-  },
-};
+  };
+}
 
 const eventStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Event',
-  name: title,
-  description,
-  startDate: '2026-11-07T12:15:00-05:00',
-  endDate: '2026-11-07T14:00:00-05:00',
+  name: EVENT_DETAILS.name,
+  description: upcomingDescription,
+  startDate: EVENT_DETAILS.startDate,
+  endDate: EVENT_DETAILS.endDate,
   eventStatus: 'https://schema.org/EventScheduled',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  image: ['https://speechontheslope.com/events/reading-yogis-flyer.png'],
+  image: [
+    `https://speechontheslope.com${EVENT_DETAILS.shareImageSrc}`,
+    `https://speechontheslope.com${EVENT_DETAILS.flyerSrc}`,
+  ],
   isAccessibleForFree: true,
+  typicalAgeRange: '3-5',
   location: {
     '@type': 'Place',
     name: EVENT_DETAILS.venue,
@@ -82,17 +97,23 @@ const eventStructuredData = {
     priceCurrency: 'USD',
     availability: 'https://schema.org/LimitedAvailability',
     url: EVENT_DETAILS.registerUrl,
+    validFrom: '2026-10-27T00:00:00-04:00',
   },
 };
 
 export default function WorkshopsPage() {
+  const isPast = isEventPast();
+
   return (
     <div className="min-h-screen bg-brand-cream">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventStructuredData) }}
-      />
-      <EventsPage />
+      {/* Only advertise the event to search engines while it's upcoming. */}
+      {!isPast && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventStructuredData) }}
+        />
+      )}
+      <EventsPage isPast={isPast} />
       <Footer />
     </div>
   );
