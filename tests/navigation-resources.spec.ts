@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('navbar places the milestone checker after workshops', async ({ page }) => {
+test('navbar places the milestone checker after events', async ({ page }) => {
   await page.goto('/');
 
   const navLinks = await page.locator('header nav a').evaluateAll((links) =>
@@ -14,7 +14,7 @@ test('navbar places the milestone checker after workshops', async ({ page }) => 
 
   expect(workshopsIndex).toBeGreaterThanOrEqual(0);
   expect(milestoneIndex).toBe(workshopsIndex + 1);
-  expect(navLinks[workshopsIndex]?.label).toBe('Classes');
+  expect(navLinks[workshopsIndex]?.label).toBe('Events');
   expect(navLinks[milestoneIndex]?.label).toBe('Milestone Checker');
 });
 

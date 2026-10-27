@@ -15,7 +15,7 @@ const createNavLinks = () => [
   { href: '/faq', label: 'FAQ', color: 'hover:text-brand-darkBlue' },
   {
     href: '/workshops',
-    label: 'Classes',
+    label: 'Events',
     color: 'hover:text-brand-darkBlue',
   },
   {

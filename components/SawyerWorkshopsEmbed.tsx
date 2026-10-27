@@ -1,5 +1,7 @@
 'use client';
 
+// Only used by the sunset classes page: components/legacy/LegacyClassesPage.tsx
+
 import { useEffect, useRef, useState } from 'react';
 
 const SAWYER_EMBED_ID = 'SA_Rx-ONEen46NUk7msYILkAEWPhrnZ_wj1';

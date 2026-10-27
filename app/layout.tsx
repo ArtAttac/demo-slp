@@ -277,6 +277,7 @@ export default function RootLayout({
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Sawyer is only used by the sunset classes page (components/legacy/LegacyClassesPage.tsx). */}
         <link rel="preconnect" href="https://www.hisawyer.com" />
         <link rel="preconnect" href="https://cdn-fir-p.hisawyer.com" />
 
