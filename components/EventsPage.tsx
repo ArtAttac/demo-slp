@@ -36,7 +36,7 @@ const schedule = [
 const quickFacts = [
   { label: 'Free', detail: 'No cost to attend' },
   { label: 'Ages 3–5', detail: 'Reading Yogis class' },
-  { label: 'All ages', detail: 'Family celebration' },
+  { label: 'All ages', detail: 'Family Fun' },
 ];
 
 /* ---------- Decorative shapes ---------- */
