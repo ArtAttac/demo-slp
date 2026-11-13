@@ -10,9 +10,9 @@ import Footer from '@/components/Footer';
 export const revalidate = 3600;
 
 const upcomingDescription =
-  'Join Speech on the Slope at Rikud Studio on Saturday, November 7 for a free Reading Yogis early literacy class (ages 3-5) followed by crafts, games, snacks, and family fun for all ages.';
+  'Join Speech on the Slope at Rikud Studio on Saturday, November 21 for a FREE Fall Storytime Yoga class (ages 3-5) followed by a family fall celebration with games, crafts, music, raffle prizes, and snacks for all ages.';
 const pastDescription =
-  'Community events from Speech on the Slope in Brooklyn, including our Reading Yogis early literacy and movement pop-ups. Follow along for upcoming family events.';
+  'Community events from Speech on the Slope in Brooklyn, including our Storytime Yoga early literacy and movement classes. Follow along for upcoming family events.';
 
 export function generateMetadata(): Metadata {
   const isPast = isEventPast();
@@ -24,7 +24,7 @@ export function generateMetadata(): Metadata {
         url: EVENT_DETAILS.shareImageSrc,
         width: 1200,
         height: 630,
-        alt: 'Free Reading Yogis Pop-Up & Family Celebration, Saturday Nov 7 at Rikud Studio, Brooklyn',
+        alt: 'Free Storytime Yoga & Family Fun, Saturday Nov 21 at Rikud Studio, Brooklyn',
       };
 
   return {
@@ -69,10 +69,9 @@ const eventStructuredData = {
   endDate: EVENT_DETAILS.endDate,
   eventStatus: 'https://schema.org/EventScheduled',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  image: [
-    `https://speechontheslope.com${EVENT_DETAILS.shareImageSrc}`,
-    `https://speechontheslope.com${EVENT_DETAILS.flyerSrc}`,
-  ],
+  image: [EVENT_DETAILS.shareImageSrc, EVENT_DETAILS.flyerSrc]
+    .filter((src): src is string => Boolean(src))
+    .map((src) => `https://speechontheslope.com${src}`),
   isAccessibleForFree: true,
   typicalAgeRange: '3-5',
   location: {
@@ -87,10 +86,7 @@ const eventStructuredData = {
       addressCountry: 'US',
     },
   },
-  organizer: [
-    { '@type': 'Organization', name: 'Speech on the Slope', url: 'https://speechontheslope.com' },
-    { '@type': 'Organization', name: 'Little Makers Studio' },
-  ],
+  organizer: { '@type': 'Organization', name: 'Speech on the Slope', url: 'https://speechontheslope.com' },
   offers: {
     '@type': 'Offer',
     price: '0',

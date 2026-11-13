@@ -8,35 +8,35 @@ import { EVENT_DETAILS } from '@/components/events-data';
 
 const schedule = [
   {
-    time: '12:15 PM',
-    range: '12:15–1:00 PM',
-    title: 'Reading Yogis',
+    time: '3:00 PM',
+    range: '3:00–3:45 PM',
+    title: 'Fall Storytime Yoga',
     ages: 'Ages 3–5',
     pill: 'bg-brand-yellow',
     accent: 'text-brand-bluePurple',
     border: 'border-brand-yellow',
     description:
-      'Brooklyn’s most-loved SLP-led reading & yoga class. A playful early literacy class with stories, movement & games!',
+      'We’ll kick things off with a fall-themed story designed to build early literacy and language skills, including rhyming, vocabulary, and comprehension! Then, we’ll bring letters and sounds to life through movement and yoga poses that strengthen letter-sound awareness.',
     tag: null,
   },
   {
-    time: '1:00 PM',
-    range: '1:00–2:00 PM',
-    title: 'Crafts, Games, Snacks & Family Fun',
-    ages: 'All ages',
+    time: '3:45 PM',
+    range: '3:45–4:30 PM',
+    title: 'Family Fall Celebration',
+    ages: 'All ages welcome!',
     pill: 'bg-brand-pink',
     accent: 'text-brand-pink',
     border: 'border-brand-pink',
     description:
-      'Hands-on crafts with Little Makers Studio, plus games, snacks, a raffle & more. Stay after class or sign up for the party on its own!',
+      'After Storytime Yoga, the fun continues with a family celebration featuring games, crafts, music, raffle prizes, and yummy snacks!',
     tag: 'Siblings welcome!',
   },
 ];
 
 const quickFacts = [
   { label: 'Free', detail: 'No cost to attend' },
-  { label: 'Ages 3–5', detail: 'Reading Yogis class' },
-  { label: 'All ages', detail: 'Family Fun' },
+  { label: 'Ages 3–5', detail: 'Storytime Yoga' },
+  { label: 'All ages', detail: 'Family Celebration' },
 ];
 
 /* ---------- Decorative shapes ---------- */
@@ -217,7 +217,7 @@ export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="font-heading text-5xl leading-[1.05] text-brand-darkBlue sm:text-6xl md:text-7xl"
           >
-            Reading Yogis Pop-Up
+            Storytime Yoga
           </motion.h1>
 
           <motion.p
@@ -227,7 +227,7 @@ export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
             className="mt-3 font-heading text-3xl italic text-brand-cream sm:text-4xl md:text-5xl"
             style={{ textShadow: '3px 3px 0 #171e5d' }}
           >
-            &amp; Family Celebration
+            &amp; Family Fun
           </motion.p>
 
           <motion.div
@@ -290,19 +290,22 @@ export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
         >
           {isPast && (
             <p className="mb-5 inline-block rounded-full bg-brand-pink/20 px-4 py-1.5 text-sm font-semibold text-brand-darkBlue">
-              This event took place on November 7. Thank you to everyone who joined us!
+              This event took place on November 21. Thank you to everyone who joined us!
             </p>
           )}
           <p className="text-lg leading-relaxed text-brand-darkBlue sm:text-xl">
-            Join <span className="font-semibold text-brand-bluePurple">Speech on the Slope</span> at{' '}
-            <span className="font-semibold">Rikud Studio</span> on <span className="font-semibold">Saturday, November 7</span>,
-            for a <span className="rounded-md bg-brand-yellow/60 px-1 font-bold">FREE</span> Reading Yogis Pop-Up and Family
-            Celebration! Enjoy a playful early literacy class for ages 3–5 from 12:15–1:00 PM, followed by crafts with{' '}
-            <span className="font-semibold text-brand-pink">Little Makers Studio</span>, games, snacks, and family fun from
-            1:00–2:00 PM.
+            Join <span className="font-semibold text-brand-bluePurple">Speech on the Slope</span> for a{' '}
+            <span className="rounded-md bg-brand-yellow/60 px-1 font-bold">FREE</span> Fall Storytime Yoga Class &amp; Family
+            Celebration!
           </p>
+          <p className="mt-4 text-lg leading-relaxed text-brand-darkBlue sm:text-xl">
+            Come celebrate fall with us at <span className="font-semibold">{EVENT_DETAILS.venue}</span> on{' '}
+            <span className="font-semibold">{EVENT_DETAILS.longDateLabel}</span>, for an afternoon filled with stories,
+            movement, creativity, and family fun!
+          </p>
+          {/* The heading font has no apostrophe glyph, so keep apostrophes out of this line. */}
           <p className="mt-5 font-heading text-xl text-brand-darkBlue sm:text-2xl">
-            The celebration is open to siblings &amp; children of all ages!
+            The celebration portion is open to families &amp; siblings of all ages!
           </p>
         </motion.div>
       </section>
@@ -365,7 +368,12 @@ export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
 
       {/* Flyer + location */}
       <section className="relative px-4 pb-20 sm:px-6 sm:pb-24">
-        <div className="mx-auto grid max-w-5xl items-center gap-14 md:grid-cols-2">
+        <div
+          className={`mx-auto grid items-center gap-14 ${
+            EVENT_DETAILS.flyerSrc ? 'max-w-5xl md:grid-cols-2' : 'max-w-xl'
+          }`}
+        >
+          {EVENT_DETAILS.flyerSrc && (
           <motion.div
             initial={{ opacity: 0, rotate: -8, y: 40 }}
             whileInView={{ opacity: 1, rotate: -3, y: 0 }}
@@ -386,7 +394,7 @@ export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
               <span aria-hidden="true" className="absolute -top-3 right-6 h-7 w-24 rotate-6 bg-brand-pink/80 shadow-sm" />
               <Image
                 src={EVENT_DETAILS.flyerSrc}
-                alt="Flyer: Free trial class plus family fun, Saturday 11/7, 12:15 to 2 PM at Rikud Studio, with Speech on the Slope and Little Makers Studio"
+                alt={`Flyer: ${EVENT_DETAILS.name}, ${EVENT_DETAILS.dateLabel}, ${EVENT_DETAILS.timeLabel} at ${EVENT_DETAILS.venue}`}
                 width={1545}
                 height={1999}
                 sizes="(min-width: 768px) 384px, 90vw"
@@ -403,6 +411,7 @@ export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
               <Sparkle className="h-10 w-10" />
             </Float>
           </motion.div>
+          )}
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -477,8 +486,8 @@ export default function EventsPage({ isPast = false }: { isPast?: boolean }) {
           </h2>
           <p className="relative mx-auto mt-4 max-w-xl text-lg text-white/80">
             {isPast
-              ? 'Follow us on Instagram to hear about our next Reading Yogis pop-up and family events.'
-              : 'Registration is free. Fill out the quick form below and we’ll see you at Rikud Studio on November 7.'}
+              ? 'Follow us on Instagram to hear about our next Storytime Yoga class and family events.'
+              : 'This event is completely FREE! Space is limited, so be sure to register to save your spot. We can’t wait to celebrate with you and your little ones!'}
           </p>
           <div className="relative mt-9">
             {isPast ? (
