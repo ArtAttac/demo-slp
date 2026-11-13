@@ -1,7 +1,7 @@
 export const EVENT_DETAILS = {
   name: 'Free Reading Yogis Pop-Up & Family Celebration',
   registerUrl:
-    'https://docs.google.com/forms/d/e/1FAIpQLScQ90OiT69wldfFj6ys5-KfCOhquRXCFD9nxczP6cjUNpvsDQ/viewform?usp=header',
+    'https://docs.google.com/forms/d/e/1FAIpQLSdqrNxizl_bUSL1wZMFSZGgxMaH8tjchJoybRZ-lo3ZVSQomg/viewform?usp=header',
   flyerSrc: '/events/reading-yogis-flyer.png',
   shareImageSrc: '/events/reading-yogis-share.png',
   startDate: '2026-11-07T12:15:00-05:00',
