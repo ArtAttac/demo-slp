@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 export const revalidate = 3600;
 
 const upcomingDescription =
-  'Join Speech on the Slope at Rikud Studio on Saturday, November 21 for a FREE Fall Storytime Yoga class (ages 3-5) followed by a family fall celebration with games, crafts, music, raffle prizes, and snacks for all ages.';
+  'Join Speech on the Slope at Rikud Studio on Saturday, November 21 for a FREE Fall Storytime Yoga class (ages 2-5) followed by a family fall celebration with games, crafts, music, raffle prizes, and snacks for all ages.';
 const pastDescription =
   'Community events from Speech on the Slope in Brooklyn, including our Storytime Yoga early literacy and movement classes. Follow along for upcoming family events.';
 
@@ -73,7 +73,7 @@ const eventStructuredData = {
     .filter((src): src is string => Boolean(src))
     .map((src) => `https://speechontheslope.com${src}`),
   isAccessibleForFree: true,
-  typicalAgeRange: '3-5',
+  typicalAgeRange: '2-5',
   location: {
     '@type': 'Place',
     name: EVENT_DETAILS.venue,

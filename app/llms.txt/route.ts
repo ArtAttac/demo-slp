@@ -11,7 +11,7 @@ export function GET() {
     : `
 ## Upcoming event
 
-- [${EVENT_DETAILS.name}](${getAbsoluteUrl('/workshops')}): Saturday, November 21, 2026, 3:00-4:30 PM at ${EVENT_DETAILS.venue}, ${EVENT_DETAILS.street}, ${EVENT_DETAILS.cityLine}. Free. A fall-themed Storytime Yoga class for ages 3-5 building rhyming, vocabulary, comprehension, and letter-sound awareness through stories, movement, and yoga (3:00-3:45 PM), followed by a family fall celebration with games, crafts, music, raffle prizes, and snacks for all ages, siblings welcome (3:45-4:30 PM). Limited spots; register at ${EVENT_DETAILS.registerUrl}
+- [${EVENT_DETAILS.name}](${getAbsoluteUrl('/workshops')}): Saturday, November 21, 2026, 3:00-4:30 PM at ${EVENT_DETAILS.venue}, ${EVENT_DETAILS.street}, ${EVENT_DETAILS.cityLine}. Free. A fall-themed Storytime Yoga class for ages 2-5 building rhyming, vocabulary, comprehension, and letter-sound awareness through stories, movement, and yoga (3:00-3:45 PM), followed by a family fall celebration with games, crafts, music, raffle prizes, and snacks for all ages, siblings welcome (3:45-4:30 PM). Limited spots; register at ${EVENT_DETAILS.registerUrl}
 `;
 
   const body = `# Speech on the Slope

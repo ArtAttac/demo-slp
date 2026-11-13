@@ -11,7 +11,7 @@ const schedule = [
     time: '3:00 PM',
     range: '3:00–3:45 PM',
     title: 'Fall Storytime Yoga',
-    ages: 'Ages 3–5',
+    ages: 'Ages 2–5',
     pill: 'bg-brand-yellow',
     accent: 'text-brand-bluePurple',
     border: 'border-brand-yellow',
@@ -35,7 +35,7 @@ const schedule = [
 
 const quickFacts = [
   { label: 'Free', detail: 'No cost to attend' },
-  { label: 'Ages 3–5', detail: 'Storytime Yoga' },
+  { label: 'Ages 2–5', detail: 'Storytime Yoga' },
   { label: 'All ages', detail: 'Family Celebration' },
 ];
 
