@@ -3,7 +3,7 @@ type EventDetails = {
   registerUrl: string;
   /** Set to a /public path once a flyer for this event exists; the flyer card is hidden while null. */
   flyerSrc: string | null;
-  /** Social share image. Falls back to the generic events image until an event-specific one exists. */
+  /** Social share image. 1200x630. */
   shareImageSrc: string;
   startDate: string;
   endDate: string;
@@ -22,7 +22,7 @@ export const EVENT_DETAILS: EventDetails = {
   registerUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSdqrNxizl_bUSL1wZMFSZGgxMaH8tjchJoybRZ-lo3ZVSQomg/viewform?usp=header',
   flyerSrc: null,
-  shareImageSrc: '/workshops-share.png',
+  shareImageSrc: '/events/storytime-yoga-share.png',
   startDate: '2026-11-21T15:00:00-05:00',
   endDate: '2026-11-21T16:30:00-05:00',
   dateLabel: 'Sat, Nov 21',

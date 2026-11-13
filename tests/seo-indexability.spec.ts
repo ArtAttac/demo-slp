@@ -52,7 +52,7 @@ test.describe('public route indexability', () => {
     await page.goto('/workshops');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      /\/workshops-share\.png$/,
+      /\/events\/storytime-yoga-share\.png$/,
     );
     const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
     const event = jsonLd.map((text) => JSON.parse(text)).find((data) => data['@type'] === 'Event');
